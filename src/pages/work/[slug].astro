@@ -1,0 +1,527 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { projects } from "../../data/projects";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+type Project = (typeof projects)[number] & {
+  role: string;
+  description?: string;
+  highlight?: string;
+  credits: string[];
+  spotify?: string;
+  youtube?: string;
+  image: {
+    src: string;
+  };
+};
+
+const currentLanguage: SiteLanguage = "en";
+
+const pageText = {
+  en: {
+    pageTitleSuffix: "Gabriel Soares Credits",
+    fallbackDescription: "featuring contributions by Gabriel Soares.",
+    back: "Back to Projects",
+    about: "About",
+    contributions: "Gabriel Soares Contributions",
+    listen: "Listen on Spotify",
+    watch: "Watch on YouTube",
+    schemaLanguage: "en",
+  },
+  pt: {
+    pageTitleSuffix: "Créditos de Gabriel Soares",
+    fallbackDescription: "com contribuições de Gabriel Soares.",
+    back: "Voltar para Projetos",
+    about: "Sobre",
+    contributions: "Contribuições de Gabriel Soares",
+    listen: "Ouvir no Spotify",
+    watch: "Assistir no YouTube",
+    schemaLanguage: "pt-BR",
+  },
+  es: {
+    pageTitleSuffix: "Créditos de Gabriel Soares",
+    fallbackDescription: "con contribuciones de Gabriel Soares.",
+    back: "Volver a Proyectos",
+    about: "Sobre",
+    contributions: "Contribuciones de Gabriel Soares",
+    listen: "Escuchar en Spotify",
+    watch: "Ver en YouTube",
+    schemaLanguage: "es",
+  },
+};
+
+const textReplacements: Record<SiteLanguage, Record<string, string>> = {
+  en: {},
+
+  pt: {
+    "Music Production": "Produção Musical",
+    "Music producer": "Produtor musical",
+    "Producer": "Produtor",
+    "Acoustic Guitar": "Violão",
+    "Acoustic guitar": "Violão",
+    "Guitar": "Violão",
+    "Arrangement": "Arranjo",
+    "Arrangements": "Arranjos",
+    "Instrumental Production": "Produção Instrumental",
+    "Instrumental production": "Produção instrumental",
+    "Piano": "Piano",
+    "Bass": "Baixo",
+    "Electric Guitar": "Guitarra",
+    "Editing": "Edição",
+    "Recording": "Gravação",
+    "Live Recording": "Gravação ao vivo",
+    "Live Project": "Projeto ao vivo",
+    "Live Session": "Live Session",
+    "Credits": "Créditos",
+    "Featured": "Destaque",
+    "Collaboration": "Colaboração",
+    "Collaborations": "Colaborações",
+    "Single": "Single",
+    "Album": "Álbum",
+    "EP": "EP",
+    "Christian music": "música cristã",
+    "gospel music": "música gospel",
+    "worship music": "worship",
+    "released project": "projeto lançado",
+    "released projects": "projetos lançados",
+    "released works": "trabalhos lançados",
+    "Official Credits": "Créditos Oficiais",
+    "Latin GRAMMY® nominated album": "Álbum indicado ao Latin GRAMMY®",
+  },
+
+  es: {
+    "Music Production": "Producción Musical",
+    "Music producer": "Productor musical",
+    "Producer": "Productor",
+    "Acoustic Guitar": "Guitarra Acústica",
+    "Acoustic guitar": "Guitarra acústica",
+    "Guitar": "Guitarra",
+    "Arrangement": "Arreglo",
+    "Arrangements": "Arreglos",
+    "Instrumental Production": "Producción Instrumental",
+    "Instrumental production": "Producción instrumental",
+    "Piano": "Piano",
+    "Bass": "Bajo",
+    "Electric Guitar": "Guitarra Eléctrica",
+    "Editing": "Edición",
+    "Recording": "Grabación",
+    "Live Recording": "Grabación en vivo",
+    "Live Project": "Proyecto en vivo",
+    "Live Session": "Live Session",
+    "Credits": "Créditos",
+    "Featured": "Destacado",
+    "Collaboration": "Colaboración",
+    "Collaborations": "Colaboraciones",
+    "Single": "Single",
+    "Album": "Álbum",
+    "EP": "EP",
+    "Christian music": "música cristiana",
+    "gospel music": "música gospel",
+    "worship music": "worship",
+    "released project": "proyecto lanzado",
+    "released projects": "proyectos lanzados",
+    "released works": "trabajos lanzados",
+    "Official Credits": "Créditos Oficiales",
+    "Latin GRAMMY® nominated album": "Álbum nominado al Latin GRAMMY®",
+  },
+};
+
+const localizeText = (
+  value: string | undefined,
+  language: SiteLanguage
+): string | undefined => {
+  if (!value || language === "en") return value;
+
+  return Object.entries(textReplacements[language]).reduce(
+    (currentValue, [englishText, translatedText]) =>
+      currentValue.replaceAll(englishText, translatedText),
+    value
+  );
+};
+
+const localizeProject = (project: Project, language: SiteLanguage): Project => ({
+  ...project,
+  role: localizeText(project.role, language) ?? project.role,
+  description: localizeText(project.description, language) ?? project.description,
+  credits: project.credits?.map((credit: string) => localizeText(credit, language) ?? credit) ?? [],
+});
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props as { project: Project };
+
+const t = pageText[currentLanguage];
+
+const basePath = currentLanguage === "en" ? "" : `/${currentLanguage}`;
+
+const pageTitle = `${project.artist} - ${project.title} | ${t.pageTitleSuffix}`;
+
+const pageDescription =
+  project.description ||
+  `${project.title} by ${project.artist}, ${t.fallbackDescription}`;
+
+const projectUrl = `${siteUrl}${basePath}/work/${project.slug}`;
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "@id": `${projectUrl}#recording`,
+  url: projectUrl,
+  name: `${project.artist} - ${project.title}`,
+  description: pageDescription,
+  inLanguage: t.schemaLanguage,
+  image: `${siteUrl}${project.image.src}`,
+  byArtist: {
+    "@type": "MusicGroup",
+    name: project.artist
+  },
+  contributor: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl
+  },
+  creditText: project.role,
+  sameAs: [
+    project.spotify,
+    project.youtube
+  ].filter(Boolean)
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
+
+  <Navbar />
+
+  <main class="project">
+
+    <a class="back" href={`${basePath}/work`}>
+      <span>←</span>
+      {t.back}
+    </a>
+
+    <section class="hero-project">
+
+      <div class="cover">
+        <img
+          src={project.image.src}
+          alt={`${project.artist} - ${project.title}`}
+        />
+      </div>
+
+      <div class="content">
+
+        <p class="eyebrow">{project.artist}</p>
+
+        <h1>
+          {project.slug === "alfredo" ? (
+            <>O Senhor é o Meu<br />Pastor</>
+          ) : project.slug === "fixa-teus-olhos" ? (
+            <>Fixa Teus Olhos<br />em Mim</>
+          ) : (
+            project.title
+          )}
+        </h1>
+
+        <p class="role">{project.role}</p>
+
+        {project.highlight && (
+          <div class="badge">
+            <span class="badge-text">{project.highlight}</span>
+          </div>
+        )}
+
+        {project.description && (
+          <section class="block">
+            <p class="label">{t.about}</p>
+
+            <p class="text">{project.description}</p>
+          </section>
+        )}
+
+        {project.credits && project.credits.length > 0 && (
+          <section class="block">
+            <p class="label">{t.contributions}</p>
+
+            <div class="credits">
+              {project.credits.map((credit: string) => (
+                <span>{credit}</span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(project.spotify || project.youtube) && (
+          <div class="listen-group">
+
+            {project.spotify && (
+              <a
+                class="listen"
+                href={project.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.listen}
+              </a>
+            )}
+
+            {project.youtube && (
+              <a
+                class="listen secondary-listen"
+                href={project.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.watch}
+              </a>
+            )}
+
+          </div>
+        )}
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+.project{
+  background:#050505;
+  color:white;
+  min-height:100vh;
+}
+
+.back{
+  position:fixed;
+  top:92px;
+  left:6%;
+  z-index:999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:fit-content;
+  background:rgba(255,255,255,.07);
+  color:white;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:13px 20px;
+  text-decoration:none;
+  font:inherit;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  transition:.3s;
+}
+
+.back span{
+  display:inline-block;
+  transition:.3s;
+}
+
+.back:hover{
+  background:white;
+  color:black;
+  transform:translateY(-2px);
+}
+
+.back:hover span{
+  transform:translateX(-4px);
+}
+
+.hero-project{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr .9fr;
+  align-items:center;
+  gap:80px;
+  padding:150px 6% 120px;
+}
+
+.cover img{
+  width:100%;
+  border-radius:28px;
+  object-fit:cover;
+  box-shadow:0 40px 100px rgba(0,0,0,.45);
+}
+
+.content{
+  max-width:650px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:8px;
+  font-size:.78rem;
+  margin-bottom:22px;
+  text-transform:uppercase;
+}
+
+h1{
+  font-size:5.4rem;
+  line-height:.95;
+  margin-bottom:28px;
+}
+
+.role{
+  color:#d7d7d7;
+  font-size:1.25rem;
+  line-height:1.8;
+  margin-bottom:28px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  padding:12px 20px;
+  border-radius:999px;
+  background:rgba(210,176,120,.08);
+  border:1px solid rgba(210,176,120,.22);
+}
+
+.badge-text{
+  color:#f0d7a3;
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:.3px;
+  line-height:1;
+}
+
+.block{
+  margin-top:48px;
+  padding-top:34px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.label{
+  color:var(--gold);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-size:.72rem;
+  margin-bottom:18px;
+}
+
+.text{
+  color:#cfcfcf;
+  font-size:1.05rem;
+  line-height:1.9;
+  max-width:560px;
+}
+
+.credits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.credits span{
+  padding:10px 15px;
+  border-radius:999px;
+  background:#121212;
+  border:1px solid rgba(255,255,255,.08);
+  color:#d9d9d9;
+  font-size:.9rem;
+}
+
+.listen-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:42px;
+}
+
+.listen{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px 24px;
+  border-radius:999px;
+  background:white;
+  color:black;
+  text-decoration:none;
+  font-weight:700;
+  transition:.3s;
+}
+
+.listen:hover{
+  transform:translateY(-3px);
+}
+
+.secondary-listen{
+  background:rgba(255,255,255,.06);
+  color:white;
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.secondary-listen:hover{
+  background:rgba(255,255,255,.12);
+  color:white;
+}
+
+@media(max-width:900px){
+  .hero-project{
+    grid-template-columns:1fr;
+    padding-top:170px;
+    gap:46px;
+  }
+
+  h1{
+    font-size:3.4rem;
+  }
+
+  .back{
+    top:92px;
+    left:6%;
+  }
+}
+
+@media(max-width:700px){
+  .hero-project{
+    padding:155px 6% 90px;
+  }
+
+  .back{
+    position:absolute;
+    top:92px;
+    left:6%;
+    right:6%;
+    width:auto;
+    justify-content:center;
+  }
+
+  h1{
+    font-size:3rem;
+  }
+
+  .role{
+    font-size:1.05rem;
+  }
+
+  .listen-group{
+    flex-direction:column;
+  }
+
+  .listen{
+    width:100%;
+  }
+}
+</style>

@@ -1,0 +1,707 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import { projects } from "../../../data/projects";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+type SiteLanguage = "en" | "pt" | "es";
+type Project = (typeof projects)[number];
+
+const currentLanguage: SiteLanguage = "es";
+
+const pageText = {
+  en: {
+    pageTitleSuffix: "Gabriel Soares Credits",
+    fallbackDescription: "featuring contributions by Gabriel Soares.",
+    back: "Back to Projects",
+    about: "About",
+    contributions: "Gabriel Soares Contributions",
+    listen: "Listen on Spotify",
+    watch: "Watch on YouTube",
+    schemaLanguage: "en",
+  },
+  pt: {
+    pageTitleSuffix: "Créditos de Gabriel Soares",
+    fallbackDescription: "com contribuições de Gabriel Soares.",
+    back: "Voltar para Projetos",
+    about: "Sobre",
+    contributions: "Contribuições de Gabriel Soares",
+    listen: "Ouvir no Spotify",
+    watch: "Assistir no YouTube",
+    schemaLanguage: "pt-BR",
+  },
+  es: {
+    pageTitleSuffix: "Créditos de Gabriel Soares",
+    fallbackDescription: "con contribuciones de Gabriel Soares.",
+    back: "Volver a Proyectos",
+    about: "Sobre",
+    contributions: "Contribuciones de Gabriel Soares",
+    listen: "Escuchar en Spotify",
+    watch: "Ver en YouTube",
+    schemaLanguage: "es",
+  },
+};
+
+type Replacement = readonly [string, string];
+
+const textReplacements: Record<SiteLanguage, Replacement[]> = {
+  en: [],
+  pt: [
+    ["Latin GRAMMY® Nominated Album", "Álbum indicado ao Latin GRAMMY®"],
+    ["Released in Cinemark Theaters", "Lançado na rede Cinemark do Brasil"],
+    ["19M+ Spotify Streams", "19M+ streams no Spotify"],
+    ["31M+ YouTube Views", "31M+ visualizações no YouTube"],
+    ["4M+ YouTube Views", "4M+ visualizações no YouTube"],
+    ["59M+ YouTube Views", "59M+ visualizações no YouTube"],
+    ["8M+ YouTube Views", "8M+ visualizações no YouTube"],
+    ["2M+ YouTube Views", "2M+ visualizações no YouTube"],
+    ["USA Live Session", "Live Session nos EUA"],
+    ["Track: Deus É Bom", "Faixa: Deus É Bom"],
+    ["Event Theme Song", "Tema de Evento"],
+    ["Full Instrumental Production", "Produção Instrumental Completa"],
+    ["Full Instrumental Recording", "Gravação Instrumental Completa"],
+    ["Music Production and Instrument Recording", "Produção Musical e Gravação de Instrumentos"],
+    ["Music Production and Acoustic Guitar", "Produção Musical e Violão"],
+    ["Music Production and Piano Recording", "Produção Musical e Gravação de Piano"],
+    ["Orchestration and Bass Recording", "Orquestração e Gravação de Baixo"],
+    ["Composition and Full Instrumental Recording", "Composição e Gravação Instrumental Completa"],
+    ["Acoustic Guitar and Piano Recording", "Gravação de Violão e Piano"],
+    ["Acoustic Guitar Recording", "Gravação de Violão"],
+    ["Multi-Instrumental Recording", "Gravação Multi-instrumental"],
+    ["Complete Music Production", "Produção Musical Completa"],
+    ["Instrumental Production", "Produção Instrumental"],
+    ["Instrumental Arrangement", "Arranjo Instrumental"],
+    ["Acoustic Arrangement", "Arranjo Acústico"],
+    ["Vocal Arrangement", "Arranjo Vocal"],
+    ["Vocal Editing", "Edição Vocal"],
+    ["Instrument Editing", "Edição Instrumental"],
+    ["String Arrangement", "Arranjo de Cordas"],
+    ["Orchestration", "Orquestração"],
+    ["All Instruments", "Todos os Instrumentos"],
+    ["Music Production", "Produção Musical"],
+    ["Acoustic Guitar", "Violão"],
+    ["Acoustic guitar", "Violão"],
+    ["acoustic guitar", "violão"],
+    ["Electric Guitar", "Guitarra"],
+    ["electric guitar", "guitarra"],
+    ["Studio Acoustic Guitar", "Violão de Estúdio"],
+    ["Studio acoustic guitar", "Violão de estúdio"],
+    ["Arrangement", "Arranjo"],
+    ["Arrangements", "Arranjos"],
+    ["arrangements", "arranjos"],
+    ["arrangement", "arranjo"],
+    ["Live Single", "Single Ao Vivo"],
+    ["Live Project", "Projeto Ao Vivo"],
+    ["Live Recording", "Gravação Ao Vivo"],
+    ["Recording", "Gravação"],
+    ["recording", "gravação"],
+    ["Recordings", "Gravações"],
+    ["recordings", "gravações"],
+    ["Editing", "Edição"],
+    ["editing", "edição"],
+    ["Instrumentation", "Instrumentação"],
+    ["instrumentation", "instrumentação"],
+    ["Backing Vocals", "Backing Vocals"],
+    ["Drums", "Bateria"],
+    ["Bass", "Baixo"],
+    ["Synths", "Synths"],
+    ["Pads", "Pads"],
+    ["Percussion", "Percussão"],
+    ["Strings", "Cordas"],
+    ["Effects", "Efeitos"],
+    ["Guitar", "Guitarra"],
+    ["Piano", "Piano"],
+    ["Mix", "Mix"],
+    ["Master", "Master"],
+],
+  es: [
+    ["Latin GRAMMY® Nominated Album", "Álbum nominado al Latin GRAMMY®"],
+    ["Released in Cinemark Theaters", "Lanzado en la red Cinemark de Brasil"],
+    ["19M+ Spotify Streams", "19M+ streams en Spotify"],
+    ["31M+ YouTube Views", "31M+ visualizaciones en YouTube"],
+    ["4M+ YouTube Views", "4M+ visualizaciones en YouTube"],
+    ["59M+ YouTube Views", "59M+ visualizaciones en YouTube"],
+    ["8M+ YouTube Views", "8M+ visualizaciones en YouTube"],
+    ["2M+ YouTube Views", "2M+ visualizaciones en YouTube"],
+    ["USA Live Session", "Live Session en EE. UU."],
+    ["Track: Deus É Bom", "Canción: Deus É Bom"],
+    ["Event Theme Song", "Tema de Evento"],
+    ["Full Instrumental Production", "Producción Instrumental Completa"],
+    ["Composition and Full Instrumental Recording", "Composición y Grabación Instrumental Completa"],
+    ["Full Instrumental Recording", "Grabación Instrumental Completa"],
+    ["Composition and Grabación Instrumental Completa", "Composición y Grabación Instrumental Completa"],
+    ["Composition", "Composición"],
+    ["Music Production and Instrument Recording", "Producción Musical y Grabación de Instrumentos"],
+    ["Music Production and Acoustic Guitar", "Producción Musical y Guitarra Acústica"],
+    ["Music Production and Piano Recording", "Producción Musical y Grabación de Piano"],
+    ["Orchestration and Bass Recording", "Orquestación y Grabación de Bajo"],
+    ["Acoustic Guitar and Piano Recording", "Grabación de Guitarra Acústica y Piano"],
+    ["Acoustic Guitar Recording", "Grabación de Guitarra Acústica"],
+    ["Multi-Instrumental Recording", "Grabación Multiinstrumental"],
+    ["Complete Music Production", "Producción Musical Completa"],
+    ["Instrumental Production", "Producción Instrumental"],
+    ["Instrumental Arrangement", "Arreglo Instrumental"],
+    ["Acoustic Arrangement", "Arreglo Acústico"],
+    ["Vocal Arrangement", "Arreglo Vocal"],
+    ["Vocal Editing", "Edición Vocal"],
+    ["Instrument Editing", "Edición Instrumental"],
+    ["String Arrangement", "Arreglo de Cuerdas"],
+    ["Orchestration", "Orquestación"],
+    ["All Instruments", "Todos los Instrumentos"],
+    ["Music Production", "Producción Musical"],
+    ["Acoustic Guitar", "Guitarra Acústica"],
+    ["Acoustic guitar", "Guitarra acústica"],
+    ["acoustic guitar", "guitarra acústica"],
+    ["Electric Guitar", "Guitarra Eléctrica"],
+    ["electric guitar", "guitarra eléctrica"],
+    ["Studio Acoustic Guitar", "Guitarra Acústica de Estudio"],
+    ["Studio acoustic guitar", "Guitarra acústica de estudio"],
+    ["Arrangement", "Arreglo"],
+    ["Arrangements", "Arreglos"],
+    ["arrangements", "arreglos"],
+    ["arrangement", "arreglo"],
+    ["Live Single", "Single En Vivo"],
+    ["Live Project", "Proyecto En Vivo"],
+    ["Live Recording", "Grabación En Vivo"],
+    ["Recording", "Grabación"],
+    ["recording", "grabación"],
+    ["Recordings", "Grabaciones"],
+    ["recordings", "grabaciones"],
+    ["Editing", "Edición"],
+    ["editing", "edición"],
+    ["Instrumentation", "Instrumentación"],
+    ["instrumentation", "instrumentación"],
+    ["Backing Vocals", "Backing Vocals"],
+    ["Drums", "Batería"],
+    ["Bass", "Bajo"],
+    ["Synths", "Sintetizadores"],
+    ["Pads", "Pads"],
+    ["Percussion", "Percusión"],
+    ["Strings", "Cuerdas"],
+    ["Effects", "Efectos"],
+    ["Guitar", "Guitarra"],
+    ["Piano", "Piano"],
+    ["Mix", "Mezcla"],
+    ["Master", "Master"],
+],
+};
+
+const descriptionTranslations: Record<SiteLanguage, Record<string, string>> = {
+  en: {},
+  pt: {
+    "Music production and acoustic guitar for Temporal, the Latin GRAMMY® nominated album by Vocal Livre.": "Produção musical e violão em Temporal, álbum do Vocal Livre indicado ao Latin GRAMMY®.",
+    "Live album project released in Cinemark theaters across Brazil.": "Projeto de álbum ao vivo lançado na rede Cinemark do Brasil.",
+    "Live session project by Vocal Livre.": "Projeto live session do Vocal Livre.",
+    "Acoustic project by Vocal Livre.": "Projeto acústico do Vocal Livre.",
+    "Acoustic guitar and piano recordings for the Vocal Livre project Releituras.": "Gravações de violão e piano para o projeto Releituras, do Vocal Livre.",
+    "Music production and acoustic guitar recording for Vocal Livre's Live Session project.": "Produção musical e gravação de violão para o projeto Live Session do Vocal Livre.",
+    "Music production and acoustic guitar recording for the acoustic project by Vocal Livre.": "Produção musical e gravação de violão para o projeto acústico do Vocal Livre.",
+    "Music production, acoustic guitar and electric guitar for Bela História (Ao Vivo) by Vocal Livre.": "Produção musical, violão e guitarra para Bela História (Ao Vivo), do Vocal Livre.",
+    "Music production and acoustic guitar for Só o Começo (Ao Vivo) by Vocal Livre.": "Produção musical e violão para Só o Começo (Ao Vivo), do Vocal Livre.",
+    "Full instrumental production and arrangement for Tu Tens o Melhor by Joyce Carnassale and Vocal Livre, including bass, electric guitar, acoustic guitar and piano recordings.": "Produção instrumental completa e arranjo para Tu Tens o Melhor, de Joyce Carnassale e Vocal Livre, incluindo baixo, guitarra, violão e piano.",
+    "Music production, instrumental arrangement, acoustic guitar and pads for one of Vocal Livre's most streamed songs.": "Produção musical, arranjo instrumental, violão e pads em uma das músicas mais ouvidas do Vocal Livre.",
+    "Single by Vocal Livre with production and acoustic guitar contributions. The music video features an acting appearance by Rafa Kalimann.": "Single do Vocal Livre com contribuições de produção e violão. O videoclipe conta com participação de Rafa Kalimann.",
+    "Music production, arrangement and piano recording for Fixa Teus Olhos em Mim by Vocal Livre.": "Produção musical, arranjo e gravação de piano para Fixa Teus Olhos em Mim, do Vocal Livre.",
+    "Music production, arrangement and piano recording for Fixa Teus Olhos em Mim by Daniel Salles and Vocal Livre.": "Produção musical, arranjo e gravação de piano para Fixa Teus Olhos em Mim, de Daniel Salles e Vocal Livre.",
+    "Instrumental and vocal arrangement for one of Vocal Livre's most viewed videos.": "Arranjo instrumental e vocal para um dos vídeos mais vistos do Vocal Livre.",
+    "Acoustic version by Vocal Livre with acoustic guitar and arrangement contributions.": "Versão acústica do Vocal Livre com contribuições de violão e arranjo.",
+    "YouTube release by Vocal Livre and Etiene Pires with arrangement and acoustic guitar contributions.": "Lançamento no YouTube de Vocal Livre e Etiene Pires com contribuições de arranjo e violão.",
+    "Music production and acoustic guitar for Pedro Valença's live project.": "Produção musical e violão para o projeto ao vivo de Pedro Valença.",
+    "Multi-instrumental recording for Pedro Valença and Paula Schneider, including acoustic guitars, bass, pads, guitars and piano.": "Gravação multi-instrumental para Pedro Valença e Paula Schneider, incluindo violões, baixo, pads, guitarras e piano.",
+    "Music production and acoustic guitar for a live session recorded in the United States.": "Produção musical e violão para uma live session gravada nos Estados Unidos.",
+    "Instrumental production for the track Deus É Bom, from the album Senhor da Vida by Arautos do Rei.": "Produção instrumental para a faixa Deus É Bom, do álbum Senhor da Vida, dos Arautos do Rei.",
+    "Music production, acoustic guitar and electric guitar for Gabro Ao Vivo.": "Produção musical, violão e guitarra para Gabro Ao Vivo.",
+    "Acoustic guitar recording for Maranata by Adoradores 5.": "Gravação de violão para Maranata, do Adoradores 5.",
+    "Acoustic guitar recording for E Se Fosse Você?, released by Gravadora Novo Tempo.": "Gravação de violão para E Se Fosse Você?, lançado pela Gravadora Novo Tempo.",
+    "Acoustic guitar recording for Meu Lugar No Mundo.": "Gravação de violão para Meu Lugar No Mundo.",
+    "Acoustic guitar recording for Meu Lugar No Mundo by Novo Tom.": "Gravação de violão para Meu Lugar No Mundo, do Novo Tom.",
+    "Acoustic guitar recording for Era a Mão de Deus.": "Gravação de violão para Era a Mão de Deus.",
+    "Acoustic guitar recording for Era a Mão de Deus by Novo Tom.": "Gravação de violão para Era a Mão de Deus, do Novo Tom.",
+    "Acoustic guitar recording for Adoradores 5.": "Gravação de violão para Adoradores 5.",
+    "Acoustic guitar recording for Adoradores 5 by Adoradores Novo Tempo.": "Gravação de violão para Adoradores 5, do Adoradores Novo Tempo.",
+    "Music production with acoustic guitar and piano recordings.": "Produção musical com gravações de violão e piano.",
+    "Music production, acoustic guitar and piano recordings for Intimidade by Vagner Dida and Weslley Fonseca.": "Produção musical, violão e piano para Intimidade, de Vagner Dida e Weslley Fonseca.",
+    "Complete music production for Together I'll Go by Adventistas Centro-Oeste, including arrangement, instruments, editing, mix, master and backing vocals.": "Produção musical completa para Together I'll Go, dos Adventistas Centro-Oeste, incluindo arranjo, instrumentos, edição, mix, master e backing vocals.",
+    "Music production and piano recording for Quem Sou by Pedra Azul.": "Produção musical e gravação de piano para Quem Sou, do Pedra Azul.",
+    "Music production, string orchestration and bass recording for Jubileu by Ronaldo Fagundes.": "Produção musical, orquestração de cordas e gravação de baixo para Jubileu, de Ronaldo Fagundes.",
+    "Music production and acoustic guitar recording for Eu Sou Águia by Tiago Alves.": "Produção musical e gravação de violão para Eu Sou Águia, de Tiago Alves.",
+    "Composition and full instrumental recording for O Senhor é o Meu Pastor by Alfredo Torres.": "Composição e gravação instrumental completa para O Senhor é o Meu Pastor, de Alfredo Torres.",
+    "Full instrumental recording for Autor da Vida by Vocal Livre and Monkakitos, including drums, bass, synths, acoustic guitar, electric guitar, piano, pads, percussion and strings.": "Gravação instrumental completa para Autor da Vida, do Vocal Livre e Monkakitos, incluindo bateria, baixo, synths, violão, guitarra, piano, pads, percussão e cordas.",
+    "Music production, acoustic guitar, electric guitar, piano, effects, vocal editing and production work for A Guerra by Vocal Advento and Deise Kelly.": "Produção musical, violão, guitarra, piano, efeitos, edição vocal e trabalho de produção para A Guerra, de Vocal Advento e Deise Kelly.",
+    "Acoustic guitar recordings for Gabro.": "Gravações de violão para Gabro.",
+    "Acoustic guitar recording for Há Lugar Pra Ti by Gabro.": "Gravação de violão para Há Lugar Pra Ti, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver by Gabro.": "Gravação de violão para Recordar É Viver, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver Vol. 2 by Gabro.": "Gravação de violão para Recordar É Viver Vol. 2, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver Vol. 3 by Gabro.": "Gravação de violão para Recordar É Viver Vol. 3, de Gabro.",
+  },
+  es: {
+    "Music production and acoustic guitar for Temporal, the Latin GRAMMY® nominated album by Vocal Livre.": "Producción musical y guitarra acústica en Temporal, álbum de Vocal Livre nominado al Latin GRAMMY®.",
+    "Live album project released in Cinemark theaters across Brazil.": "Proyecto de álbum en vivo lanzado en la red Cinemark de Brasil.",
+    "Live session project by Vocal Livre.": "Proyecto live session de Vocal Livre.",
+    "Acoustic project by Vocal Livre.": "Proyecto acústico de Vocal Livre.",
+    "Acoustic guitar and piano recordings for the Vocal Livre project Releituras.": "Grabaciones de guitarra acústica y piano para el proyecto Releituras de Vocal Livre.",
+    "Music production and acoustic guitar recording for Vocal Livre's Live Session project.": "Producción musical y grabación de guitarra acústica para el proyecto Live Session de Vocal Livre.",
+    "Music production and acoustic guitar recording for the acoustic project by Vocal Livre.": "Producción musical y grabación de guitarra acústica para el proyecto acústico de Vocal Livre.",
+    "Music production, acoustic guitar and electric guitar for Bela História (Ao Vivo) by Vocal Livre.": "Producción musical, guitarra acústica y guitarra eléctrica para Bela História (Ao Vivo), de Vocal Livre.",
+    "Music production and acoustic guitar for Só o Começo (Ao Vivo) by Vocal Livre.": "Producción musical y guitarra acústica para Só o Começo (Ao Vivo), de Vocal Livre.",
+    "Full instrumental production and arrangement for Tu Tens o Melhor by Joyce Carnassale and Vocal Livre, including bass, electric guitar, acoustic guitar and piano recordings.": "Producción instrumental completa y arreglo para Tu Tens o Melhor, de Joyce Carnassale y Vocal Livre, incluyendo bajo, guitarra eléctrica, guitarra acústica y piano.",
+    "Music production, instrumental arrangement, acoustic guitar and pads for one of Vocal Livre's most streamed songs.": "Producción musical, arreglo instrumental, guitarra acústica y pads en una de las canciones más escuchadas de Vocal Livre.",
+    "Single by Vocal Livre with production and acoustic guitar contributions. The music video features an acting appearance by Rafa Kalimann.": "Single de Vocal Livre con contribuciones de producción y guitarra acústica. El videoclip cuenta con una participación actoral de Rafa Kalimann.",
+    "Music production, arrangement and piano recording for Fixa Teus Olhos em Mim by Vocal Livre.": "Producción musical, arreglo y grabación de piano para Fixa Teus Olhos em Mim, de Vocal Livre.",
+    "Music production, arrangement and piano recording for Fixa Teus Olhos em Mim by Daniel Salles and Vocal Livre.": "Producción musical, arreglo y grabación de piano para Fixa Teus Olhos em Mim, de Daniel Salles y Vocal Livre.",
+    "Instrumental and vocal arrangement for one of Vocal Livre's most viewed videos.": "Arreglo instrumental y vocal para uno de los videos más vistos de Vocal Livre.",
+    "Acoustic version by Vocal Livre with acoustic guitar and arrangement contributions.": "Versión acústica de Vocal Livre con contribuciones de guitarra acústica y arreglo.",
+    "YouTube release by Vocal Livre and Etiene Pires with arrangement and acoustic guitar contributions.": "Lanzamiento en YouTube de Vocal Livre y Etiene Pires con contribuciones de arreglo y guitarra acústica.",
+    "Music production and acoustic guitar for Pedro Valença's live project.": "Producción musical y guitarra acústica para el proyecto en vivo de Pedro Valença.",
+    "Multi-instrumental recording for Pedro Valença and Paula Schneider, including acoustic guitars, bass, pads, guitars and piano.": "Grabación multiinstrumental para Pedro Valença y Paula Schneider, incluyendo guitarras acústicas, bajo, pads, guitarras eléctricas y piano.",
+    "Music production and acoustic guitar for a live session recorded in the United States.": "Producción musical y guitarra acústica para una live session grabada en Estados Unidos.",
+    "Instrumental production for the track Deus É Bom, from the album Senhor da Vida by Arautos do Rei.": "Producción instrumental para la canción Deus É Bom, del álbum Senhor da Vida de Arautos do Rei.",
+    "Music production, acoustic guitar and electric guitar for Gabro Ao Vivo.": "Producción musical, guitarra acústica y guitarra eléctrica para Gabro Ao Vivo.",
+    "Acoustic guitar recording for Maranata by Adoradores 5.": "Grabación de guitarra acústica para Maranata, de Adoradores 5.",
+    "Acoustic guitar recording for E Se Fosse Você?, released by Gravadora Novo Tempo.": "Grabación de guitarra acústica para E Se Fosse Você?, lanzado por Gravadora Novo Tempo.",
+    "Acoustic guitar recording for Meu Lugar No Mundo.": "Grabación de guitarra acústica para Meu Lugar No Mundo.",
+    "Acoustic guitar recording for Meu Lugar No Mundo by Novo Tom.": "Grabación de guitarra acústica para Meu Lugar No Mundo, de Novo Tom.",
+    "Acoustic guitar recording for Era a Mão de Deus.": "Grabación de guitarra acústica para Era a Mão de Deus.",
+    "Acoustic guitar recording for Era a Mão de Deus by Novo Tom.": "Grabación de guitarra acústica para Era a Mão de Deus, de Novo Tom.",
+    "Acoustic guitar recording for Adoradores 5.": "Grabación de guitarra acústica para Adoradores 5.",
+    "Acoustic guitar recording for Adoradores 5 by Adoradores Novo Tempo.": "Grabación de guitarra acústica para Adoradores 5, de Adoradores Novo Tempo.",
+    "Music production with acoustic guitar and piano recordings.": "Producción musical con grabaciones de guitarra acústica y piano.",
+    "Music production, acoustic guitar and piano recordings for Intimidade by Vagner Dida and Weslley Fonseca.": "Producción musical, guitarra acústica y piano para Intimidade, de Vagner Dida y Weslley Fonseca.",
+    "Complete music production for Together I'll Go by Adventistas Centro-Oeste, including arrangement, instruments, editing, mix, master and backing vocals.": "Producción musical completa para Together I'll Go, de Adventistas Centro-Oeste, incluyendo arreglo, instrumentos, edición, mezcla, master y backing vocals.",
+    "Music production and piano recording for Quem Sou by Pedra Azul.": "Producción musical y grabación de piano para Quem Sou, de Pedra Azul.",
+    "Music production, string orchestration and bass recording for Jubileu by Ronaldo Fagundes.": "Producción musical, orquestación de cuerdas y grabación de bajo para Jubileu, de Ronaldo Fagundes.",
+    "Music production and acoustic guitar recording for Eu Sou Águia by Tiago Alves.": "Producción musical y grabación de guitarra acústica para Eu Sou Águia, de Tiago Alves.",
+    "Composition and full instrumental recording for O Senhor é o Meu Pastor by Alfredo Torres.": "Composición y grabación instrumental completa para O Senhor é o Meu Pastor, de Alfredo Torres.",
+    "Full instrumental recording for Autor da Vida by Vocal Livre and Monkakitos, including drums, bass, synths, acoustic guitar, electric guitar, piano, pads, percussion and strings.": "Grabación instrumental completa para Autor da Vida, de Vocal Livre y Monkakitos, incluyendo batería, bajo, sintetizadores, guitarra acústica, guitarra eléctrica, piano, pads, percusión y cuerdas.",
+    "Music production, acoustic guitar, electric guitar, piano, effects, vocal editing and production work for A Guerra by Vocal Advento and Deise Kelly.": "Producción musical, guitarra acústica, guitarra eléctrica, piano, efectos, edición vocal y trabajo de producción para A Guerra, de Vocal Advento y Deise Kelly.",
+    "Acoustic guitar recordings for Gabro.": "Grabaciones de guitarra acústica para Gabro.",
+    "Acoustic guitar recording for Há Lugar Pra Ti by Gabro.": "Grabación de guitarra acústica para Há Lugar Pra Ti, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver by Gabro.": "Grabación de guitarra acústica para Recordar É Viver, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver Vol. 2 by Gabro.": "Grabación de guitarra acústica para Recordar É Viver Vol. 2, de Gabro.",
+    "Acoustic guitar recording for Recordar É Viver Vol. 3 by Gabro.": "Grabación de guitarra acústica para Recordar É Viver Vol. 3, de Gabro.",
+  },
+};
+
+const applyReplacements = (value: string, replacements: Replacement[]): string => {
+  return [...replacements]
+    .sort(([firstFrom], [secondFrom]) => secondFrom.length - firstFrom.length)
+    .reduce((result: string, [from, to]: Replacement) => {
+      return result.split(from).join(to);
+    }, value);
+};
+
+const localizeText = (
+  value: string | undefined,
+  language: SiteLanguage
+): string | undefined => {
+  if (!value || language === "en") return value;
+
+  return applyReplacements(value, textReplacements[language]);
+};
+
+const localizeDescription = (
+  value: string | undefined,
+  language: SiteLanguage
+): string | undefined => {
+  if (!value || language === "en") return value;
+
+  return descriptionTranslations[language][value] ?? localizeText(value, language);
+};
+
+const localizeProject = (project: Project, language: SiteLanguage): Project => {
+  const localizedHighlight = project.highlight
+    ? localizeText(project.highlight, language)
+    : undefined;
+
+  const localizedDescription = project.description
+    ? localizeDescription(project.description, language)
+    : undefined;
+
+  return {
+    ...project,
+    role: localizeText(project.role, language) ?? project.role,
+    ...(localizedHighlight ? { highlight: localizedHighlight } : {}),
+    ...(localizedDescription ? { description: localizedDescription } : {}),
+    credits: project.credits.map((credit: string) =>
+      localizeText(credit, language) ?? credit
+    ),
+  };
+};
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project: rawProject } = Astro.props as { project: Project };
+const project = localizeProject(rawProject, currentLanguage);
+
+const t = pageText[currentLanguage];
+
+const basePath = "/es";
+
+const pageTitle = `${project.artist} - ${project.title} | ${t.pageTitleSuffix}`;
+
+const pageDescription =
+  project.description ||
+  `${project.title} by ${project.artist}, ${t.fallbackDescription}`;
+
+const projectUrl = `${siteUrl}${basePath}/work/${project.slug}`;
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "@id": `${projectUrl}#recording`,
+  url: projectUrl,
+  name: `${project.artist} - ${project.title}`,
+  description: pageDescription,
+  inLanguage: t.schemaLanguage,
+  image: `${siteUrl}${project.image.src}`,
+  byArtist: {
+    "@type": "MusicGroup",
+    name: project.artist
+  },
+  contributor: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl
+  },
+  creditText: project.role,
+  sameAs: [
+    project.spotify,
+    project.youtube
+  ].filter(Boolean)
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
+
+  <Navbar />
+
+  <main class="project">
+
+    <a class="back" href={`${basePath}/work`}>
+      <span>←</span>
+      {t.back}
+    </a>
+
+    <section class="hero-project">
+
+      <div class="cover">
+        <img
+          src={project.image.src}
+          alt={`${project.artist} - ${project.title}`}
+        />
+      </div>
+
+      <div class="content">
+
+        <p class="eyebrow">{project.artist}</p>
+
+        <h1>
+          {project.slug === "alfredo" ? (
+            <>O Senhor é o Meu<br />Pastor</>
+          ) : project.slug === "fixa-teus-olhos" ? (
+            <>Fixa Teus Olhos<br />em Mim</>
+          ) : (
+            project.title
+          )}
+        </h1>
+
+        <p class="role">{project.role}</p>
+
+        {project.highlight && (
+          <div class="badge">
+            <span class="badge-text">{project.highlight}</span>
+          </div>
+        )}
+
+        {project.description && (
+          <section class="block">
+            <p class="label">{t.about}</p>
+
+            <p class="text">{project.description}</p>
+          </section>
+        )}
+
+        {project.credits && project.credits.length > 0 && (
+          <section class="block">
+            <p class="label">{t.contributions}</p>
+
+            <div class="credits">
+              {project.credits.map((credit: string) => (
+                <span>{credit}</span>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(project.spotify || project.youtube) && (
+          <div class="listen-group">
+
+            {project.spotify && (
+              <a
+                class="listen"
+                href={project.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.listen}
+              </a>
+            )}
+
+            {project.youtube && (
+              <a
+                class="listen secondary-listen"
+                href={project.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.watch}
+              </a>
+            )}
+
+          </div>
+        )}
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+.project{
+  background:#050505;
+  color:white;
+  min-height:100vh;
+}
+
+.back{
+  position:fixed;
+  top:92px;
+  left:6%;
+  z-index:999;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:fit-content;
+  background:rgba(255,255,255,.07);
+  color:white;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:13px 20px;
+  text-decoration:none;
+  font:inherit;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  transition:.3s;
+}
+
+.back span{
+  display:inline-block;
+  transition:.3s;
+}
+
+.back:hover{
+  background:white;
+  color:black;
+  transform:translateY(-2px);
+}
+
+.back:hover span{
+  transform:translateX(-4px);
+}
+
+.hero-project{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr .9fr;
+  align-items:center;
+  gap:80px;
+  padding:150px 6% 120px;
+}
+
+.cover img{
+  width:100%;
+  border-radius:28px;
+  object-fit:cover;
+  box-shadow:0 40px 100px rgba(0,0,0,.45);
+}
+
+.content{
+  max-width:650px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:8px;
+  font-size:.78rem;
+  margin-bottom:22px;
+  text-transform:uppercase;
+}
+
+h1{
+  font-size:5.4rem;
+  line-height:.95;
+  margin-bottom:28px;
+}
+
+.role{
+  color:#d7d7d7;
+  font-size:1.25rem;
+  line-height:1.8;
+  margin-bottom:28px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  padding:12px 20px;
+  border-radius:999px;
+  background:rgba(210,176,120,.08);
+  border:1px solid rgba(210,176,120,.22);
+}
+
+.badge-text{
+  color:#f0d7a3;
+  font-size:.92rem;
+  font-weight:600;
+  letter-spacing:.3px;
+  line-height:1;
+}
+
+.block{
+  margin-top:48px;
+  padding-top:34px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+
+.label{
+  color:var(--gold);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-size:.72rem;
+  margin-bottom:18px;
+}
+
+.text{
+  color:#cfcfcf;
+  font-size:1.05rem;
+  line-height:1.9;
+  max-width:560px;
+}
+
+.credits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.credits span{
+  padding:10px 15px;
+  border-radius:999px;
+  background:#121212;
+  border:1px solid rgba(255,255,255,.08);
+  color:#d9d9d9;
+  font-size:.9rem;
+}
+
+.listen-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:42px;
+}
+
+.listen{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px 24px;
+  border-radius:999px;
+  background:white;
+  color:black;
+  text-decoration:none;
+  font-weight:700;
+  transition:.3s;
+}
+
+.listen:hover{
+  transform:translateY(-3px);
+}
+
+.secondary-listen{
+  background:rgba(255,255,255,.06);
+  color:white;
+  border:1px solid rgba(255,255,255,.14);
+}
+
+.secondary-listen:hover{
+  background:rgba(255,255,255,.12);
+  color:white;
+}
+
+@media(max-width:900px){
+  .hero-project{
+    grid-template-columns:1fr;
+    padding-top:170px;
+    gap:46px;
+  }
+
+  h1{
+    font-size:3.4rem;
+  }
+
+  .back{
+    top:92px;
+    left:6%;
+  }
+}
+
+@media(max-width:700px){
+  .hero-project{
+    padding:155px 6% 90px;
+  }
+
+  .back{
+    position:absolute;
+    top:92px;
+    left:6%;
+    right:6%;
+    width:auto;
+    justify-content:center;
+  }
+
+  h1{
+    font-size:3rem;
+  }
+
+  .role{
+    font-size:1.05rem;
+  }
+
+  .listen-group{
+    flex-direction:column;
+  }
+
+  .listen{
+    width:100%;
+  }
+}
+</style>

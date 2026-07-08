@@ -1,0 +1,336 @@
+---
+const siteUrl = "https://gabrielsoares.art.br";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const currentLanguage: SiteLanguage =
+  currentPath === "/pt" || currentPath.startsWith("/pt/")
+    ? "pt"
+    : currentPath === "/es" || currentPath.startsWith("/es/")
+      ? "es"
+      : "en";
+
+const languageMeta = {
+  en: {
+    htmlLang: "en",
+    ogLocale: "en_US",
+    schemaLanguage: "en",
+    defaultTitle: "Gabriel Soares | Music Producer & Acoustic Guitar Recording",
+    defaultDescription:
+      "Gabriel Soares is a Brazilian music producer, acoustic guitarist, arranger and multi-instrumentalist with verified credits across Christian, gospel and worship music projects.",
+  },
+  pt: {
+    htmlLang: "pt-BR",
+    ogLocale: "pt_BR",
+    schemaLanguage: "pt-BR",
+    defaultTitle: "Gabriel Soares | Produtor Musical & Gravação de Violão",
+    defaultDescription:
+      "Gabriel Soares é um produtor musical, violonista, arranjador e multi-instrumentista brasileiro com créditos verificados em projetos de música cristã, gospel e worship.",
+  },
+  es: {
+    htmlLang: "es",
+    ogLocale: "es_ES",
+    schemaLanguage: "es",
+    defaultTitle: "Gabriel Soares | Productor Musical & Grabación de Guitarra Acústica",
+    defaultDescription:
+      "Gabriel Soares es un productor musical, guitarrista acústico, arreglista y multiinstrumentista brasileño con créditos verificados en proyectos de música cristiana, gospel y worship.",
+  },
+};
+
+const defaultTitle = languageMeta[currentLanguage].defaultTitle;
+const defaultDescription = languageMeta[currentLanguage].defaultDescription;
+
+const {
+  title = defaultTitle,
+  description = defaultDescription,
+  image = "/og-image.jpg",
+  type = "website",
+} = Astro.props;
+
+const normalizedPath = currentPath.replace(/\/$/, "") || "/";
+
+const pathWithoutLanguage =
+  currentPath === "/pt" || currentPath.startsWith("/pt/")
+    ? currentPath.slice(3) || "/"
+    : currentPath === "/es" || currentPath.startsWith("/es/")
+      ? currentPath.slice(3) || "/"
+      : currentPath;
+
+const normalizedPathWithoutLanguage =
+  pathWithoutLanguage.replace(/\/$/, "") || "/";
+
+const getAbsoluteUrl = (path: string) =>
+  path === "/" ? siteUrl : `${siteUrl}${path}`;
+
+const getLocalizedPath = (language: SiteLanguage) => {
+  if (language === "en") return normalizedPathWithoutLanguage;
+
+  return normalizedPathWithoutLanguage === "/"
+    ? `/${language}`
+    : `/${language}${normalizedPathWithoutLanguage}`;
+};
+
+const canonicalUrl = getAbsoluteUrl(normalizedPath);
+
+const alternateUrls = {
+  en: getAbsoluteUrl(getLocalizedPath("en")),
+  pt: getAbsoluteUrl(getLocalizedPath("pt")),
+  es: getAbsoluteUrl(getLocalizedPath("es")),
+};
+
+const imageUrl = image.startsWith("http")
+  ? image
+  : `${siteUrl}${image}`;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#person`,
+  name: "Gabriel Soares",
+  url: siteUrl,
+  image: imageUrl,
+  jobTitle: [
+    "Music Producer",
+    "Acoustic Guitarist",
+    "Studio Acoustic Guitarist",
+    "Multi-Instrumentalist",
+    "Arranger"
+  ],
+  description:
+    "Gabriel Soares is a Brazilian music producer, acoustic guitarist, arranger and multi-instrumentalist with verified credits across Christian, gospel and worship music projects, including work connected to Vocal Livre, Arautos do Rei, Pedro Valença, Devoted Vocal, Novo Tom and other artists.",
+  knowsAbout: [
+    "Music Production",
+    "Acoustic Guitar Recording",
+    "Studio Acoustic Guitar",
+    "Acoustic Guitar",
+    "Arrangement",
+    "Live Music Production",
+    "Studio Recording",
+    "Remote Recording",
+    "Christian Music",
+    "Gospel Music",
+    "Worship Music",
+    "Music Credits"
+  ],
+  sameAs: [
+    "https://www.instagram.com/gabrielsoaresprodutor/",
+    "https://www.youtube.com/@gabrielsoaresprodutor",
+    "https://www.tiktok.com/@gabrielsoaresprodutor",
+    "https://www.linkedin.com/in/gabriel-soares-5a0127420/",
+    "https://open.spotify.com/intl-pt/artist/4llhbsPozmyRXlJWNmAVHb"
+  ]
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  name: "Gabriel Soares",
+  url: siteUrl,
+  description: defaultDescription,
+  publisher: {
+    "@id": `${siteUrl}/#person`
+  },
+  inLanguage: languageMeta[currentLanguage].schemaLanguage
+};
+---
+
+<!doctype html>
+<html lang={languageMeta[currentLanguage].htmlLang}>
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{title}</title>
+
+  <meta name="description" content={description} />
+
+  <meta name="author" content="Gabriel Soares" />
+
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <link rel="alternate" hreflang="en" href={alternateUrls.en} />
+  <link rel="alternate" hreflang="pt-BR" href={alternateUrls.pt} />
+  <link rel="alternate" hreflang="es" href={alternateUrls.es} />
+  <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=31" />
+  <link rel="apple-touch-icon" href="/favicon.svg?v=31" />
+  <meta name="theme-color" content="#050505" />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:site_name" content="Gabriel Soares" />
+  <meta property="og:locale" content={languageMeta[currentLanguage].ogLocale} />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={imageUrl} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+</head>
+
+<body>
+
+  <slot />
+
+  <script is:inline>
+  (() => {
+    const path = window.location.pathname;
+
+    if (path !== "/") return;
+
+    const savedLanguage = window.localStorage.getItem("gabriel-site-language");
+
+    if (savedLanguage === "pt") {
+      window.location.replace("/pt");
+      return;
+    }
+
+    if (savedLanguage === "es") {
+      window.location.replace("/es");
+      return;
+    }
+
+    if (savedLanguage === "en") return;
+
+    const browserLanguages = navigator.languages || [navigator.language || ""];
+
+    const prefersPortuguese = browserLanguages.some((language) =>
+      language.toLowerCase().startsWith("pt")
+    );
+
+    const prefersSpanish = browserLanguages.some((language) =>
+      language.toLowerCase().startsWith("es")
+    );
+
+    if (prefersPortuguese) {
+      window.location.replace("/pt");
+      return;
+    }
+
+    if (prefersSpanish) {
+      window.location.replace("/es");
+    }
+  })();
+  </script>
+
+  <script is:inline>
+  const scrollOffsets = {
+    work: -110,
+    contact: -120,
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+
+      if (!href || href === "#") return;
+
+      const targetId = href.replace("#", "");
+      const target = document.getElementById(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      const offset = scrollOffsets[targetId] ?? 0;
+
+      const targetPosition =
+        target.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    });
+  });
+  </script>
+
+</body>
+
+</html>
+
+<style is:global>
+:root{
+  --background:#050505;
+  --surface:#101010;
+  --text:#ffffff;
+  --muted:#bcbcbc;
+  --gold:#d2b078;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--background);
+  color:var(--text);
+  font-family:"Inter",sans-serif;
+  overflow-x:hidden;
+}
+
+body.modal-open{
+  overflow:hidden;
+}
+
+h1,
+h2,
+h3,
+h4{
+  font-family:"Cormorant Garamond",serif;
+  font-weight:600;
+  letter-spacing:.5px;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+a{
+  color:inherit;
+}
+
+section{
+  position:relative;
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+}
+</style>

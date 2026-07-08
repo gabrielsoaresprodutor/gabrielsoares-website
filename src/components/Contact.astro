@@ -1,0 +1,1155 @@
+---
+const contactLinks = {
+  email: "contato@gabrielsoares.art.br",
+  whatsapp: "https://wa.me/5515997832172",
+  instagram: "https://www.instagram.com/gabrielsoaresprodutor/",
+  youtube: "https://www.youtube.com/@gabrielsoaresprodutor",
+  tiktok: "https://www.tiktok.com/@gabrielsoaresprodutor",
+  linkedin: "https://www.linkedin.com/in/gabrielsoaresprodutor/",
+  spotify: "https://open.spotify.com/intl-pt/artist/4llhbsPozmyRXlJWNmAVHb",
+};
+
+const web3FormsAccessKey = "487d496e-7987-4464-adf4-57d87889b885";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const getRouteLanguage = (pathname: string): SiteLanguage => {
+  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "pt";
+  if (pathname === "/es" || pathname.startsWith("/es/")) return "es";
+  return "en";
+};
+
+const currentLanguage = getRouteLanguage(currentPath);
+
+const contactText: Record<
+  SiteLanguage,
+  {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    emailLabel: string;
+    emailText: string;
+    fromName: string;
+    subject: string;
+    name: string;
+    namePlaceholder: string;
+    email: string;
+    emailPlaceholder: string;
+    whatsapp: string;
+    whatsappPlaceholder: string;
+    projectType: string;
+    projectTypePlaceholder: string;
+    message: string;
+    messagePlaceholder: string;
+    send: string;
+    instagram: string;
+    youtube: string;
+    whatsappTitle: string;
+    whatsappText: string;
+    tiktok: string;
+    linkedinTitle: string;
+    linkedin: string;
+    spotify: string;
+  }
+> = {
+  en: {
+    eyebrow: "CONTACT",
+    title: "Let’s create something meaningful.",
+    intro:
+      "For music production, acoustic guitar recordings, arrangements, collaborations, live projects and artistic direction, send a message directly from the website.",
+    emailLabel: "Professional Email",
+    emailText:
+      "Share your project, reference, deadline and what kind of recording, production or arrangement you need. This is the best place to start a professional conversation with Gabriel Soares.",
+    fromName: "Gabriel Soares Website",
+    subject: "New message from gabrielsoares.art.br",
+    name: "Name",
+    namePlaceholder: "Your name",
+    email: "Email",
+    emailPlaceholder: "your@email.com",
+    whatsapp: "WhatsApp",
+    whatsappPlaceholder: "Optional",
+    projectType: "Project type",
+    projectTypePlaceholder: "Recording, production, arrangement...",
+    message: "Message",
+    messagePlaceholder:
+      "Tell me about your project, references, deadline and what you need...",
+    send: "Send Message",
+    instagram: "Recent works, studio moments, releases and behind the scenes.",
+    youtube: "Videos, performances, productions and featured music projects.",
+    whatsappTitle: "Direct contact",
+    whatsappText:
+      "Send a direct message for recording, production and project inquiries.",
+    tiktok: "Short videos, music moments, studio ideas and creative content.",
+    linkedinTitle: "Professional profile",
+    linkedin:
+      "Professional information, music work and selected career highlights.",
+    spotify: "Listen to selected productions, recordings and released works.",
+  },
+
+  pt: {
+    eyebrow: "CONTATO",
+    title: "Vamos criar algo com significado.",
+    intro:
+      "Para produção musical, gravações de violão, arranjos, colaborações, projetos ao vivo e direção artística, envie uma mensagem diretamente pelo site.",
+    emailLabel: "E-mail Profissional",
+    emailText:
+      "Envie seu projeto, referências, prazo e o tipo de gravação, produção ou arranjo que você precisa. Este é o melhor lugar para iniciar uma conversa profissional com Gabriel Soares.",
+    fromName: "Site Gabriel Soares",
+    subject: "Nova mensagem de gabrielsoares.art.br",
+    name: "Nome",
+    namePlaceholder: "Seu nome",
+    email: "E-mail",
+    emailPlaceholder: "seu@email.com",
+    whatsapp: "WhatsApp",
+    whatsappPlaceholder: "Opcional",
+    projectType: "Tipo de projeto",
+    projectTypePlaceholder: "Gravação, produção, arranjo...",
+    message: "Mensagem",
+    messagePlaceholder:
+      "Fale sobre seu projeto, referências, prazo e o que você precisa...",
+    send: "Enviar Mensagem",
+    instagram: "Trabalhos recentes, momentos de estúdio, lançamentos e bastidores.",
+    youtube: "Vídeos, performances, produções e projetos musicais em destaque.",
+    whatsappTitle: "Contato direto",
+    whatsappText:
+      "Envie uma mensagem direta sobre gravações, produção musical e novos projetos.",
+    tiktok:
+      "Vídeos curtos, momentos musicais, ideias de estúdio e conteúdo criativo.",
+    linkedinTitle: "Perfil profissional",
+    linkedin:
+      "Informações profissionais, trabalhos musicais e destaques selecionados da carreira.",
+    spotify: "Ouça produções, gravações e trabalhos lançados selecionados.",
+  },
+
+  es: {
+    eyebrow: "CONTACTO",
+    title: "Creemos algo con significado.",
+    intro:
+      "Para producción musical, grabaciones de guitarra acústica, arreglos, colaboraciones, proyectos en vivo y dirección artística, envía un mensaje directamente desde el sitio.",
+    emailLabel: "E-mail Profesional",
+    emailText:
+      "Comparte tu proyecto, referencias, plazo y qué tipo de grabación, producción o arreglo necesitas. Este es el mejor lugar para iniciar una conversación profesional con Gabriel Soares.",
+    fromName: "Sitio Gabriel Soares",
+    subject: "Nuevo mensaje desde gabrielsoares.art.br",
+    name: "Nombre",
+    namePlaceholder: "Tu nombre",
+    email: "E-mail",
+    emailPlaceholder: "tu@email.com",
+    whatsapp: "WhatsApp",
+    whatsappPlaceholder: "Opcional",
+    projectType: "Tipo de proyecto",
+    projectTypePlaceholder: "Grabación, producción, arreglo...",
+    message: "Mensaje",
+    messagePlaceholder:
+      "Cuéntame sobre tu proyecto, referencias, plazo y lo que necesitas...",
+    send: "Enviar Mensaje",
+    instagram: "Trabajos recientes, momentos de estudio, lanzamientos y backstage.",
+    youtube: "Videos, performances, producciones y proyectos musicales destacados.",
+    whatsappTitle: "Contacto directo",
+    whatsappText:
+      "Envía un mensaje directo para grabaciones, producción musical y consultas sobre proyectos.",
+    tiktok:
+      "Videos cortos, momentos musicales, ideas de estudio y contenido creativo.",
+    linkedinTitle: "Perfil profesional",
+    linkedin:
+      "Información profesional, trabajos musicales y destacados seleccionados de carrera.",
+    spotify: "Escucha producciones, grabaciones y trabajos lanzados seleccionados.",
+  },
+};
+
+const t = contactText[currentLanguage];
+---
+
+<section class="contact" id="contact">
+
+  <div class="container">
+
+    <div class="heading">
+      <p class="eyebrow">{t.eyebrow}</p>
+
+      <h2>{t.title}</h2>
+
+      <p class="intro">
+        {t.intro}
+      </p>
+    </div>
+
+    <div class="contact-layout">
+
+      <div class="main-card">
+
+        <div class="email-intro">
+          <span class="label">{t.emailLabel}</span>
+
+          <h3>{contactLinks.email}</h3>
+
+          <p>
+            {t.emailText}
+          </p>
+        </div>
+
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+
+          <input type="hidden" name="access_key" value={web3FormsAccessKey} />
+          <input type="hidden" name="from_name" value={t.fromName} />
+          <input type="hidden" name="subject" value={t.subject} />
+
+          <div class="form-row">
+
+            <div class="form-field">
+              <label for="name">{t.name}</label>
+
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder={t.namePlaceholder}
+                autocomplete="name"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="email">{t.email}</label>
+
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder={t.emailPlaceholder}
+                autocomplete="email"
+                required
+              />
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-field">
+              <label for="whatsapp">{t.whatsapp}</label>
+
+              <input
+                id="whatsapp"
+                type="tel"
+                name="whatsapp"
+                placeholder={t.whatsappPlaceholder}
+                autocomplete="tel"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="project-type">{t.projectType}</label>
+
+              <input
+                id="project-type"
+                type="text"
+                name="project_type"
+                placeholder={t.projectTypePlaceholder}
+                required
+              />
+            </div>
+
+          </div>
+
+          <div class="form-field">
+            <label for="message">{t.message}</label>
+
+            <textarea
+              id="message"
+              name="message"
+              placeholder={t.messagePlaceholder}
+              required
+            ></textarea>
+          </div>
+
+          <button class="send-button" type="submit">
+            {t.send}
+            <span>↗</span>
+          </button>
+
+        </form>
+
+      </div>
+
+      <div class="links-grid">
+
+        <a class="contact-card instagram-card" href={contactLinks.instagram} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon instagram-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7.25A4.75 4.75 0 1 1 12 16.75 4.75 4.75 0 0 1 12 7.25Zm0 2A2.75 2.75 0 1 0 12 14.75 2.75 2.75 0 0 0 12 9.25Zm4.95-2.55a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">Instagram</span>
+
+          <strong class="small-handle">@gabrielsoaresprodutor</strong>
+
+          <p>{t.instagram}</p>
+
+        </a>
+
+        <a class="contact-card youtube-card" href={contactLinks.youtube} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon youtube-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M21.6 7.18a2.76 2.76 0 0 0-1.94-1.95C17.94 4.77 12 4.77 12 4.77s-5.94 0-7.66.46A2.76 2.76 0 0 0 2.4 7.18C1.94 8.9 1.94 12 1.94 12s0 3.1.46 4.82a2.76 2.76 0 0 0 1.94 1.95c1.72.46 7.66.46 7.66.46s5.94 0 7.66-.46a2.76 2.76 0 0 0 1.94-1.95c.46-1.72.46-4.82.46-4.82s0-3.1-.46-4.82ZM10 15.31V8.69L15.5 12 10 15.31Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">YouTube</span>
+
+          <strong>Gabriel Soares</strong>
+
+          <p>{t.youtube}</p>
+
+        </a>
+
+        <a class="contact-card whatsapp-card" href={contactLinks.whatsapp} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon whatsapp-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12.04 2.1c-5.45 0-9.88 4.32-9.88 9.65 0 1.72.47 3.4 1.36 4.86L2 22l5.55-1.45a10.08 10.08 0 0 0 4.49 1.05c5.45 0 9.88-4.32 9.88-9.65S17.49 2.1 12.04 2.1Zm0 17.84a8.35 8.35 0 0 1-4.26-1.17l-.31-.18-3.29.86.88-3.13-.2-.32a7.83 7.83 0 0 1-1.2-4.25c0-4.4 3.75-7.98 8.38-7.98 4.62 0 8.38 3.58 8.38 7.98 0 4.4-3.76 8.19-8.38 8.19Zm4.62-5.97c-.25-.12-1.49-.72-1.72-.8-.23-.08-.4-.12-.57.13-.17.25-.66.8-.81.96-.15.17-.3.19-.56.06-.25-.12-1.07-.39-2.04-1.23-.75-.66-1.26-1.47-1.41-1.72-.15-.25-.02-.39.11-.51.12-.11.25-.3.38-.45.13-.15.17-.25.26-.42.08-.17.04-.32-.02-.45-.06-.12-.57-1.37-.79-1.88-.21-.5-.42-.43-.57-.44h-.49c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.09s.9 2.42 1.03 2.59c.13.17 1.78 2.7 4.32 3.79.6.26 1.08.42 1.45.53.61.19 1.16.16 1.6.1.49-.07 1.49-.61 1.7-1.19.21-.58.21-1.08.15-1.19-.06-.1-.23-.16-.48-.29Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">WhatsApp</span>
+
+          <strong>{t.whatsappTitle}</strong>
+
+          <p>{t.whatsappText}</p>
+
+        </a>
+
+        <a class="contact-card tiktok-card" href={contactLinks.tiktok} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon tiktok-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M17.2 2c.33 2.86 1.94 4.56 4.8 4.74v3.2c-1.66.16-3.12-.38-4.7-1.35v6.02c0 7.66-8.35 10.05-11.7 4.56-2.15-3.53-.83-9.72 6.08-9.97v3.38c-.54.09-1.12.22-1.65.4-1.58.54-2.48 1.55-2.23 3.33.48 3.41 6.74 4.42 6.22-2.24V2h3.18Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">TikTok</span>
+
+          <strong>@gabrielsoaresprodutor</strong>
+
+          <p>{t.tiktok}</p>
+
+        </a>
+
+        <a class="contact-card linkedin-card" href={contactLinks.linkedin} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon linkedin-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5ZM3 9.75h3.96V21H3V9.75Zm6.25 0h3.79v1.54h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.65 4.77 6.1V21h-3.96v-4.94c0-1.18-.02-2.7-1.65-2.7-1.65 0-1.9 1.29-1.9 2.62V21H10.2V9.75h-.95Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">LinkedIn</span>
+
+          <strong>{t.linkedinTitle}</strong>
+
+          <p>{t.linkedin}</p>
+
+        </a>
+
+        <a class="contact-card spotify-card" href={contactLinks.spotify} target="_blank" rel="noopener noreferrer">
+
+          <div class="card-top">
+            <span class="social-icon spotify-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2Zm4.63 14.47a.77.77 0 0 1-1.05.25c-2.88-1.76-6.5-2.16-10.77-1.18a.77.77 0 1 1-.34-1.5c4.68-1.07 8.69-.62 11.91 1.36.36.22.47.7.25 1.07Zm1.23-2.75a.92.92 0 0 1-1.27.3c-3.29-2.02-8.31-2.61-12.19-1.43a.92.92 0 1 1-.54-1.76c4.43-1.35 9.95-.7 13.7 1.61.43.27.57.84.3 1.28Zm.1-2.87C14.02 8.52 7.52 8.31 3.76 9.46a1.07 1.07 0 1 1-.62-2.05c4.31-1.31 11.45-1.06 15.92 1.6a1.07 1.07 0 0 1-1.1 1.84Z" />
+              </svg>
+            </span>
+
+            <span class="arrow">↗</span>
+          </div>
+
+          <span class="label">Spotify</span>
+
+          <strong>Gabriel Soares</strong>
+
+          <p>{t.spotify}</p>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.contact{
+  background:
+    radial-gradient(circle at top right, rgba(210,176,120,.14), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(255,255,255,.045), transparent 30%),
+    #050505;
+  color:white;
+  padding:130px 6%;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.heading{
+  max-width:780px;
+  margin-bottom:64px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:4rem;
+  line-height:1;
+  margin-bottom:24px;
+}
+
+.intro{
+  color:#c9c9c9;
+  font-size:1.08rem;
+  line-height:1.8;
+  max-width:700px;
+}
+
+.contact-layout{
+  display:grid;
+  grid-template-columns:1.12fr 1.18fr;
+  gap:28px;
+  align-items:stretch;
+}
+
+.main-card,
+.contact-card{
+  position:relative;
+  text-decoration:none;
+  color:white;
+  border-radius:30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.065),
+      rgba(255,255,255,.018)
+    );
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.055);
+  transition:.35s;
+  overflow:hidden;
+}
+
+.main-card{
+  padding:38px;
+  display:flex;
+  flex-direction:column;
+  gap:38px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.18),
+      rgba(255,255,255,.025)
+    );
+  border-color:rgba(210,176,120,.28);
+}
+
+.main-card::before,
+.contact-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,.08), transparent 42%);
+  opacity:.55;
+  pointer-events:none;
+}
+
+.email-intro,
+.contact-form{
+  position:relative;
+  z-index:2;
+}
+
+.label{
+  display:inline-block;
+  width:fit-content;
+  color:#f0d7a3;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:4px;
+  margin-bottom:24px;
+}
+
+.main-card h3{
+  font-size:2rem;
+  line-height:1.05;
+  margin-bottom:20px;
+  word-break:break-word;
+}
+
+.main-card p,
+.contact-card p{
+  color:#bdbdbd;
+  line-height:1.75;
+  font-size:.95rem;
+  margin:0;
+}
+
+.contact-form{
+  display:grid;
+  gap:22px;
+  margin-top:8px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.form-field{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.form-field label{
+  display:block;
+  color:rgba(255,255,255,.78);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+}
+
+.contact-form input,
+.contact-form textarea{
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  background:rgba(5,5,5,.48);
+  color:white;
+  padding:18px 19px;
+  font:inherit;
+  font-size:1rem;
+  outline:none;
+  transition:.25s;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 12px 30px rgba(0,0,0,.14);
+}
+
+.contact-form input{
+  height:66px;
+}
+
+.contact-form textarea{
+  min-height:260px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color:rgba(255,255,255,.36);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:rgba(240,215,163,.55);
+  background:rgba(5,5,5,.62);
+  box-shadow:
+    0 0 0 4px rgba(210,176,120,.09),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.send-button{
+  width:fit-content;
+  margin-top:8px;
+  border:0;
+  border-radius:999px;
+  padding:17px 26px;
+  background:#f0d7a3;
+  color:#050505;
+  font:inherit;
+  font-size:.98rem;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transition:.3s;
+}
+
+.send-button:hover{
+  transform:translateY(-3px);
+  background:white;
+}
+
+.links-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  grid-auto-rows:1fr;
+  gap:24px;
+  align-items:stretch;
+}
+
+.contact-card{
+  min-height:0;
+  height:100%;
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.contact-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(210,176,120,.38);
+}
+
+.contact-card strong{
+  display:block;
+  font-size:1.16rem;
+  line-height:1.22;
+  margin-bottom:14px;
+  max-width:100%;
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+
+.contact-card .small-handle{
+  font-size:.86rem;
+  line-height:1.24;
+  letter-spacing:-.65px;
+  white-space:nowrap;
+  max-width:100%;
+}
+
+.card-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.social-icon{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.social-icon::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at 30% 18%,
+      rgba(255,255,255,.58),
+      rgba(255,255,255,.15) 24%,
+      transparent 48%
+    );
+  opacity:.72;
+  pointer-events:none;
+}
+
+.social-icon svg{
+  width:24px;
+  height:24px;
+  position:relative;
+  z-index:2;
+  display:block;
+}
+
+.social-icon svg path{
+  fill:currentColor;
+}
+
+.whatsapp-icon{
+  color:white;
+  background:
+    linear-gradient(145deg, #32e075 0%, #25D366 45%, #128C7E 100%);
+}
+
+.instagram-icon{
+  color:white;
+  background:
+    linear-gradient(
+      145deg,
+      #feda75 0%,
+      #fa7e1e 24%,
+      #d62976 52%,
+      #962fbf 76%,
+      #4f5bd5 100%
+    );
+}
+
+.youtube-icon{
+  color:white;
+  background:
+    linear-gradient(145deg, #ff4f4f 0%, #ff0000 52%, #b60000 100%);
+}
+
+.tiktok-icon{
+  color:white;
+  background:
+    radial-gradient(circle at 75% 28%, rgba(254,44,85,.75), transparent 34%),
+    radial-gradient(circle at 25% 72%, rgba(37,244,238,.72), transparent 34%),
+    linear-gradient(145deg, #111, #000);
+}
+
+.linkedin-icon{
+  color:white;
+  background:
+    linear-gradient(145deg, #3b9be8 0%, #0A66C2 52%, #064780 100%);
+}
+
+.spotify-icon{
+  color:#061307;
+  background:
+    linear-gradient(145deg, #37ee78 0%, #1ED760 45%, #129447 100%);
+}
+
+.whatsapp-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(37,211,102,.24), transparent 36%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.instagram-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(214,41,118,.24), transparent 36%),
+    radial-gradient(circle at 88% 12%, rgba(79,91,213,.18), transparent 32%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.youtube-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255,0,0,.24), transparent 36%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.tiktok-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(254,44,85,.2), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(37,244,238,.13), transparent 32%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.linkedin-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(10,102,194,.24), transparent 36%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.spotify-card{
+  background:
+    radial-gradient(circle at 12% 8%, rgba(30,215,96,.24), transparent 36%),
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+}
+
+.contact-card.disabled{
+  opacity:.76;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+.contact-card.disabled:hover{
+  transform:none;
+  border-color:rgba(255,255,255,.08);
+}
+
+.arrow{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f0d7a3;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  font-size:1rem;
+  transition:.35s;
+}
+
+.contact-card:hover .arrow{
+  background:#f0d7a3;
+  color:#050505;
+  transform:translate(3px,-3px);
+}
+
+.contact-card.disabled:hover .arrow{
+  background:rgba(255,255,255,.055);
+  color:#f0d7a3;
+  transform:none;
+}
+
+@media(max-width:1000px){
+  .contact-layout{
+    grid-template-columns:1fr;
+  }
+
+  h2{
+    font-size:3rem;
+  }
+}
+
+@media(max-width:700px){
+  .contact{
+    padding:82px 0;
+    overflow:hidden;
+  }
+
+  .container{
+    max-width:none;
+    width:100%;
+    padding:0 20px;
+  }
+
+  .heading{
+    margin-bottom:34px;
+  }
+
+  .eyebrow{
+    font-size:.66rem;
+    letter-spacing:4px;
+    margin-bottom:12px;
+  }
+
+  h2{
+    font-size:2.35rem;
+    line-height:1.04;
+    margin-bottom:18px;
+  }
+
+  .intro{
+    font-size:.94rem;
+    line-height:1.65;
+  }
+
+  .contact-layout{
+    grid-template-columns:1fr;
+    gap:22px;
+  }
+
+  .main-card{
+    padding:26px 22px;
+    border-radius:26px;
+    gap:28px;
+  }
+
+  .label{
+    font-size:.64rem;
+    letter-spacing:3px;
+    margin-bottom:16px;
+  }
+
+  .main-card h3{
+    font-size:1.28rem;
+    line-height:1.18;
+    margin-bottom:14px;
+  }
+
+  .main-card p{
+    font-size:.88rem;
+    line-height:1.6;
+  }
+
+  .form-row{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .contact-form{
+    gap:18px;
+  }
+
+  .form-field{
+    gap:8px;
+  }
+
+  .form-field label{
+    font-size:.66rem;
+    letter-spacing:2px;
+  }
+
+  .contact-form input{
+    height:56px;
+  }
+
+  .contact-form input,
+  .contact-form textarea{
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:.94rem;
+  }
+
+  .contact-form textarea{
+    min-height:190px;
+  }
+
+  .send-button{
+    width:100%;
+    min-height:54px;
+    margin-top:4px;
+  }
+
+  .links-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    grid-auto-rows:auto;
+    gap:12px;
+  }
+
+  .contact-card{
+    min-height:126px;
+    height:auto;
+    padding:16px;
+    border-radius:20px;
+    justify-content:flex-start;
+  }
+
+  .contact-card:hover{
+    transform:none;
+  }
+
+  .card-top{
+    align-items:center;
+    margin-bottom:12px;
+    gap:10px;
+  }
+
+  .social-icon{
+    width:36px;
+    height:36px;
+    flex-basis:36px;
+    border-radius:12px;
+  }
+
+  .social-icon svg{
+    width:20px;
+    height:20px;
+  }
+
+  .arrow{
+    width:30px;
+    height:30px;
+    flex-basis:30px;
+    font-size:.82rem;
+  }
+
+  .contact-card .label{
+    font-size:.6rem;
+    letter-spacing:2.4px;
+    margin-bottom:8px;
+  }
+
+  .contact-card strong{
+    font-size:.9rem;
+    line-height:1.18;
+    margin-bottom:0;
+  }
+
+  .contact-card .small-handle{
+    font-size:.72rem;
+    line-height:1.2;
+    letter-spacing:-.3px;
+    white-space:normal;
+  }
+
+  .contact-card p{
+    display:none;
+  }
+ 
+  .email-intro{
+  display:grid;
+  gap:10px;
+  }
+
+  .email-intro .label{
+  margin-bottom:0;
+  }
+
+  .main-card h3{
+  display:inline-flex;
+  width:fit-content;
+  max-width:100%;
+  padding:10px 13px;
+  border-radius:14px;
+  background:rgba(5,5,5,.38);
+  border:1px solid rgba(255,255,255,.09);
+  font-size:1rem;
+  line-height:1.2;
+  margin-bottom:0;
+  }
+
+  .email-intro p{
+  font-size:.82rem;
+  line-height:1.55;
+  color:rgba(255,255,255,.62);
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  }
+
+  .main-card{
+  gap:22px;
+  }
+  .contact-card{
+  min-height:88px;
+  padding:14px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  grid-template-areas:
+    "icon label";
+  align-items:center;
+  column-gap:12px;
+  }
+
+  .card-top{
+  grid-area:icon;
+  margin:0;
+  display:block;
+  }
+
+  .social-icon{
+  width:38px;
+  height:38px;
+  flex-basis:38px;
+  } 
+
+  .social-icon svg{
+  width:21px;
+  height:21px;
+  }
+
+  .arrow{
+  display:none;
+  }
+
+  .contact-card .label{
+  grid-area:label;
+  margin:0;
+  font-size:.74rem;
+  letter-spacing:2px;
+  line-height:1.2;
+  }
+
+  .contact-card strong,
+  .contact-card .small-handle,
+  .contact-card p{
+  display:none;
+  }  
+}
+
+@media(max-width:420px){
+  .container{
+    padding:0 16px;
+  }
+
+  .links-grid{
+    gap:10px;
+  }
+
+  .contact-card{
+    min-height:116px;
+    padding:14px;
+    border-radius:18px;
+  }
+
+  .social-icon{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+    border-radius:11px;
+  }
+
+  .social-icon svg{
+    width:19px;
+    height:19px;
+  }
+
+  .arrow{
+    width:28px;
+    height:28px;
+    flex-basis:28px;
+  }
+
+  .contact-card strong{
+    font-size:.84rem;
+  }
+
+  .contact-card .small-handle{
+    font-size:.68rem;
+  }
+  .contact-card{
+  min-height:82px;
+  padding:13px;
+  column-gap:10px;
+  }
+
+  .social-icon{
+  width:36px;
+  height:36px;
+  flex-basis:36px;
+  }
+
+  .social-icon svg{
+  width:20px;
+  height:20px;
+  }
+
+  .contact-card .label{
+  font-size:.7rem;
+  }
+}
+</style>

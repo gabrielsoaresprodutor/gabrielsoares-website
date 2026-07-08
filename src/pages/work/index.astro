@@ -1,0 +1,407 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { projects } from "../../data/projects";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+const pageTitle = "Gabriel Soares Work | Music Production & Acoustic Guitar Credits";
+
+const pageDescription =
+  "Selected work by Gabriel Soares, Brazilian music producer, acoustic guitarist and multi-instrumentalist, including albums, singles, live projects, recordings and collaborations.";
+
+type Project = (typeof projects)[number];
+
+const localizeProject = (project: Project): Project => project;
+
+const localizedProjects = projects.map(localizeProject);
+const mainProjectSlugs = [
+  "temporal",
+  "temporal-aovivo",
+  "recife15",
+  "pedro-live",
+  "pedro-paula-1",
+  "pedro-paula-2",
+];
+
+const mainProjects = mainProjectSlugs.flatMap((slug) => {
+  const foundProject = localizedProjects.find((project) => project.slug === slug);
+
+  return foundProject ? [foundProject] : [];
+});
+
+const vocalLivreEPs = localizedProjects.filter((project) => project.collection === "vl-eps");
+const vocalLivreSingles = localizedProjects.filter((project) => project.collection === "vl-singles");
+const vocalLivreYoutube = localizedProjects.filter((project) => project.collection === "vl-youtube");
+
+const featured = localizedProjects.filter((project) => project.collection === "featured");
+const other = localizedProjects.filter((project) => project.collection === "other");
+
+const workSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${siteUrl}/work#collection`,
+  url: `${siteUrl}/work`,
+  name: "Gabriel Soares Work",
+  description: pageDescription,
+  inLanguage: "en",
+  about: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    name: "Selected music productions, recordings and collaborations by Gabriel Soares",
+    itemListElement: localizedProjects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "MusicRecording",
+        name: `${project.artist} - ${project.title}`,
+        description: project.description,
+        byArtist: {
+          "@type": "MusicGroup",
+          name: project.artist
+        },
+        contributor: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Gabriel Soares"
+        },
+        url: `${siteUrl}/work/${project.slug}`,
+        image: `${siteUrl}${project.image.src}`
+      }
+    }))
+  }
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(workSchema)} />
+
+  <Navbar />
+
+  <main class="work">
+
+    <section class="intro">
+
+      <a class="back-button" href="/#work">
+        <span class="back-icon">←</span>
+        <span>Featured Work</span>
+      </a>
+
+      <p class="eyebrow">PROJECTS & DISCOGRAPHY</p>
+
+      <h1>Selected productions, albums and recordings.</h1>
+
+      <p class="subtitle">
+        A curated discography of music production, acoustic guitar recordings, arrangements, live projects and collaborations by Gabriel Soares.
+      </p>
+
+      <div class="intro-actions">
+        <a href="/credits">Official Credits</a>
+        <a href="/#contact">Start a Project</a>
+      </div>
+
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">SELECTED WORK</p>
+
+      <div class="category">
+        <h2>Albums & Featured Projects</h2>
+
+        <div class="grid">
+          {mainProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      </div>
+
+      {vocalLivreEPs.length > 0 && (
+        <div class="category">
+          <h2>EPs</h2>
+
+          <div class="grid">
+            {vocalLivreEPs.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {vocalLivreSingles.length > 0 && (
+        <div class="category">
+          <h2>Singles</h2>
+
+          <div class="grid">
+            {vocalLivreSingles.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {vocalLivreYoutube.length > 0 && (
+        <div class="category">
+          <h2>YouTube</h2>
+
+          <div class="grid">
+            {vocalLivreYoutube.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">FEATURED COLLABORATIONS</p>
+
+      <h2>Collaborations & Sessions</h2>
+
+      <div class="grid">
+        {featured.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">OTHER PROJECTS</p>
+
+      <h2>Additional Credits</h2>
+
+      <div class="grid">
+        {other.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+.work{
+  background:#050505;
+  color:white;
+  min-height:100vh;
+  padding:150px 6% 120px;
+}
+
+.intro,
+.artist{
+  max-width:1200px;
+  margin:auto;
+}
+
+.intro{
+  margin-bottom:120px;
+}
+
+.back-button{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  width:fit-content;
+  min-height:48px;
+  padding:0 20px 0 14px;
+  margin-bottom:58px;
+  border-radius:999px;
+  color:rgba(255,255,255,.74);
+  text-decoration:none;
+  border:1px solid rgba(210,176,120,.24);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.12),
+      rgba(255,255,255,.025)
+    );
+  font-size:.76rem;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  transition:.28s ease;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.back-icon{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f0d7a3;
+  background:rgba(210,176,120,.12);
+  border:1px solid rgba(210,176,120,.25);
+  font-size:1rem;
+  letter-spacing:0;
+  transition:.28s ease;
+}
+
+.back-button:hover{
+  color:#f0d7a3;
+  border-color:rgba(210,176,120,.5);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.19),
+      rgba(255,255,255,.035)
+    );
+  transform:translateY(-2px);
+}
+
+.back-button:hover .back-icon{
+  background:rgba(210,176,120,.2);
+  border-color:rgba(210,176,120,.44);
+  transform:translateX(-3px);
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:4.8rem;
+  line-height:1;
+  max-width:900px;
+  margin-bottom:24px;
+}
+
+.subtitle{
+  color:#bdbdbd;
+  font-size:1.1rem;
+  line-height:1.8;
+  max-width:690px;
+}
+
+.intro-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:38px;
+}
+
+.intro-actions a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 22px;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+  border:1px solid rgba(210,176,120,.28);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.12),
+      rgba(255,255,255,.025)
+    );
+  font-size:.78rem;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  transition:.28s ease;
+}
+
+.intro-actions a:hover{
+  transform:translateY(-3px);
+  color:#f0d7a3;
+  border-color:rgba(210,176,120,.5);
+}
+
+.artist{
+  margin-bottom:140px;
+  padding-top:60px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.category{
+  margin-top:55px;
+}
+
+.category + .category{
+  margin-top:90px;
+}
+
+h2{
+  font-size:3rem;
+  margin-bottom:34px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  h1{
+    font-size:3.8rem;
+  }
+}
+
+@media(max-width:700px){
+  .work{
+    padding:120px 6% 90px;
+  }
+
+  .intro{
+    margin-bottom:90px;
+  }
+
+  .back-button{
+    width:100%;
+    justify-content:center;
+    margin-bottom:44px;
+  }
+
+  h1{
+    font-size:3.1rem;
+  }
+
+  h2{
+    font-size:2.3rem;
+  }
+
+  .intro-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .intro-actions a{
+    width:100%;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .artist{
+    margin-bottom:100px;
+  }
+
+  .category + .category{
+    margin-top:70px;
+  }
+}
+</style>

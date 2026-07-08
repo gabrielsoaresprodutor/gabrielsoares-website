@@ -1,0 +1,697 @@
+---
+import musoSummary from "../assets/recognition/muso-summary.png";
+import musoTopGuitarists from "../assets/recognition/muso-top-guitarists.png";
+import musoTopProducers from "../assets/recognition/muso-top-producers.png";
+import musoCredits from "../assets/recognition/muso-credits.png";
+import musoFoundingMember from "../assets/recognition/muso-founding-member.png";
+import musoTopStreamed from "../assets/recognition/muso-top-streamed.png";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const getRouteLanguage = (pathname: string): SiteLanguage => {
+  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "pt";
+  if (pathname === "/es" || pathname.startsWith("/es/")) return "es";
+  return "en";
+};
+
+const currentLanguage = getRouteLanguage(currentPath);
+
+const text: Record<
+  SiteLanguage,
+  {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    previousImage: string;
+    nextImage: string;
+  }
+> = {
+  en: {
+    eyebrow: "VERIFIED CREDITS",
+    title: "Verified Credits & Guitar Recognition.",
+    intro:
+      "A selection of verified credits, streaming milestones and acoustic guitar recognition across released music projects.",
+    previousImage: "Previous MUSO AI image",
+    nextImage: "Next MUSO AI image",
+  },
+
+  pt: {
+    eyebrow: "CRÉDITOS VERIFICADOS",
+    title: "Créditos verificados & reconhecimento no violão.",
+    intro:
+      "Uma seleção de créditos verificados, marcos de streaming e reconhecimento como violonista em projetos musicais lançados.",
+    previousImage: "Imagem anterior da MUSO AI",
+    nextImage: "Próxima imagem da MUSO AI",
+  },
+
+  es: {
+    eyebrow: "CRÉDITOS VERIFICADOS",
+    title: "Créditos verificados & reconocimiento en guitarra acústica.",
+    intro:
+      "Una selección de créditos verificados, logros de streaming y reconocimiento como guitarrista acústico en proyectos musicales lanzados.",
+    previousImage: "Imagen anterior de MUSO AI",
+    nextImage: "Siguiente imagen de MUSO AI",
+  },
+};
+
+const stats = [
+  {
+    value: "430",
+    label: {
+      en: "Verified Credits",
+      pt: "Créditos Verificados",
+      es: "Créditos Verificados",
+    },
+  },
+  {
+    value: "208M",
+    label: {
+      en: "Streams Across Credited Works",
+      pt: "Streams em Trabalhos Creditados",
+      es: "Streams en Trabajos Acreditados",
+    },
+  },
+  {
+    value: "Top 1%",
+    label: {
+      en: "Streamed Guitarists",
+      pt: "Violonistas Mais Ouvidos",
+      es: "Guitarristas Más Escuchados",
+    },
+  },
+  {
+    value: "#840",
+    label: {
+      en: "Worldwide Guitar Ranking",
+      pt: "Ranking Mundial de Violão",
+      es: "Ranking Mundial de Guitarra",
+    },
+  },
+];
+
+const slides = [
+  {
+    image: musoTopGuitarists,
+    title: {
+      en: "ACOUSTIC GUITAR RECOGNITION",
+      pt: "RECONHECIMENTO NO VIOLÃO",
+      es: "RECONOCIMIENTO EN GUITARRA ACÚSTICA",
+    },
+    caption: {
+      en: "Ranked among the Top 1% streamed guitarists on MUSO AI, with a worldwide guitar ranking position of #840.",
+      pt: "Entre o Top 1% dos violonistas mais ouvidos na MUSO AI, com posição #840 no ranking mundial de guitarra/violão.",
+      es: "Entre el Top 1% de los guitarristas más escuchados en MUSO AI, con la posición #840 en el ranking mundial de guitarra.",
+    },
+    alt: {
+      en: "Top 1% streamed guitarists on MUSO AI",
+      pt: "Top 1% dos violonistas mais ouvidos na MUSO AI",
+      es: "Top 1% de guitarristas más escuchados en MUSO AI",
+    },
+  },
+  {
+    image: musoTopProducers,
+    title: {
+      en: "PRODUCER RECOGNITION",
+      pt: "RECONHECIMENTO COMO PRODUTOR",
+      es: "RECONOCIMIENTO COMO PRODUCTOR",
+    },
+    caption: {
+      en: "Recognized among the Top 1% streamed producers on MUSO AI.",
+      pt: "Reconhecido entre o Top 1% dos produtores mais ouvidos na MUSO AI.",
+      es: "Reconocido entre el Top 1% de los productores más escuchados en MUSO AI.",
+    },
+    alt: {
+      en: "Top 1% streamed producers on MUSO AI",
+      pt: "Top 1% dos produtores mais ouvidos na MUSO AI",
+      es: "Top 1% de productores más escuchados en MUSO AI",
+    },
+  },
+  {
+    image: musoSummary,
+    title: {
+      en: "PUBLIC MUSIC DATA",
+      pt: "DADOS MUSICAIS PÚBLICOS",
+      es: "DATOS MUSICALES PÚBLICOS",
+    },
+    caption: {
+      en: "A summary of streams, credits, videos and views connected to released music projects.",
+      pt: "Um resumo de streams, créditos, vídeos e visualizações conectados a projetos musicais lançados.",
+      es: "Un resumen de streams, créditos, videos y visualizaciones conectados a proyectos musicales lanzados.",
+    },
+    alt: {
+      en: "MUSO AI summary for Gabriel Soares",
+      pt: "Resumo da MUSO AI para Gabriel Soares",
+      es: "Resumen de MUSO AI para Gabriel Soares",
+    },
+  },
+  {
+    image: musoCredits,
+    title: {
+      en: "VERIFIED CREDITS",
+      pt: "CRÉDITOS VERIFICADOS",
+      es: "CRÉDITOS VERIFICADOS",
+    },
+    caption: {
+      en: "430 verified credits connected to recordings, collaborations and released works.",
+      pt: "430 créditos verificados conectados a gravações, colaborações e trabalhos lançados.",
+      es: "430 créditos verificados conectados a grabaciones, colaboraciones y trabajos lanzados.",
+    },
+    alt: {
+      en: "430 credits on MUSO AI",
+      pt: "430 créditos na MUSO AI",
+      es: "430 créditos en MUSO AI",
+    },
+  },
+  {
+    image: musoTopStreamed,
+    title: {
+      en: "TOP STREAMED WORKS",
+      pt: "TRABALHOS MAIS OUVIDOS",
+      es: "TRABAJOS MÁS ESCUCHADOS",
+    },
+    caption: {
+      en: "Selected credited works connected to millions of streams across released music projects.",
+      pt: "Trabalhos creditados conectados a milhões de streams em projetos musicais lançados.",
+      es: "Trabajos acreditados conectados a millones de streams en proyectos musicales lanzados.",
+    },
+    alt: {
+      en: "Top streamed works on MUSO AI",
+      pt: "Trabalhos mais ouvidos na MUSO AI",
+      es: "Trabajos más escuchados en MUSO AI",
+    },
+  },
+  {
+    image: musoFoundingMember,
+    title: {
+      en: "FOUNDING MEMBER",
+      pt: "FOUNDING MEMBER",
+      es: "FOUNDING MEMBER",
+    },
+    caption: {
+      en: "MUSO AI founding member recognition connected to public music data and verified credits.",
+      pt: "Reconhecimento como founding member da MUSO AI, conectado a dados musicais públicos e créditos verificados.",
+      es: "Reconocimiento como founding member de MUSO AI, conectado a datos musicales públicos y créditos verificados.",
+    },
+    alt: {
+      en: "MUSO AI founding member badge",
+      pt: "Selo de founding member da MUSO AI",
+      es: "Insignia de founding member de MUSO AI",
+    },
+  },
+];
+
+const t = text[currentLanguage];
+---
+
+<section class="recognition" id="recognition">
+
+  <div class="container">
+
+    <div class="recognition-grid">
+
+      <div class="content">
+
+        <p class="eyebrow">{t.eyebrow}</p>
+
+        <h2>{t.title}</h2>
+
+        <p class="intro">
+          {t.intro}
+        </p>
+
+        <div class="stats-grid">
+
+          {stats.map((item) => (
+
+            <article class="stat-card">
+
+              <strong>{item.value}</strong>
+
+              <span>{item.label[currentLanguage]}</span>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </div>
+
+      <div class="featured-proof" data-recognition-carousel>
+
+        <div class="featured-image">
+
+          {slides.map((slide, index) => (
+
+            <img
+              src={slide.image.src}
+              alt={slide.alt[currentLanguage]}
+              class={index === 0 ? "proof-slide active" : "proof-slide"}
+              data-slide-image
+            />
+
+          ))}
+
+          <button
+            class="carousel-arrow prev"
+            type="button"
+            aria-label={t.previousImage}
+            data-recognition-prev
+          >
+            ‹
+          </button>
+
+          <button
+            class="carousel-arrow next"
+            type="button"
+            aria-label={t.nextImage}
+            data-recognition-next
+          >
+            ›
+          </button>
+
+        </div>
+
+        <div class="featured-caption">
+
+          {slides.map((slide, index) => (
+
+            <div
+              class={index === 0 ? "caption-slide active" : "caption-slide"}
+              data-slide-caption
+            >
+              <span>{slide.title[currentLanguage]}</span>
+
+              <p>{slide.caption[currentLanguage]}</p>
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.recognition{
+  background:#080808;
+  color:white;
+  padding:120px 0;
+  overflow:hidden;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 6%;
+}
+
+.recognition-grid{
+  display:grid;
+  grid-template-columns:1fr .92fr;
+  gap:64px;
+  align-items:center;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:3rem;
+  max-width:720px;
+  line-height:1.05;
+  margin-bottom:22px;
+}
+
+.intro{
+  color:rgba(255,255,255,.62);
+  font-size:1rem;
+  line-height:1.8;
+  max-width:640px;
+  margin-bottom:34px;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:16px;
+}
+
+.stat-card{
+  padding:24px;
+  min-height:150px;
+  border-radius:26px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.018)
+    );
+  border:1px solid rgba(255,255,255,.085);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+.stat-card strong{
+  font-size:3.15rem;
+  line-height:1;
+  color:#f5f5f5;
+  letter-spacing:-2px;
+}
+
+.stat-card span{
+  color:rgba(255,255,255,.58);
+  font-size:.88rem;
+  line-height:1.5;
+}
+
+.featured-proof{
+  position:relative;
+  border-radius:34px;
+  padding:18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.02)
+    );
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.featured-proof::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:34px;
+  background:
+    radial-gradient(
+      circle at 30% 15%,
+      rgba(210,176,120,.22),
+      transparent 38%
+    );
+  pointer-events:none;
+}
+
+.featured-image{
+  position:relative;
+  z-index:1;
+  border-radius:24px;
+  overflow:hidden;
+  background:#111;
+  aspect-ratio:4 / 5;
+}
+
+.proof-slide{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  opacity:0;
+  transition:opacity .28s ease;
+}
+
+.proof-slide.active{
+  opacity:1;
+}
+
+.carousel-arrow{
+  position:absolute;
+  top:50%;
+  z-index:5;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.24);
+  color:rgba(255,255,255,.78);
+  font-size:1.65rem;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transform:translateY(-50%);
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    color .25s ease,
+    opacity .25s ease,
+    transform .25s ease;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:
+    0 12px 34px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.12);
+  opacity:.68;
+}
+
+.carousel-arrow:hover{
+  background:rgba(210,176,120,.18);
+  border-color:rgba(210,176,120,.38);
+  color:#f0d7a3;
+  opacity:1;
+  transform:translateY(-50%) scale(1.06);
+}
+
+.carousel-arrow.prev{
+  left:22px;
+}
+
+.carousel-arrow.next{
+  right:22px;
+}
+
+.featured-caption{
+  position:relative;
+  z-index:1;
+  padding:18px 4px 2px;
+}
+
+.caption-slide{
+  display:none;
+}
+
+.caption-slide.active{
+  display:block;
+}
+
+.caption-slide span{
+  display:block;
+  color:var(--gold);
+  font-size:.7rem;
+  letter-spacing:3px;
+  margin-bottom:8px;
+}
+
+.caption-slide p{
+  color:rgba(255,255,255,.58);
+  font-size:.9rem;
+  line-height:1.6;
+}
+
+@media(max-width:1000px){
+  .recognition-grid{
+    grid-template-columns:1fr;
+    gap:42px;
+  }
+
+  .featured-proof{
+    max-width:520px;
+  }
+}
+
+@media(max-width:700px){
+  .recognition{
+    padding:82px 0;
+  }
+
+  h2{
+    font-size:2.35rem;
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+
+  .stat-card{
+    min-height:118px;
+    padding:18px;
+    border-radius:20px;
+  }
+
+  .stat-card strong{
+    font-size:2.25rem;
+    letter-spacing:-1.2px;
+  }
+
+  .stat-card span{
+    font-size:.76rem;
+    line-height:1.35;
+  }
+
+  .carousel-arrow{
+    width:38px;
+    height:38px;
+    font-size:1.5rem;
+  }
+
+  .carousel-arrow.prev{
+    left:14px;
+  }
+
+  .carousel-arrow.next{
+    right:14px;
+  }
+}
+
+@media(max-width:380px){
+  .stats-grid{
+    gap:10px;
+  }
+
+  .stat-card{
+    min-height:108px;
+    padding:16px;
+  }
+
+  .stat-card strong{
+    font-size:2rem;
+  }
+
+  .stat-card span{
+    font-size:.7rem;
+  }
+
+  .featured-image{
+  touch-action:pan-y;
+  cursor:grab;
+}
+
+  .featured-image.is-dragging{
+  cursor:grabbing;
+}
+
+  .carousel-arrow{
+  display:none;
+}  
+</style>
+
+<script is:inline>
+const recognitionCarousel = document.querySelector("[data-recognition-carousel]");
+
+if (recognitionCarousel) {
+  const images = recognitionCarousel.querySelectorAll("[data-slide-image]");
+  const captions = recognitionCarousel.querySelectorAll("[data-slide-caption]");
+  const prevButton = recognitionCarousel.querySelector("[data-recognition-prev]");
+  const nextButton = recognitionCarousel.querySelector("[data-recognition-next]");
+  const imageArea = recognitionCarousel.querySelector(".featured-image");
+
+  let currentSlide = 0;
+
+  const showSlide = (index) => {
+    if (!images.length) return;
+
+    currentSlide = (index + images.length) % images.length;
+
+    images.forEach((image, imageIndex) => {
+      image.classList.toggle("active", imageIndex === currentSlide);
+    });
+
+    captions.forEach((caption, captionIndex) => {
+      caption.classList.toggle("active", captionIndex === currentSlide);
+    });
+  };
+
+  prevButton?.addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+  });
+
+  nextButton?.addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+  });
+
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  const minimumSwipeDistance = 45;
+
+  imageArea?.addEventListener("pointerdown", (event) => {
+    if (event.target.closest(".carousel-arrow")) return;
+
+    isDragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    currentX = event.clientX;
+    currentY = event.clientY;
+
+    imageArea.classList.add("is-dragging");
+
+    if (imageArea.setPointerCapture) {
+      imageArea.setPointerCapture(event.pointerId);
+    }
+  });
+
+  imageArea?.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+
+    currentX = event.clientX;
+    currentY = event.clientY;
+  });
+
+  const finishSwipe = (event) => {
+    if (!isDragging) return;
+
+    const deltaX = currentX - startX;
+    const deltaY = currentY - startY;
+
+    const isHorizontalSwipe =
+      Math.abs(deltaX) > minimumSwipeDistance &&
+      Math.abs(deltaX) > Math.abs(deltaY);
+
+    if (isHorizontalSwipe) {
+      if (deltaX < 0) {
+        showSlide(currentSlide + 1);
+      } else {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    isDragging = false;
+    imageArea?.classList.remove("is-dragging");
+
+    if (imageArea?.releasePointerCapture && event.pointerId) {
+      try {
+        imageArea.releasePointerCapture(event.pointerId);
+      } catch {}
+    }
+  };
+
+  imageArea?.addEventListener("pointerup", finishSwipe);
+  imageArea?.addEventListener("pointercancel", finishSwipe);
+}
+</script>

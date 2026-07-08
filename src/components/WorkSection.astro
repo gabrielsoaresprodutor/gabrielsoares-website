@@ -1,0 +1,595 @@
+---
+import { projects } from "../data/projects";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const getRouteLanguage = (pathname: string): SiteLanguage => {
+  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "pt";
+  if (pathname === "/es" || pathname.startsWith("/es/")) return "es";
+  return "en";
+};
+
+const currentLanguage = getRouteLanguage(currentPath);
+
+const removeLanguagePrefix = (pathname: string): string => {
+  if (pathname === "/pt" || pathname === "/es") return "/";
+
+  return pathname.replace(/^\/(pt|es)(?=\/)/, "") || "/";
+};
+
+const getLocalizedPath = (language: SiteLanguage, pathname: string): string => {
+  const cleanPath = removeLanguagePrefix(pathname);
+
+  if (language === "en") {
+    return cleanPath;
+  }
+
+  if (cleanPath === "/") {
+    return `/${language}`;
+  }
+
+  return `/${language}${cleanPath}`;
+};
+
+const sectionText: Record<
+  SiteLanguage,
+  {
+    eyebrow: string;
+    title: string;
+    moreButton: string;
+  }
+> = {
+  en: {
+    eyebrow: "SELECTED WORK",
+    title: "Featured Work",
+    moreButton: "View More Works",
+  },
+
+  pt: {
+    eyebrow: "TRABALHOS SELECIONADOS",
+    title: "Trabalhos em destaque",
+    moreButton: "Ver Mais Trabalhos",
+  },
+
+  es: {
+    eyebrow: "PROYECTOS SELECCIONADOS",
+    title: "Proyectos destacados",
+    moreButton: "Ver Más Proyectos",
+  },
+};
+
+const textReplacements: Record<SiteLanguage, Array<[string, string]>> = {
+  en: [],
+
+  pt: [
+    ["Latin GRAMMY® Nominated Project", "Projeto indicado ao Latin GRAMMY®"],
+    ["Latin GRAMMY® Nominee", "Indicado ao Latin GRAMMY®"],
+    ["Latin GRAMMY® Winner", "Vencedor do Latin GRAMMY®"],
+
+    ["Studio Acoustic Guitar", "Violão de Estúdio"],
+    ["Session Acoustic Guitar", "Violão de Estúdio"],
+    ["Acoustic Guitar Recording", "Gravação de Violão"],
+    ["Remote Acoustic Guitar", "Violão Remoto"],
+    ["Acoustic Guitar", "Violão"],
+
+    ["Instrumental Production", "Produção Instrumental"],
+    ["Music Production", "Produção Musical"],
+    ["Additional Production", "Produção Adicional"],
+    ["Live Production", "Produção Ao Vivo"],
+    ["Co-Production", "Coprodução"],
+    ["Production", "Produção"],
+
+    ["Live Recording", "Gravação Ao Vivo"],
+    ["Remote Recording", "Gravação Remota"],
+    ["Recording", "Gravação"],
+
+    ["Arrangement", "Arranjo"],
+    ["Arrangements", "Arranjos"],
+    ["Arranger", "Arranjador"],
+
+    ["Editing", "Edição"],
+    ["Programming", "Programação"],
+
+    ["Producer", "Produtor"],
+    ["Composer", "Compositor"],
+    ["Multi-Instrumentalist", "Multi-instrumentista"],
+
+    ["Featured Credit", "Crédito em destaque"],
+    ["Verified Credit", "Crédito verificado"],
+    ["Official Release", "Lançamento oficial"],
+    ["Live Project", "Projeto Ao Vivo"],
+    ["Remote Session", "Sessão Remota"],
+  ],
+
+  es: [
+    ["Latin GRAMMY® Nominated Project", "Proyecto nominado al Latin GRAMMY®"],
+    ["Latin GRAMMY® Nominee", "Nominado al Latin GRAMMY®"],
+    ["Latin GRAMMY® Winner", "Ganador del Latin GRAMMY®"],
+
+    ["Studio Acoustic Guitar", "Guitarra Acústica de Estudio"],
+    ["Session Acoustic Guitar", "Guitarra Acústica de Estudio"],
+    ["Acoustic Guitar Recording", "Grabación de Guitarra Acústica"],
+    ["Remote Acoustic Guitar", "Guitarra Acústica Remota"],
+    ["Acoustic Guitar", "Guitarra Acústica"],
+
+    ["Instrumental Production", "Producción Instrumental"],
+    ["Music Production", "Producción Musical"],
+    ["Additional Production", "Producción Adicional"],
+    ["Live Production", "Producción en Vivo"],
+    ["Co-Production", "Coproducción"],
+    ["Production", "Producción"],
+
+    ["Live Recording", "Grabación en Vivo"],
+    ["Remote Recording", "Grabación Remota"],
+    ["Recording", "Grabación"],
+
+    ["Arrangement", "Arreglo"],
+    ["Arrangements", "Arreglos"],
+    ["Arranger", "Arreglista"],
+
+    ["Editing", "Edición"],
+    ["Programming", "Programación"],
+
+    ["Producer", "Productor"],
+    ["Composer", "Compositor"],
+    ["Multi-Instrumentalist", "Multiinstrumentista"],
+
+    ["Featured Credit", "Crédito destacado"],
+    ["Verified Credit", "Crédito verificado"],
+    ["Official Release", "Lanzamiento oficial"],
+    ["Live Project", "Proyecto en Vivo"],
+    ["Remote Session", "Sesión Remota"],
+  ],
+};
+
+const localizeProjectText = (value?: string): string => {
+  if (!value) return "";
+
+  let output = value;
+
+  textReplacements[currentLanguage].forEach(([source, target]) => {
+    output = output.split(source).join(target);
+  });
+
+  return output;
+};
+
+const featuredProjectSlugs = [
+  "temporal",
+  "temporal-aovivo",
+  "recife15",
+
+  "pedro-live",
+  "pedro-paula-1",
+  "pedro-paula-2",
+
+  "devoted",
+  "gabro-aovivo",
+  "arautos",
+
+  "maranata",
+  "e-se-fosse-voce",
+  "meu-lugar-no-mundo",
+
+  "era-a-mao-de-deus",
+  "adoradores-5",
+  "intimidade",
+
+  "pedrazul",
+  "jubileu",
+  "fixa-teus-olhos",
+
+  "so-o-comeco",
+  "a-comecar-em-mim",
+  "descansarei",
+];
+
+const featuredProjects = featuredProjectSlugs.flatMap((slug) => {
+  const foundProject = projects.find((item) => item.slug === slug);
+
+  return foundProject ? [foundProject] : [];
+});
+
+const t = sectionText[currentLanguage];
+
+const workIndexHref = getLocalizedPath(currentLanguage, "/work");
+
+const getProjectHref = (slug: string): string => {
+  return `${workIndexHref}/${slug}`;
+};
+---
+
+<section class="featured" id="work">
+
+  <div class="container">
+
+    <p class="eyebrow">{t.eyebrow}</p>
+
+    <h2>{t.title}</h2>
+
+    <div class="grid">
+
+      {featuredProjects.map((item) => {
+        const role = localizeProjectText(item.role);
+        const highlight = localizeProjectText(item.highlight);
+
+        return (
+          <a class="card" href={getProjectHref(item.slug)}>
+
+            <div class="image-wrap">
+              <img src={item.image.src} alt={`${item.artist} - ${item.title}`} />
+            </div>
+
+            <div class="info">
+
+              <p class="artist">{item.artist}</p>
+
+              <h3>
+                {item.slug === "alfredo" ? (
+                  <>O Senhor é o Meu<br />Pastor</>
+                ) : item.slug === "fixa-teus-olhos" ? (
+                  <>Fixa Teus Olhos<br />em Mim</>
+                ) : (
+                  item.title
+                )}
+              </h3>
+
+              <p class="role">{role}</p>
+
+              {highlight && (
+                <span>{highlight}</span>
+              )}
+
+            </div>
+
+          </a>
+        );
+      })}
+
+    </div>
+
+    <div class="more-work-wrap">
+
+      <a class="more-work-button" href={workIndexHref}>
+        {t.moreButton}
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.featured{
+  background:#090909;
+  color:white;
+  padding:120px 6%;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:3rem;
+  margin-bottom:60px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+.card{
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  color:inherit;
+  background:#141414;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  overflow:hidden;
+  transition:.35s;
+  height:100%;
+}
+
+.card *,
+.card:visited,
+.card:hover,
+.card:active{
+  text-decoration:none;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(210,176,120,.35);
+}
+
+.image-wrap{
+  overflow:hidden;
+}
+
+.card img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  transition:.5s;
+}
+
+.card:hover img{
+  transform:scale(1.04);
+}
+
+.info{
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.artist{
+  color:#aaa;
+  letter-spacing:3px;
+  font-size:.75rem;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+h3{
+  font-size:2rem;
+  line-height:1.18;
+  margin-bottom:12px;
+}
+
+.role{
+  color:#bdbdbd;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+span{
+  display:inline-block;
+  width:fit-content;
+  margin-top:auto;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:999px;
+  font-size:.78rem;
+  color:#ddd;
+}
+
+.more-work-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:58px;
+}
+
+.more-work-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:54px;
+  padding:0 28px;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+  border:1px solid rgba(210,176,120,.34);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.16),
+      rgba(255,255,255,.03)
+    );
+  font-size:.82rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:.28s ease;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.more-work-button:hover{
+  transform:translateY(-3px);
+  border-color:rgba(210,176,120,.58);
+  color:#f0d7a3;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.24),
+      rgba(255,255,255,.045)
+    );
+}
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .featured{
+    padding:90px 6%;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  h2{
+    font-size:2.2rem;
+  }
+
+  .more-work-wrap{
+    margin-top:42px;
+  }
+
+  .more-work-button{
+    width:100%;
+  }
+}
+
+@media(max-width:700px){
+  .featured{
+    padding:74px 0 82px;
+    overflow:hidden;
+  }
+
+  .container{
+    max-width:none;
+    width:100%;
+  }
+
+  .eyebrow,
+  h2{
+    padding:0 20px;
+  }
+
+  .eyebrow{
+    font-size:.66rem;
+    letter-spacing:4px;
+    margin-bottom:12px;
+  }
+
+  h2{
+    font-size:2.15rem;
+    line-height:1.05;
+    margin-bottom:28px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:none;
+    grid-auto-flow:column;
+    grid-auto-columns:minmax(228px, 72vw);
+    gap:16px;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:20px;
+    padding:4px 20px 24px;
+    margin:0;
+  }
+
+  .grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .card{
+    scroll-snap-align:start;
+    border-radius:20px;
+    background:#131313;
+    min-height:auto;
+  }
+
+  .card:hover{
+    transform:none;
+  }
+
+  .image-wrap{
+    border-radius:20px 20px 0 0;
+  }
+
+  .card img{
+    aspect-ratio:1/1;
+  }
+
+  .card:hover img{
+    transform:none;
+  }
+
+  .info{
+    padding:18px 17px 17px;
+  }
+
+  .artist{
+    font-size:.62rem;
+    letter-spacing:2px;
+    line-height:1.4;
+    margin-bottom:8px;
+  }
+
+  h3{
+    font-size:1.32rem;
+    line-height:1.12;
+    margin-bottom:9px;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .role{
+    font-size:.82rem;
+    line-height:1.45;
+    margin-bottom:16px;
+    color:rgba(255,255,255,.66);
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  span{
+    font-size:.68rem;
+    line-height:1.25;
+    padding:7px 11px;
+    max-width:100%;
+  }
+
+  .more-work-wrap{
+    justify-content:flex-start;
+    margin-top:18px;
+    padding:0 20px;
+  }
+
+  .more-work-button{
+    width:auto;
+    min-height:46px;
+    padding:0 18px;
+    font-size:.68rem;
+    letter-spacing:2px;
+  }
+}
+
+@media(max-width:380px){
+  .grid{
+    grid-auto-columns:minmax(214px, 76vw);
+    gap:14px;
+    padding-left:16px;
+    padding-right:16px;
+    scroll-padding-inline:16px;
+  }
+
+  .eyebrow,
+  h2,
+  .more-work-wrap{
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  h2{
+    font-size:2rem;
+  }
+
+  .info{
+    padding:16px;
+  }
+
+  h3{
+    font-size:1.22rem;
+  }
+}
+</style>

@@ -1,0 +1,554 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import Footer from "../../../components/Footer.astro";
+import ProjectCard from "../../../components/ProjectCard.astro";
+import { projects } from "../../../data/projects";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+const pageTitle = "Trabalhos de Gabriel Soares | Produção Musical & Violão";
+
+const pageDescription =
+  "Trabalhos selecionados de Gabriel Soares, produtor musical, violonista e multi-instrumentista brasileiro, incluindo álbuns, singles, projetos ao vivo, gravações e colaborações.";
+
+type Project = (typeof projects)[number];
+
+type Replacement = readonly [string, string];
+
+const textReplacements: Replacement[] = [
+  ["Released in Cinemark Theaters", "Lançado na rede Cinemark do Brasil"],
+  ["Live album project released in Cinemark theaters across Brazil.", "Projeto de álbum ao vivo lançado na rede Cinemark do Brasil."],
+  ["Full Instrumental Production", "Produção Instrumental Completa"],
+  ["Full Instrumental Recording", "Gravação Instrumental Completa"],
+  ["Music Production and Instrument Recording", "Produção Musical e Gravação de Instrumentos"],
+  ["Music Production and Acoustic Guitar", "Produção Musical e Violão"],
+  ["Music Production and Piano Recording", "Produção Musical e Gravação de Piano"],
+  ["Orchestration and Bass Recording", "Orquestração e Gravação de Baixo"],
+  ["Composition and Full Instrumental Recording", "Composição e Gravação Instrumental Completa"],
+  ["Composition", "Composição"],
+  ["Composition and Gravação Instrumental Completa", "Composição e Gravação Instrumental Completa"],
+  ["Acoustic Guitar and Piano Recording", "Gravação de Violão e Piano"],
+  ["Acoustic Guitar Recording", "Gravação de Violão"],
+  ["Multi-Instrumental Recording", "Gravação Multi-instrumental"],
+  ["Instrumental Production", "Produção Instrumental"],
+  ["Instrumental Arrangement", "Arranjo Instrumental"],
+  ["Vocal Arrangement", "Arranjo Vocal"],
+  ["Vocal Editing", "Edição Vocal"],
+  ["Instrument Editing", "Edição Instrumental"],
+  ["String Arrangement", "Arranjo de Cordas"],
+  ["Orchestration", "Orquestração"],
+  ["All Instruments", "Todos os Instrumentos"],
+  ["Music Production", "Produção Musical"],
+  ["Acoustic Guitar", "Violão"],
+  ["Acoustic guitar", "Violão"],
+  ["acoustic guitar", "violão"],
+  ["Electric Guitar", "Guitarra"],
+  ["electric guitar", "guitarra"],
+  ["Studio Acoustic Guitar", "Violão de Estúdio"],
+  ["Studio acoustic guitar", "Violão de estúdio"],
+  ["Music producer", "Produtor musical"],
+  ["music producer", "produtor musical"],
+  ["Producer", "Produtor"],
+  ["producer", "produtor"],
+  ["Production", "Produção"],
+  ["production", "produção"],
+  ["Arrangement", "Arranjo"],
+  ["Arrangements", "Arranjos"],
+  ["arrangements", "arranjos"],
+  ["arrangement", "arranjo"],
+  ["Live Session Production", "Produção de Live Session"],
+  ["Acoustic Project Production", "Produção de Projeto Acústico"],
+  ["Live Single", "Single Ao Vivo"],
+  ["Live Recording", "Gravação Ao Vivo"],
+  ["Live Projects", "Projetos Ao Vivo"],
+  ["Live Project", "Projeto Ao Vivo"],
+  ["live projects", "projetos ao vivo"],
+  ["live recordings", "gravações ao vivo"],
+  ["Recording", "Gravação"],
+  ["recording", "gravação"],
+  ["Recordings", "Gravações"],
+  ["recordings", "gravações"],
+  ["Editing", "Edição"],
+  ["editing", "edição"],
+  ["Instrumentation", "Instrumentação"],
+  ["instrumentation", "instrumentação"],
+  ["Drums", "Bateria"],
+  ["Bass", "Baixo"],
+  ["Synths", "Synths"],
+  ["Pads", "Pads"],
+  ["Percussion", "Percussão"],
+  ["Strings", "Cordas"],
+  ["Piano", "Piano"],
+  ["Effects", "Efeitos"],
+  ["Guitar", "Guitarra"],
+  ["textures", "texturas"],
+  ["Textures", "Texturas"],
+  ["Collaboration", "Colaboração"],
+  ["collaboration", "colaboração"],
+  ["Collaborations", "Colaborações"],
+  ["collaborations", "colaborações"],
+  ["Featured", "Destaque"],
+  ["featured", "destaque"],
+  ["Christian", "cristãos"],
+  ["christian", "cristãos"],
+  ["Released", "Lançado"],
+  ["released", "lançado"],
+  ["Selected", "Selecionados"],
+  ["selected", "selecionados"],
+  ["millions of streams", "milhões de streams"],
+  ["Latin GRAMMY® nominated", "indicado ao Latin GRAMMY®"]
+];
+
+const creditReplacements: Replacement[] = [
+  ["Composition", "Composição"],
+  ["Full Instrumental Production", "Produção Instrumental Completa"],
+  ["Full Instrumental Recording", "Gravação Instrumental Completa"],
+  ["Instrumental Production", "Produção Instrumental"],
+  ["Instrumental Arrangement", "Arranjo Instrumental"],
+  ["Vocal Arrangement", "Arranjo Vocal"],
+  ["Vocal Editing", "Edição Vocal"],
+  ["Instrument Editing", "Edição Instrumental"],
+  ["String Arrangement", "Arranjo de Cordas"],
+  ["Orchestration", "Orquestração"],
+  ["All Instruments", "Todos os Instrumentos"],
+  ["Music Production", "Produção Musical"],
+  ["Acoustic Guitar", "Violão"],
+  ["Electric Guitar", "Guitarra"],
+  ["Guitar", "Guitarra"],
+  ["Arrangement", "Arranjo"],
+  ["Arrangements", "Arranjos"],
+  ["Instrumentation", "Instrumentação"],
+  ["Recording", "Gravação"],
+  ["Editing", "Edição"],
+  ["Drums", "Bateria"],
+  ["Bass", "Baixo"],
+  ["Synths", "Synths"],
+  ["Pads", "Pads"],
+  ["Percussion", "Percussão"],
+  ["Strings", "Cordas"],
+  ["Piano", "Piano"],
+  ["Effects", "Efeitos"],
+  ["Producer", "Produtor"],
+  ["Production", "Produção"],
+  ["Live Recording", "Gravação Ao Vivo"]
+];
+
+const applyReplacements = (value: string, replacements: Replacement[]): string => {
+  return [...replacements]
+    .sort(([firstFrom], [secondFrom]) => secondFrom.length - firstFrom.length)
+    .reduce((result: string, [from, to]: Replacement) => {
+      return result.split(from).join(to);
+    }, value);
+};
+
+const localizeProject = (project: Project): Project => {
+  const localizedHighlight = project.highlight
+    ? applyReplacements(project.highlight, textReplacements)
+    : undefined;
+
+  const localizedDescription = project.description
+    ? applyReplacements(project.description, textReplacements)
+    : undefined;
+
+  return {
+    ...project,
+    role: applyReplacements(project.role, textReplacements),
+    ...(localizedHighlight ? { highlight: localizedHighlight } : {}),
+    ...(localizedDescription ? { description: localizedDescription } : {}),
+    credits: project.credits.map((credit: string) =>
+      applyReplacements(credit, creditReplacements)
+    ),
+  };
+};
+
+const localizedProjects = projects.map(localizeProject);
+
+const mainProjectSlugs = [
+  "temporal",
+  "temporal-aovivo",
+  "recife15",
+  "pedro-live",
+  "pedro-paula-1",
+  "pedro-paula-2",
+];
+
+const mainProjects = mainProjectSlugs.flatMap((slug) => {
+  const foundProject = localizedProjects.find((project) => project.slug === slug);
+
+  return foundProject ? [foundProject] : [];
+});
+
+const vocalLivreEPs = localizedProjects.filter((project) => project.collection === "vl-eps");
+const vocalLivreSingles = localizedProjects.filter((project) => project.collection === "vl-singles");
+const vocalLivreYoutube = localizedProjects.filter((project) => project.collection === "vl-youtube");
+
+const featured = localizedProjects.filter((project) => project.collection === "featured");
+const other = localizedProjects.filter((project) => project.collection === "other");
+
+const workSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${siteUrl}/pt/work#collection`,
+  url: `${siteUrl}/pt/work`,
+  name: "Trabalhos de Gabriel Soares",
+  description: pageDescription,
+  inLanguage: "pt-BR",
+  about: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    name: "Produções musicais, gravações e colaborações selecionadas de Gabriel Soares",
+    itemListElement: localizedProjects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "MusicRecording",
+        name: `${project.artist} - ${project.title}`,
+        description: project.description,
+        byArtist: {
+          "@type": "MusicGroup",
+          name: project.artist
+        },
+        contributor: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Gabriel Soares"
+        },
+        url: `${siteUrl}/pt/work/${project.slug}`,
+        image: `${siteUrl}${project.image.src}`
+      }
+    }))
+  }
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(workSchema)} />
+
+  <Navbar />
+
+  <main class="work">
+
+    <section class="intro">
+
+      <a class="back-button" href="/pt#work">
+        <span class="back-icon">←</span>
+        <span>Trabalhos em Destaque</span>
+      </a>
+
+      <p class="eyebrow">PROJETOS & DISCOGRAFIA</p>
+
+      <h1>Produções, álbuns e gravações selecionadas.</h1>
+
+      <p class="subtitle">
+        Uma discografia curada com produção musical, gravações de violão, arranjos, projetos ao vivo e colaborações de Gabriel Soares.
+      </p>
+
+      <div class="intro-actions">
+        <a href="/pt/credits">Créditos Oficiais</a>
+        <a href="/pt#contact">Iniciar um Projeto</a>
+      </div>
+
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">TRABALHOS SELECIONADOS</p>
+
+      <div class="category">
+        <h2>Álbuns & Projetos em Destaque</h2>
+
+        <div class="grid">
+          {mainProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      </div>
+
+      {vocalLivreEPs.length > 0 && (
+        <div class="category">
+          <h2>EPs</h2>
+
+          <div class="grid">
+            {vocalLivreEPs.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {vocalLivreSingles.length > 0 && (
+        <div class="category">
+          <h2>Singles</h2>
+
+          <div class="grid">
+            {vocalLivreSingles.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {vocalLivreYoutube.length > 0 && (
+        <div class="category">
+          <h2>YouTube</h2>
+
+          <div class="grid">
+            {vocalLivreYoutube.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">COLABORAÇÕES EM DESTAQUE</p>
+
+      <h2>Colaborações & Sessões</h2>
+
+      <div class="grid">
+        {featured.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+    <section class="artist">
+      <p class="eyebrow">OUTROS PROJETOS</p>
+
+      <h2>Créditos Adicionais</h2>
+
+      <div class="grid">
+        {other.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+.work{
+  background:#050505;
+  color:white;
+  min-height:100vh;
+  padding:150px 6% 120px;
+}
+
+.intro,
+.artist{
+  max-width:1200px;
+  margin:auto;
+}
+
+.intro{
+  margin-bottom:120px;
+}
+
+.back-button{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  width:fit-content;
+  min-height:48px;
+  padding:0 20px 0 14px;
+  margin-bottom:58px;
+  border-radius:999px;
+  color:rgba(255,255,255,.74);
+  text-decoration:none;
+  border:1px solid rgba(210,176,120,.24);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.12),
+      rgba(255,255,255,.025)
+    );
+  font-size:.76rem;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  transition:.28s ease;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.back-icon{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f0d7a3;
+  background:rgba(210,176,120,.12);
+  border:1px solid rgba(210,176,120,.25);
+  font-size:1rem;
+  letter-spacing:0;
+  transition:.28s ease;
+}
+
+.back-button:hover{
+  color:#f0d7a3;
+  border-color:rgba(210,176,120,.5);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.19),
+      rgba(255,255,255,.035)
+    );
+  transform:translateY(-2px);
+}
+
+.back-button:hover .back-icon{
+  background:rgba(210,176,120,.2);
+  border-color:rgba(210,176,120,.44);
+  transform:translateX(-3px);
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:4.8rem;
+  line-height:1;
+  max-width:900px;
+  margin-bottom:24px;
+}
+
+.subtitle{
+  color:#bdbdbd;
+  font-size:1.1rem;
+  line-height:1.8;
+  max-width:690px;
+}
+
+.intro-actions{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:38px;
+}
+
+.intro-actions a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  padding:0 22px;
+  border-radius:999px;
+  color:white;
+  text-decoration:none;
+  border:1px solid rgba(210,176,120,.28);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.12),
+      rgba(255,255,255,.025)
+    );
+  font-size:.78rem;
+  letter-spacing:2.4px;
+  text-transform:uppercase;
+  transition:.28s ease;
+}
+
+.intro-actions a:hover{
+  transform:translateY(-3px);
+  color:#f0d7a3;
+  border-color:rgba(210,176,120,.5);
+}
+
+.artist{
+  margin-bottom:140px;
+  padding-top:60px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.category{
+  margin-top:55px;
+}
+
+.category + .category{
+  margin-top:90px;
+}
+
+h2{
+  font-size:3rem;
+  margin-bottom:34px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  h1{
+    font-size:3.8rem;
+  }
+}
+
+@media(max-width:700px){
+  .work{
+    padding:120px 6% 90px;
+  }
+
+  .intro{
+    margin-bottom:90px;
+  }
+
+  .back-button{
+    width:100%;
+    justify-content:center;
+    margin-bottom:44px;
+  }
+
+  h1{
+    font-size:3.1rem;
+  }
+
+  h2{
+    font-size:2.3rem;
+  }
+
+  .intro-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .intro-actions a{
+    width:100%;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .artist{
+    margin-bottom:100px;
+  }
+
+  .category + .category{
+    margin-top:70px;
+  }
+}
+</style>

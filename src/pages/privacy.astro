@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+
+  <Navbar />
+
+  <main class="legal">
+
+    <section class="container">
+
+      <p class="eyebrow">PRIVACY</p>
+
+      <h1>Privacy Policy</h1>
+
+      <p class="updated">Last updated: 2026</p>
+
+      <div class="content">
+
+        <p>
+          This Privacy Policy explains how information may be handled when you visit
+          the official portfolio website of Gabriel Soares.
+        </p>
+
+        <h2>Information you provide</h2>
+
+        <p>
+          This website may include contact links such as email, WhatsApp, Instagram,
+          YouTube and Spotify. If you choose to contact Gabriel Soares through any of
+          these channels, the information you provide will be used only to respond to
+          your message, discuss projects, collaborations or professional inquiries.
+        </p>
+
+        <h2>Email communication</h2>
+
+        <p>
+          When you send an email to the professional contact address, your email
+          address, name and message content may be received and stored in the mailbox
+          used for professional communication.
+        </p>
+
+        <h2>External platforms</h2>
+
+        <p>
+          This website includes links to third-party platforms such as Instagram,
+          YouTube, Spotify and WhatsApp. These platforms have their own privacy
+          policies, terms and data practices. Gabriel Soares is not responsible for
+          how external platforms collect or process your information.
+        </p>
+
+        <h2>Cookies and analytics</h2>
+
+        <p>
+          This website does not currently use advanced tracking, advertising cookies
+          or analytics tools. If analytics or similar services are added in the
+          future, this policy may be updated.
+        </p>
+
+        <h2>Data use</h2>
+
+        <p>
+          Personal information voluntarily provided through contact channels will not
+          be sold. It may be used only for communication, professional opportunities,
+          project discussions and related business purposes.
+        </p>
+
+        <h2>Updates</h2>
+
+        <p>
+          This Privacy Policy may be updated from time to time to reflect changes in
+          the website, contact methods, external services or legal requirements.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <Footer />
+
+</Layout>
+
+<style>
+.legal{
+  background:#050505;
+  color:white;
+  min-height:100vh;
+  padding:160px 6% 100px;
+}
+
+.container{
+  max-width:880px;
+  margin:auto;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:4rem;
+  line-height:1;
+  margin-bottom:18px;
+}
+
+.updated{
+  color:rgba(255,255,255,.48);
+  margin-bottom:60px;
+}
+
+.content{
+  display:grid;
+  gap:28px;
+}
+
+.content h2{
+  color:white;
+  font-size:1.45rem;
+  margin-top:20px;
+}
+
+.content p{
+  color:#c9c9c9;
+  line-height:1.9;
+  font-size:1rem;
+}
+
+@media(max-width:700px){
+  .legal{
+    padding:140px 6% 80px;
+  }
+
+  h1{
+    font-size:2.7rem;
+  }
+}
+</style>

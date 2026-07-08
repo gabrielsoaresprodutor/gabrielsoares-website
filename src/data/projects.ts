@@ -1,0 +1,581 @@
+import temporal from "../assets/projects/temporal.png";
+import temporalAovivo from "../assets/projects/temporal-aovivo.png";
+import recife15 from "../assets/projects/recife15.png";
+
+import liveSession from "../assets/projects/live-session.png";
+import acustico from "../assets/projects/acustico.png";
+import releituras from "../assets/projects/releituras.png";
+
+import soOComeco from "../assets/projects/so-o-comeco.png";
+import belaHistoriaAoVivo from "../assets/projects/bela-historia-aovivo.png";
+import soOComecoAoVivo from "../assets/projects/so-o-comeco-aovivo.png";
+import tuTensOMelhor from "../assets/projects/tu-tens-o-melhor.png";
+import aComecarEmMim from "../assets/projects/a-comecar-em-mim.png";
+import fixaTeusOlhos from "../assets/projects/fixa-teus-olhos.png";
+
+import sondaMe from "../assets/projects/sonda-me.png";
+import tudoQueVivi from "../assets/projects/tudo-que-vivi.png";
+import descansarei from "../assets/projects/descansarei.png";
+
+import devoted from "../assets/projects/devoted.png";
+import arautos from "../assets/projects/arautos.png";
+import gabroAovivo from "../assets/projects/gabro-aovivo.png";
+
+import dvdpedro from "../assets/projects/dvdpedro.png";
+import pedropaula1 from "../assets/projects/pedropaula1.png";
+import pedropaula2 from "../assets/projects/pedropaula2.png";
+
+import intimidade from "../assets/projects/intimidade.png";
+import together from "../assets/projects/together.png";
+import pedrazul from "../assets/projects/pedrazul.png";
+import jubileu from "../assets/projects/jubileu.png";
+import aguia from "../assets/projects/aguia.png";
+import maranata from "../assets/projects/maranata.png";
+import eSeFosseVoce from "../assets/projects/e-se-fosse-voce.png";
+import meuLugarNoMundo from "../assets/projects/meu-lugar-no-mundo.png";
+import eraAMaoDeDeus from "../assets/projects/era-a-mao-de-deus.png";
+import adoradores5 from "../assets/projects/adoradores-5.png";
+import alfredo from "../assets/projects/alfredo.png";
+import autorDaVida from "../assets/projects/autor-da-vida.png";
+import aGuerra from "../assets/projects/a-guerra.png";
+
+import gabro0 from "../assets/projects/gabro0.png";
+import gabro1 from "../assets/projects/gabro1.png";
+import gabro2 from "../assets/projects/gabro2.png";
+import gabro3 from "../assets/projects/gabro3.png";
+
+import type { ImageMetadata } from "astro";
+
+export type ProjectCollection =
+  | "vl-albums"
+  | "vl-eps"
+  | "vl-singles"
+  | "vl-youtube"
+  | "pedro"
+  | "featured"
+  | "other";
+
+export type Project = {
+  slug: string;
+  collection: ProjectCollection;
+  artist: string;
+  title: string;
+  role: string;
+  highlight?: string;
+  description?: string;
+  credits: string[];
+  spotify?: string;
+  youtube?: string;
+  image: ImageMetadata;
+};
+import sonharPequeno from "../assets/projects/sonhar-pequeno.png";
+
+export const projects: Project[] = [
+  {
+          slug: "temporal",
+          collection: "vl-albums",
+          artist: "Vocal Livre",
+          title: "Temporal",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Latin GRAMMY® Nominated Album",
+          description: "Music production and acoustic guitar for Temporal, the Latin GRAMMY® nominated album by Vocal Livre.",
+          credits: ["Music Production", "Acoustic Guitar", "Instrumental Arrangement", "Instrumentation", "Instrument Editing"],
+          spotify: "https://open.spotify.com/intl-pt/album/1Yz68J9kxtGwrMiUUPdbmF",
+          youtube: "",
+          image: temporal
+        },
+  {
+          slug: "temporal-aovivo",
+          collection: "vl-albums",
+          artist: "Vocal Livre",
+          title: "Temporal Ao Vivo",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Released in Cinemark Theaters",
+          description: "Live album project released in Cinemark theaters across Brazil.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/7rraIXg79Z1H4GPzs9vWyf?si=E2UnTLVeRS2-Ct27lvhiuA",
+          youtube: "",
+          image: temporalAovivo
+        },
+  {
+          slug: "recife15",
+          collection: "vl-albums",
+          artist: "Vocal Livre",
+          title: "Recife 15",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Released in Cinemark Theaters",
+          description: "Live album project released in Cinemark theaters across Brazil.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/0tnc9KegnYkFhyENW2ueyU?si=-aRn6tokRASn6P4AomUScQ",
+          youtube: "",
+          image: recife15
+        },
+  {
+          slug: "live-session",
+          collection: "vl-eps",
+          artist: "Vocal Livre",
+          title: "Live Session",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Live Session Production",
+          description: "Music production and acoustic guitar recording for Vocal Livre's Live Session project.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/4IfcjgNulOR2msDYysaR62?si=L3hQmXNnSaKIuecEFkNehg",
+          youtube: "",
+          image: liveSession
+        },
+  {
+          slug: "acustico",
+          collection: "vl-eps",
+          artist: "Vocal Livre",
+          title: "Acústico",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Acoustic Project Production",
+          description: "Music production and acoustic guitar recording for the acoustic project by Vocal Livre.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/album/1CxVTJB1c5UeHDUbXmr0tQ?si=ZmUWsRQXQ12y8Yh3LzzVYA",
+          youtube: "",
+          image: acustico
+        },
+  {
+          slug: "releituras",
+          collection: "vl-eps",
+          artist: "Vocal Livre",
+          title: "Releituras",
+          role: "Acoustic Guitar • Piano",
+          highlight: "Acoustic Guitar and Piano Recording",
+          description: "Acoustic guitar and piano recordings for the Vocal Livre project Releituras.",
+          credits: ["Acoustic Guitar", "Piano"],
+          spotify: "https://open.spotify.com/album/4THw5ctc970DrmOy3jcPIN?si=jGRQpDgtSp6DPNk5XdFKTQ",
+          youtube: "",
+          image: releituras
+        },
+  {
+          slug: "bela-historia-aovivo",
+          collection: "vl-singles",
+          artist: "Vocal Livre",
+          title: "Bela História (Ao Vivo)",
+          role: "Music Production • Acoustic Guitar • Electric Guitar",
+          highlight: "Live Single",
+          description: "Music production, acoustic guitar and electric guitar for Bela História (Ao Vivo) by Vocal Livre.",
+          credits: ["Music Production", "Acoustic Guitar", "Electric Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/3mvStIqKIlajo9BxIwI2rx?si=oUnv5IoHQA-4bgtGqs4uQw",
+          youtube: "",
+          image: belaHistoriaAoVivo
+        },
+  {
+          slug: "so-o-comeco-aovivo",
+          collection: "vl-singles",
+          artist: "Vocal Livre",
+          title: "Só o Começo (Ao Vivo)",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Live Single",
+          description: "Music production and acoustic guitar for Só o Começo (Ao Vivo) by Vocal Livre.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/7w0dGBH3H7UoOzURKyb0GN?si=EALMdoyJQg-nJDMfCSLtWw",
+          youtube: "",
+          image: soOComecoAoVivo
+        },
+  {
+          slug: "tu-tens-o-melhor",
+          collection: "vl-singles",
+          artist: "Joyce Carnassale & Vocal Livre",
+          title: "Tu Tens o Melhor",
+          role: "Instrumental Production • Arrangement • Bass • Acoustic Guitar • Electric Guitar • Piano",
+          highlight: "Full Instrumental Production",
+          description: "Full instrumental production and arrangement for Tu Tens o Melhor by Joyce Carnassale and Vocal Livre, including bass, electric guitar, acoustic guitar and piano recordings.",
+          credits: ["Instrumental Production", "Arrangement", "Bass", "Electric Guitar", "Acoustic Guitar", "Piano"],
+          spotify: "https://open.spotify.com/intl-pt/track/1p1YLFbx4V0br53oazENH1?si=2608ae612a7e44ef",
+          youtube: "",
+          image: tuTensOMelhor
+        },
+  {
+          slug: "so-o-comeco",
+          collection: "vl-singles",
+          artist: "Vocal Livre",
+          title: "Só o Começo",
+          role: "Music Production • Arrangement • Acoustic Guitar • Pads",
+          highlight: "19M+ Spotify Streams • 31M+ YouTube Views",
+          description: "Music production, instrumental arrangement, acoustic guitar and pads for one of Vocal Livre's most streamed songs.",
+          credits: ["Music Production", "Instrumental Arrangement", "Acoustic Guitar", "Pads"],
+          spotify: "https://open.spotify.com/intl-pt/track/5ug53fgtAarBSGeShPPnuF",
+          youtube: "",
+          image: soOComeco
+        },
+  {
+          slug: "a-comecar-em-mim",
+          collection: "vl-singles",
+          artist: "Vocal Livre",
+          title: "A Começar em Mim",
+          role: "Arrangement • Acoustic Guitar",
+          highlight: "4M+ YouTube Views",
+          description: "Single by Vocal Livre with production and acoustic guitar contributions. The music video features an acting appearance by Rafa Kalimann.",
+          credits: ["Arrangement", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/63vbYIdtcYPeDos7bj50vS?si=4c805f60e1f64e85",
+          youtube: "",
+          image: aComecarEmMim
+        },
+  {
+          slug: "fixa-teus-olhos",
+          collection: "vl-singles",
+          artist: "Daniel Salles & Vocal Livre",
+          title: "Fixa Teus Olhos em Mim",
+          role: "Music Production • Arrangement • Piano",
+          highlight: "Music Production and Piano Recording",
+          description: "Music production, arrangement and piano recording for Fixa Teus Olhos em Mim by Daniel Salles and Vocal Livre.",
+          credits: ["Music Production", "Arrangement", "Piano"],
+          spotify: "https://open.spotify.com/intl-pt/track/5MSM70B2xf0fHSv3ESFMSX",
+          youtube: "",
+          image: fixaTeusOlhos
+        },
+  {
+          slug: "sonda-me",
+          collection: "vl-youtube",
+          artist: "Vocal Livre",
+          title: "Sonda-me, Usa-me",
+          role: "Instrumental Arrangement • Vocal Arrangement",
+          highlight: "60M+ YouTube Views",
+          description: "Instrumental and vocal arrangement for one of Vocal Livre's most viewed videos.",
+          credits: ["Instrumental Arrangement", "Vocal Arrangement"],
+          spotify: "",
+          youtube: "https://www.youtube.com/watch?v=v7bS0E-Bpq4",
+          image: sondaMe
+        },
+  {
+          slug: "tudo-que-vivi",
+          collection: "vl-youtube",
+          artist: "Vocal Livre",
+          title: "Tudo O Que Eu Vivi",
+          role: "Acoustic Arrangement • Acoustic Guitar",
+          highlight: "8M+ YouTube Views",
+          description: "Acoustic version by Vocal Livre with acoustic guitar and arrangement contributions.",
+          credits: ["Acoustic Arrangement", "Acoustic Guitar"],
+          spotify: "",
+          youtube: "https://www.youtube.com/watch?v=Eqh7X4T2dqE",
+          image: tudoQueVivi
+        },
+  {
+          slug: "descansarei",
+          collection: "vl-youtube",
+          artist: "Vocal Livre & Etiene Pires",
+          title: "Descansarei",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "2M+ YouTube Views",
+          description: "YouTube release by Vocal Livre and Etiene Pires with arrangement and acoustic guitar contributions.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/album/7DkEJvxeyFEHMfStyJM18C?si=ysl2VlmmSBWEbm29gIjokw",
+          youtube: "",
+          image: descansarei
+        },
+  {
+          slug: "pedro-live",
+          collection: "pedro",
+          artist: "Pedro Valença",
+          title: "Ao Vivo",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Live Project",
+          description: "Music production and acoustic guitar for Pedro Valença's live project.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/2VhTiN2cTcYqxOMUOFg2Ec",
+          youtube: "",
+          image: dvdpedro
+        },
+  {
+          slug: "pedro-paula-1",
+          collection: "pedro",
+          artist: "Pedro Valença & Paula Schneider",
+          title: "Romântico Vol. 1",
+          role: "Acoustic Guitar • Bass • Piano • Guitar • Pads",
+          highlight: "Multi-Instrumental Recording",
+          description: "Multi-instrumental recording for Pedro Valença and Paula Schneider, including acoustic guitars, bass, pads, guitars and piano.",
+          credits: ["Acoustic Guitar", "Bass", "Piano", "Electric Guitar", "Pads"],
+          spotify: "https://open.spotify.com/intl-pt/album/6ES0kcyjSVYSCq53z64E9u",
+          youtube: "",
+          image: pedropaula1
+        },
+  {
+          slug: "pedro-paula-2",
+          collection: "pedro",
+          artist: "Pedro Valença & Paula Schneider",
+          title: "Romântico Vol. 2",
+          role: "Acoustic Guitar • Bass • Piano • Guitar • Pads",
+          highlight: "Multi-Instrumental Recording",
+          description: "Multi-instrumental recording for Pedro Valença and Paula Schneider, including acoustic guitars, bass, pads, guitars and piano.",
+          credits: ["Acoustic Guitar", "Bass", "Piano", "Electric Guitar", "Pads"],
+          spotify: "https://open.spotify.com/intl-pt/album/2pMhNADuJV4PfdYZhdCLUh",
+          youtube: "",
+          image: pedropaula2
+        },
+  {
+          slug: "devoted",
+          collection: "featured",
+          artist: "Devoted Vocal",
+          title: "The Countdown Live",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "USA Live Session",
+          description: "Music production and acoustic guitar for a live session recorded in the United States.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/6onbZZJ1ZrVVVLKsT9Bu73",
+          youtube: "",
+          image: devoted
+        },
+  {
+          slug: "arautos",
+          collection: "featured",
+          artist: "Arautos do Rei",
+          title: "Senhor da Vida",
+          role: "Instrumental Production",
+          highlight: "Track: Deus É Bom",
+          description: "Instrumental production for the track Deus É Bom, from the album Senhor da Vida by Arautos do Rei.",
+          credits: ["Instrumental Production"],
+          spotify: "https://open.spotify.com/intl-pt/track/3wftiYWuCeJvjUYo46l6Io",
+          youtube: "",
+          image: arautos
+        },
+  {
+          slug: "gabro-aovivo",
+          collection: "featured",
+          artist: "Gabro",
+          title: "Ao Vivo",
+          role: "Music Production • Acoustic Guitar • Electric Guitar",
+          highlight: "Live Project",
+          description: "Music production, acoustic guitar and electric guitar for Gabro Ao Vivo.",
+          credits: ["Music Production", "Acoustic Guitar", "Electric Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/15P8EE684XM3Ok4mZv5fmu?si=POX_DqFZS168y6wIY8Thmg",
+          youtube: "",
+          image: gabroAovivo
+        },
+  {
+          slug: "maranata",
+          collection: "other",
+          artist: "Adoradores 5",
+          title: "Maranata",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Maranata by Adoradores 5.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/track/7szKdaCLiqXXpll6PvfYvx?si=ac56b80ef4ea42cf",
+          youtube: "",
+          image: maranata
+        },
+  {
+          slug: "e-se-fosse-voce",
+          collection: "other",
+          artist: "Gravadora Novo Tempo",
+          title: "E Se Fosse Você?",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for E Se Fosse Você?, released by Gravadora Novo Tempo.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/6HNnX8mimuwZ5EDwZEn1QG?si=keIEgocCRrqA8tAvk7vU7w",
+          youtube: "",
+          image: eSeFosseVoce
+        },
+  {
+          slug: "meu-lugar-no-mundo",
+          collection: "other",
+          artist: "Novo Tom",
+          title: "Meu Lugar No Mundo",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Meu Lugar No Mundo by Novo Tom.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/32tZKQWzBJtq2GcdcshNKU?si=cS9wsUZFS_SqWyAbXmD3iw",
+          youtube: "",
+          image: meuLugarNoMundo
+        },
+  {
+          slug: "era-a-mao-de-deus",
+          collection: "other",
+          artist: "Novo Tom",
+          title: "Era a Mão de Deus",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Era a Mão de Deus by Novo Tom.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/25Rpu5x3HYVmTxZu4SncPN?si=-5WqqkABSb-oZt46U9I5Mw",
+          youtube: "",
+          image: eraAMaoDeDeus
+        },
+  {
+          slug: "adoradores-5",
+          collection: "other",
+          artist: "Adoradores Novo Tempo",
+          title: "Adoradores 5",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Adoradores 5 by Adoradores Novo Tempo.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/2DmId9dKFd4dhomJYpAk8b?si=7sMGtARER6m9AQVO4ZPv1Q",
+          youtube: "",
+          image: adoradores5
+        },
+  {
+          slug: "intimidade",
+          collection: "other",
+          artist: "Vagner Dida & Weslley Fonseca",
+          title: "Intimidade",
+          role: "Music Production • Acoustic Guitar • Piano",
+          highlight: "Music Production • Acoustic Guitar • Piano",
+          description: "Music production, acoustic guitar and piano recordings for Intimidade by Vagner Dida and Weslley Fonseca.",
+          credits: ["Music Production", "Acoustic Guitar", "Piano"],
+          spotify: "https://open.spotify.com/intl-pt/track/3ZLitoWeyPEH4qxUpyyKM0?si=63e29c3974974c9c",
+          youtube: "",
+          image: intimidade
+        },
+  {
+          slug: "together",
+          collection: "other",
+          artist: "Adventistas Centro-Oeste",
+          title: "Together I'll Go",
+          role: "Complete Music Production",
+          highlight: "Event Theme Song",
+          description: "Complete music production for Together I'll Go by Adventistas Centro-Oeste, including arrangement, instruments, editing, mix, master and backing vocals.",
+          credits: ["Music Production", "Arrangement", "Instrumentation", "Backing Vocals", "Editing", "Mix", "Master"],
+          spotify: "https://open.spotify.com/intl-pt/album/0KGnHAwZTxvI9gSh6OJrei?si=4nd872aoTc-g9a2sXlAQjQ",
+          youtube: "",
+          image: together
+        },
+  {
+          slug: "pedrazul",
+          collection: "other",
+          artist: "Pedra Azul",
+          title: "Quem Sou",
+          role: "Music Production • Piano",
+          highlight: "Music Production and Piano Recording",
+          description: "Music production and piano recording for Quem Sou by Pedra Azul.",
+          credits: ["Music Production", "Piano"],
+          spotify: "https://open.spotify.com/intl-pt/track/3R8AdlPHOXTNpnzUoUqcpK?si=344e1c566aa04873",
+          youtube: "",
+          image: pedrazul
+        },
+  {
+          slug: "jubileu",
+          collection: "other",
+          artist: "Ronaldo Fagundes",
+          title: "Jubileu",
+          role: "Music Production • Orchestration • Bass",
+          highlight: "Orchestration and Bass Recording",
+          description: "Music production, string orchestration and bass recording for Jubileu by Ronaldo Fagundes.",
+          credits: ["Music Production", "Orchestration", "String Arrangement", "Bass"],
+          spotify: "https://open.spotify.com/intl-pt/track/3G2PuZZEk4YJm3a1RPVzKx?si=41bf8cc422b04dd8",
+          youtube: "",
+          image: jubileu
+        },
+  {
+          slug: "aguia",
+          collection: "other",
+          artist: "Tiago Alves",
+          title: "Eu Sou Águia",
+          role: "Music Production • Acoustic Guitar",
+          highlight: "Music Production and Acoustic Guitar",
+          description: "Music production and acoustic guitar recording for Eu Sou Águia by Tiago Alves.",
+          credits: ["Music Production", "Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/track/29as63OIIPptFTHuWAA0Xb?si=2211c98fea3b4bd9",
+          youtube: "",
+          image: aguia
+        },
+  {
+          slug: "alfredo",
+          collection: "other",
+          artist: "Alfredo Torres",
+          title: "O Senhor é o Meu Pastor",
+          role: "Composition • All Instruments",
+          highlight: "Composition • Full Instrumental Recording",
+          description: "Composition and full instrumental recording for O Senhor é o Meu Pastor by Alfredo Torres.",
+          credits: ["Composition", "All Instruments", "Instrumentation"],
+          spotify: "https://open.spotify.com/intl-pt/album/7532vHXgInhJMl14yebDhQ?si=sIlMDcBSQfayAXzR680bCw",
+          youtube: "",
+          image: alfredo
+        },
+  {
+          slug: "gabro0",
+          collection: "other",
+          artist: "Gabro",
+          title: "Há Lugar Pra Ti",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Há Lugar Pra Ti by Gabro.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/album/7ii8df95qX45OVqmAZOoHh?si=dvOnKtOpQYmXkUt1HFfHsg",
+          youtube: "",
+          image: gabro0
+        },
+  {
+          slug: "gabro1",
+          collection: "other",
+          artist: "Gabro",
+          title: "Recordar É Viver",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Recordar É Viver by Gabro.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/22C1HqYYOJazoA7Kg3BBSU?si=Qqkk2t5XSD-679xSNmywTQ",
+          youtube: "",
+          image: gabro1
+        },
+  {
+          slug: "gabro2",
+          collection: "other",
+          artist: "Gabro",
+          title: "Recordar É Viver Vol. 2",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Recordar É Viver Vol. 2 by Gabro.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/3aymPN0deMNrJUHfjMjiBe?si=SM_A3jGbSgG2lb87vabrtg",
+          youtube: "",
+          image: gabro2
+        },
+  {
+          slug: "gabro3",
+          collection: "other",
+          artist: "Gabro",
+          title: "Recordar É Viver Vol. 3",
+          role: "Acoustic Guitar",
+          highlight: "Acoustic Guitar Recording",
+          description: "Acoustic guitar recording for Recordar É Viver Vol. 3 by Gabro.",
+          credits: ["Acoustic Guitar"],
+          spotify: "https://open.spotify.com/intl-pt/album/6esk10qXIwPT75OQDo76Ns?si=T_znfMOQRVOp9uQqRM6R7w",
+          youtube: "",
+          image: gabro3
+        },
+  {
+          slug: "a-guerra",
+          collection: "other",
+          artist: "Vocal Advento & Deise Kelly",
+          title: "A Guerra",
+          role: "Music Production • Acoustic Guitar • Electric Guitar • Piano",
+          highlight: "Music Production and Instrument Recording",
+          description: "Music production, acoustic guitar, electric guitar, piano, effects, vocal editing and production work for A Guerra by Vocal Advento and Deise Kelly.",
+          credits: ["Music Production", "Acoustic Guitar", "Electric Guitar", "Piano", "Effects", "Vocal Editing"],
+          spotify: "https://open.spotify.com/intl-pt/track/6GUyxuJcCNuMKQDHToytxh?si=a54cb708a8e543ff",
+          youtube: "",
+          image: aGuerra
+        },
+  {
+          slug: "autor-da-vida",
+          collection: "other",
+          artist: "Vocal Livre & Monkakitos",
+          title: "Autor da Vida",
+          role: "All Instruments",
+          highlight: "Full Instrumental Recording",
+          description: "Full instrumental recording for Autor da Vida by Vocal Livre and Monkakitos, including drums, bass, synths, acoustic guitar, electric guitar, piano, pads, percussion and strings.",
+          credits: ["All Instruments", "Drums", "Bass", "Synths", "Acoustic Guitar", "Electric Guitar", "Piano", "Pads", "Percussion", "Strings"],
+          spotify: "https://open.spotify.com/intl-pt/album/0Ec8l3tEjlsJ83JeJNvAsC?si=acEGLiCzTEe5fCb9748x7A",
+          youtube: "",
+          image: autorDaVida
+        },
+  {
+          slug: "sonhar-pequeno",
+          collection: "other",
+          artist: "Paula Shcneider",
+          title: "Sonhar Pequeno",
+          role: "Music Production • Acoustic Guitar • Piano • Bass • Mix",
+          highlight: "Producer • Acoustic Guitar • Piano • Bass • Mix",
+          description: "Music Production, acoustic guitar, piano and piano recording, mix and master for Sonhar Pequeno by Paula Schneider.",
+          credits: [],
+          spotify: "https://open.spotify.com/intl-pt/album/4FUJZzOOvi0nMH4LiG71iC",
+          youtube: "https://www.youtube.com/watch?v=ntzN_vM-Kcw",
+          image: sonharPequeno,
+        },
+];

@@ -1,0 +1,174 @@
+---
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const getRouteLanguage = (pathname: string): SiteLanguage => {
+  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "pt";
+  if (pathname === "/es" || pathname.startsWith("/es/")) return "es";
+  return "en";
+};
+
+const currentLanguage = getRouteLanguage(currentPath);
+
+const text: Record<
+  SiteLanguage,
+  {
+    eyebrow: string;
+    title: string;
+    description: string;
+    button: string;
+  }
+> = {
+  en: {
+    eyebrow: "HEAR MY GUITAR",
+    title: "Acoustic guitar recordings selected from real projects.",
+    description:
+      "A curated playlist featuring acoustic guitar recordings from albums, live sessions and studio productions I've contributed to.",
+    button: "Open on Spotify",
+  },
+
+  pt: {
+    eyebrow: "OUÇA MEU VIOLÃO",
+    title: "Gravações de violão selecionadas de projetos reais.",
+    description:
+      "Uma playlist curada com gravações de violão em álbuns, live sessions e produções de estúdio das quais participei.",
+    button: "Abrir no Spotify",
+  },
+
+  es: {
+    eyebrow: "ESCUCHA MI GUITARRA",
+    title: "Grabaciones de guitarra acústica seleccionadas de proyectos reales.",
+    description:
+      "Una playlist curada con grabaciones de guitarra acústica en álbumes, live sessions y producciones de estudio en las que participé.",
+    button: "Abrir en Spotify",
+  },
+};
+
+const t = text[currentLanguage];
+---
+
+<section class="guitar" id="guitar">
+
+  <div class="container">
+
+    <div class="left">
+
+      <p class="eyebrow">{t.eyebrow}</p>
+
+      <h2>{t.title}</h2>
+
+      <p>
+        {t.description}
+      </p>
+
+      <a
+        class="button"
+        href="https://open.spotify.com/playlist/4CF7VAouOI0MMgXvOSIV1z"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {t.button}
+      </a>
+
+    </div>
+
+    <div class="player">
+
+      <iframe
+        style="border-radius:18px"
+        src="https://open.spotify.com/embed/playlist/4CF7VAouOI0MMgXvOSIV1z?utm_source=generator&theme=0"
+        width="100%"
+        height="520"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+.guitar{
+  background:#050505;
+  color:white;
+  padding:140px 6%;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.left{
+  display:flex;
+  flex-direction:column;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:20px;
+}
+
+h2{
+  font-size:3rem;
+  line-height:1.1;
+  margin:0 0 24px;
+}
+
+p{
+  color:#bdbdbd;
+  line-height:1.8;
+  margin:0 0 36px;
+}
+
+.button{
+  display:inline-block;
+  width:max-content;
+  padding:16px 32px;
+  background:white;
+  color:black;
+  text-decoration:none;
+  border-radius:999px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.button:hover{
+  transform:translateY(-2px);
+}
+
+.player{
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:#111;
+}
+
+iframe{
+  display:block;
+}
+
+@media (max-width:900px){
+
+  .container{
+    grid-template-columns:1fr;
+  }
+
+  h2{
+    font-size:2.2rem;
+  }
+
+}
+
+</style>

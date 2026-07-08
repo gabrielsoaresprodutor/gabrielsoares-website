@@ -1,0 +1,1357 @@
+---
+import lucianoVassaoPhoto from "../assets/testimonials/luciano-vassao.png";
+import renanMartinsPhoto from "../assets/testimonials/renan-martins.png";
+import pabloCanalisPhoto from "../assets/testimonials/pablo-canalis.jpeg";
+import sergioSaasPhoto from "../assets/testimonials/sergio-saas.png";
+import kleberAugustoPhoto from "../assets/testimonials/kleber-augusto.png";
+import guiTettamantiPhoto from "../assets/testimonials/gui-tettamanti.png";
+import carlosFreitasPhoto from "../assets/testimonials/carlos-freitas.png";
+import flavioSantosPhoto from "../assets/testimonials/flavio-santos.jpeg";
+import mysonCharlyPhoto from "../assets/testimonials/myson-charly.jpeg";
+import ricardoMartinsPhoto from "../assets/testimonials/ricardo-martins.png";
+import samuelLoiaPhoto from "../assets/testimonials/samuel-loia.jpeg";
+import edisonSopperPhoto from "../assets/testimonials/edison-sopper.png";
+import pedroValencaPhoto from "../assets/testimonials/pedro-valenca.jpg";
+import jaderSantosPhoto from "../assets/testimonials/jader-santos.png";
+import ronnyeDiasPhoto from "../assets/testimonials/ronnye-dias.png";
+import sullivanDutraPhoto from "../assets/testimonials/sullivan-dutra.png";
+import gabroPhoto from "../assets/testimonials/gabro.png";
+
+type SiteLanguage = "en" | "pt" | "es";
+
+const currentPath = Astro.url.pathname;
+
+const getRouteLanguage = (pathname: string): SiteLanguage => {
+  if (pathname === "/pt" || pathname.startsWith("/pt/")) return "pt";
+  if (pathname === "/es" || pathname.startsWith("/es/")) return "es";
+  return "en";
+};
+
+const currentLanguage = getRouteLanguage(currentPath);
+
+const sectionText: Record<
+  SiteLanguage,
+  {
+    eyebrow: string;
+    title: string;
+    ariaLabel: string;
+  }
+> = {
+  en: {
+    eyebrow: "TRUSTED BY",
+    title: "Words from artists and collaborators.",
+    ariaLabel: "Testimonials",
+  },
+
+  pt: {
+    eyebrow: "CONFIANÇA DE PROFISSIONAIS",
+    title: "O que artistas e colaboradores dizem.",
+    ariaLabel: "Depoimentos",
+  },
+
+  es: {
+    eyebrow: "CONFIANZA DE PROFESIONALES",
+    title: "Lo que dicen artistas y colaboradores.",
+    ariaLabel: "Testimonios",
+  },
+};
+
+const testimonials = [
+  {
+      name: "Luciano Vassão",
+      title: {
+        en: "Mastering Engineer",
+        pt: "Engenheiro de Masterização",
+        es: "Ingeniero de Mastering",
+      },
+      location: "Flórida, USA 🇺🇸",
+      achievements: {
+        en: "Gabriela Rocha • Isadora Pompeo<br />Aline Barros • Vocal Livre<br />🏆 16x Latin GRAMMY® Nominee<br />🏆 3x Latin GRAMMY® Winner",
+        pt: "Gabriela Rocha • Isadora Pompeo<br />Aline Barros • Vocal Livre<br />🏆 16x indicado ao Latin GRAMMY®<br />🏆 3x vencedor do Latin GRAMMY®",
+        es: "Gabriela Rocha • Isadora Pompeo<br />Aline Barros • Vocal Livre<br />🏆 16x nominado al Latin GRAMMY®<br />🏆 3x ganador del Latin GRAMMY®",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: lucianoVassaoPhoto,
+      initials: "LV",
+      avatarClass: "luciano-avatar",
+      quote: {
+        en: "I’ve had the joy of working with Gabriel for several years on very special projects. Beyond his talent and skill, what has always stood out to me is his attention to every detail and his commitment to delivering work of the highest quality. At the same time, he creates an environment of trust, giving us freedom to contribute in the best possible way. It is a privilege to be part of projects alongside someone who combines sensitivity, excellence and a deep respect for music and for people.",
+        pt: "Tenho tido a felicidade de trabalhar com o Gabriel há alguns anos em projetos muito especiais. Além do talento e da competência, sempre me chamou a atenção o cuidado com cada detalhe e o compromisso em entregar um trabalho da mais alta qualidade. Ao mesmo tempo, ele cria um ambiente de confiança, dando liberdade para oferecermos nossa contribuição da melhor maneira. É um privilégio fazer parte de projetos ao lado de alguém que une sensibilidade, excelência e um profundo respeito pela música e pelas pessoas.",
+        es: "He tenido la alegría de trabajar con Gabriel durante varios años en proyectos muy especiales. Además de su talento y capacidad, siempre me ha llamado la atención el cuidado que pone en cada detalle y su compromiso con entregar un trabajo de altísima calidad. Al mismo tiempo, crea un ambiente de confianza, dando libertad para que podamos aportar de la mejor manera. Es un privilegio formar parte de proyectos junto a alguien que une sensibilidad, excelencia y un profundo respeto por la música y por las personas.",
+      },
+    },
+  {
+      name: "Edison Sopper Jr.",
+      title: {
+        en: "Mix Engineer",
+        pt: "Engenheiro de Mixagem",
+        es: "Ingeniero de Mezcla",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Vocal Livre • Novo Tom<br />Arautos do Rei • Pedro Valença<br />",
+        pt: "Vocal Livre • Novo Tom<br />Arautos do Rei • Pedro Valença<br />",
+        es: "Vocal Livre • Novo Tom<br />Arautos do Rei • Pedro Valença<br />",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: edisonSopperPhoto,
+      initials: "ES",
+      avatarClass: "edson-avatar",
+      quote: {
+        en: "I’ve worked with Gabriel for many years. I often say that producing and arranging music is not only about having good ideas, but having them and knowing how to execute them in a way that listeners can truly understand. The way instruments are performed, how layers and textures are combined, and the cleanliness of the recordings play a fundamental role in the final result of each track. Gabriel, besides being an excellent multi-instrumentalist, brings together all these other skills that a good producer needs to master. For me, working on Gabriel’s projects is always a walk in the park.",
+        pt: "Tenho trabalhado com o Gabriel há muitos anos. Costumo dizer que produzir e arranjar música não é somente ter boas ideias, é tê-las e saber como executá-las de maneira que elas possam ser entendidas por quem ouve. A forma como os instrumentos são executados, a maneira como as camadas e as texturas são combinadas e a limpeza das gravações cumprem um papel fundamental no produto final de cada fonograma. O Gabriel, além de um excelente multi-instrumentista, agrega todas essas outras capacidades que um bom produtor precisa dominar. Para mim, trabalhar nos projetos do Gabriel é sempre um passeio no parque.",
+        es: "He trabajado con Gabriel durante muchos años. Suelo decir que producir y arreglar música no se trata solamente de tener buenas ideas, sino de tenerlas y saber ejecutarlas de una manera que pueda ser entendida por quien escucha. La forma en que se interpretan los instrumentos, cómo se combinan las capas y texturas, y la limpieza de las grabaciones cumplen un papel fundamental en el resultado final de cada canción. Gabriel, además de ser un excelente multiinstrumentista, reúne todas esas otras capacidades que un buen productor necesita dominar. Para mí, trabajar en los proyectos de Gabriel siempre es un paseo por el parque.",
+      },
+    },
+  {
+      name: "Pedro Valença",
+      title: {
+        en: "Singer • Composer • Producer • Arranger",
+        pt: "Cantor • Compositor • Produtor • Arranjador",
+        es: "Cantante • Compositor • Productor • Arreglista",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Founder and Director of<br />Vocal Livre & Coral Livre",
+        pt: "Fundador e Diretor do<br />Vocal Livre & Coral Livre",
+        es: "Fundador y Director de<br />Vocal Livre & Coral Livre",
+      },
+      workedWith: {
+        en: "🏆 Latin GRAMMY® Nominee",
+        pt: "🏆 Indicado ao Latin GRAMMY®",
+        es: "🏆 Nominado al Latin GRAMMY®",
+      },
+      image: pedroValencaPhoto,
+      initials: "PV",
+      avatarClass: "pedro-avatar",
+      quote: {
+        en: "Gabriel is the kind of musician you can trust with your eyes closed. He is complete, extremely talented on so many instruments and also deeply sensitive. I have the privilege of working with him on countless productions, and I’m always absolutely satisfied with the paths he chooses. He is truly a professional I highly recommend.",
+        pt: "O Gabriel é aquele músico que a gente confia de olho fechado. Ele é completo, extremamente talentoso em tantos instrumentos e também muito sensível. Tenho o privilégio de trabalhar com ele em inúmeras produções e sempre fico absolutamente satisfeito com os caminhos que ele escolhe. Realmente, é um profissional que eu indico muito.",
+        es: "Gabriel es ese tipo de músico en quien uno confía con los ojos cerrados. Es completo, extremadamente talentoso en muchos instrumentos y también muy sensible. Tengo el privilegio de trabajar con él en innumerables producciones y siempre quedo absolutamente satisfecho con los caminos que elige. Realmente es un profesional que recomiendo muchísimo.",
+      },
+    },
+  {
+      name: "Jader Santos",
+      title: {
+        en: "Composer • Producer • Pianist • Arranger",
+        pt: "Compositor • Produtor • Pianista • Arranjador",
+        es: "Compositor • Productor • Pianista • Arreglista",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "🎖️ 25 Years of Arautos do Rei<br />💎 500+ Gospel Songs",
+        pt: "🎖️ 25 anos de Arautos do Rei<br />💎 Mais de 500 músicas gospel",
+        es: "🎖️ 25 años de Arautos do Rei<br />💎 Más de 500 canciones gospel",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: jaderSantosPhoto,
+      initials: "JS",
+      avatarClass: "jader-avatar",
+      quote: {
+        en: "I’ve always had a fantastic experience working with Gabriel on music productions. What excites me most is how his musical ideas and creative vision consistently take every song to an exceptional level.",
+        pt: "Tenho tido uma experiência fantástica quando conto com o Gabriel para uma produção musical. O que mais me empolga é que as ideias musicais e a proposta que ele tem sempre elevam a canção para um patamar excepcional.",
+        es: "Siempre he tenido una experiencia fantástica trabajando con Gabriel en producciones musicales. Lo que más me entusiasma es cómo sus ideas musicales y su visión creativa siempre llevan cada canción a un nivel excepcional.",
+      },
+    },
+  {
+      name: "Ronnye Dias",
+      title: {
+        en: "Orchestral Arranger • Conductor",
+        pt: "Arranjador Orquestral • Maestro",
+        es: "Arreglista Orquestal • Director de Orquesta",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "💎 30+ Years of Orchestral Arrangement Experience<br />🏆 2,000+ Recorded Arrangements",
+        pt: "💎 Mais de 30 anos em arranjos orquestrais<br />🏆 Mais de 2000 arranjos gravados",
+        es: "💎 Más de 30 años en arreglos orquestales<br />🏆 Más de 2000 arreglos grabados",
+      },
+      workedWith: {
+        en: "Leonardo Gonçalves • Paulo César Baruk Pedro Valença • Daniela Araújo",
+        pt: "Leonardo Gonçalves • Paulo César Baruk Pedro Valença • Daniela Araújo",
+        es: "Leonardo Gonçalves • Paulo César Baruk Pedro Valença • Daniela Araújo",
+      },
+      image: ronnyeDiasPhoto,
+      initials: "RD",
+      avatarClass: "ronnye-avatar",
+      quote: {
+        en: "Gabriel has the gift of connecting contemporary language with the richness of orchestral textures, naturally and precisely building bridges between the modern and the classical. More than a producer, he is a partner who brings out the best in every musician involved, delivering projects that impress through their beauty, depth and artistic relevance.",
+        pt: "Gabriel tem o dom de conectar a linguagem contemporânea à riqueza das texturas orquestrais, criando pontes entre o moderno e o clássico com naturalidade e precisão. Mais do que um produtor, ele é um parceiro que potencializa o melhor de cada músico envolvido, entregando projetos que impressionam pela beleza, profundidade e relevância artística.",
+        es: "Gabriel tiene el don de conectar el lenguaje contemporáneo con la riqueza de las texturas orquestales, creando puentes entre lo moderno y lo clásico con naturalidad y precisión. Más que un productor, es un compañero que potencia lo mejor de cada músico involucrado, entregando proyectos que impresionan por su belleza, profundidad y relevancia artística.",
+      },
+    },
+  {
+      name: "Gui Tettamanti",
+      title: {
+        en: "Mix Engineer",
+        pt: "Engenheiro de Mixagem",
+        es: "Ingeniero de Mezcla",
+      },
+      location: "Flórida, USA 🇺🇸",
+      achievements: {
+        en: "Alice Barros • Maria Marçal • Tadah Latin<br />🏆 5x Latin GRAMMY® Nominee<br />🏆 1x Latin GRAMMY® Winner<br />Triple Platinum",
+        pt: "Alice Barros • Maria Marçal • Tadah Latin<br />🏆 5x indicado ao Latin GRAMMY®<br />🏆 1x vencedor do Latin GRAMMY®<br />Triplo Platina",
+        es: "Alice Barros • Maria Marçal • Tadah Latin<br />🏆 5x nominado al Latin GRAMMY®<br />🏆 1x ganador del Latin GRAMMY®<br />Triple Platino",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: guiTettamantiPhoto,
+      initials: "GT",
+      avatarClass: "gui-avatar",
+      quote: {
+        en: "Gabriel Soares is an extremely talented producer and musician. His musicality, sensitivity and attention to detail elevate any project, always with great professionalism and taste. Working with him is an experience I recommend to everyone.",
+        pt: "Gabriel Soares é um produtor e um músico extremamente talentoso. Sua musicalidade, sensibilidade e atenção aos detalhes elevam qualquer projeto, sempre com muito profissionalismo e bom gosto. Trabalhar com ele é uma experiência que recomendo para todos.",
+        es: "Gabriel Soares es un productor y músico extremadamente talentoso. Su musicalidad, sensibilidad y atención a los detalles elevan cualquier proyecto, siempre con mucho profesionalismo y buen gusto. Trabajar con él es una experiencia que recomiendo a todos.",
+      },
+    },
+  {
+      name: "Kleber Augusto",
+      title: {
+        en: "Conductor • Producer",
+        pt: "Maestro • Produtor",
+        es: "Director de Orquesta • Productor",
+      },
+      location: "Curitiba, Brazil 🇧🇷",
+      achievements: {
+        en: "🏆 5x Latin GRAMMY® Winner<br />🏆 1x GRAMMY® Winner",
+        pt: "🏆 5x vencedor do Latin GRAMMY®<br />🏆 1x vencedor do GRAMMY®",
+        es: "🏆 5x ganador del Latin GRAMMY®<br />🏆 1x ganador del GRAMMY®",
+      },
+      workedWith: {
+        en: "Artistic Director at St. Petersburg Studio Orchestra • Tallinn Studio Orchestra 🇪🇪",
+        pt: "Diretor artístico na St. Petersburg Studio Orchestra • Tallinn Studio Orchestra 🇪🇪",
+        es: "Director artístico en St. Petersburg Studio Orchestra • Tallinn Studio Orchestra 🇪🇪",
+      },
+      image: kleberAugustoPhoto,
+      initials: "KA",
+      avatarClass: "kleber-avatar",
+      quote: {
+        en: "Gabriel is sensitive and talented. One thing that really stands out to me is deadlines: he is impeccable. It is always a pleasure to be part of his projects.",
+        pt: "Gabriel é sensível e talentoso. Um diferencial que me chama a atenção é em relação a prazos: ele é impecável. É sempre um prazer fazer parte dos seus projetos.",
+        es: "Gabriel es sensible y talentoso. Un diferencial que me llama mucho la atención es su relación con los plazos: es impecable. Siempre es un placer formar parte de sus proyectos.",
+      },
+    },
+  {
+      name: "Carlos Freitas",
+      title: {
+        en: "Mastering Engineer",
+        pt: "Engenheiro de Masterização",
+        es: "Ingeniero de Mastering",
+      },
+      location: "Miami, USA 🇺🇸",
+      achievements: {
+        en: "Djavan • Tom Jobim • Melim • Ed Motta<br />🏆 35x Latin GRAMMY® Winner<br />🏆 150x Latin GRAMMY® Nominee<br />🏅 8x Best Engineered Album<br />Founder of Classic Master USA",
+        pt: "Djavan • Tom Jobim • Melim • Ed Motta<br />🏆 35x vencedor do Latin GRAMMY®<br />🏆 150x indicado ao Latin GRAMMY®<br />🏅 8x Best Engineered Album<br />Fundador da Classic Master USA",
+        es: "Djavan • Tom Jobim • Melim • Ed Motta<br />🏆 35x ganador del Latin GRAMMY®<br />🏆 150x nominado al Latin GRAMMY®<br />🏅 8x Best Engineered Album<br />Fundador de Classic Master USA",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: carlosFreitasPhoto,
+      initials: "CF",
+      avatarClass: "carlos-avatar",
+      quote: {
+        en: "When I received the tracks from Raiane Porto’s EP to master, I immediately noticed the care in every detail. Gabriel Soares’ music production respected the artist’s identity, and the acoustic guitars he recorded guided the songs with so much soul. It is the kind of project that is a pleasure to work on: impeccable production, clean recording and rare artistic sensitivity. The final result is beautiful, and I’m sure it will touch many hearts.",
+        pt: "Quando recebi as faixas do EP da Raiane Porto para masterizar, percebi logo de cara o cuidado em cada detalhe. A produção musical do Gabriel Soares respeitou a identidade da artista, e os violões que ele gravou guiaram as músicas com muita alma. É o tipo de projeto que dá gosto de trabalhar: produção impecável, captação limpa e uma sensibilidade artística rara. O resultado final está lindo e tenho certeza de que vai tocar o coração de muita gente.",
+        es: "Cuando recibí las pistas del EP de Raiane Porto para masterizar, noté de inmediato el cuidado en cada detalle. La producción musical de Gabriel Soares respetó la identidad de la artista, y las guitarras acústicas que grabó guiaron las canciones con mucha alma. Es el tipo de proyecto que da gusto trabajar: producción impecable, grabación limpia y una sensibilidad artística poco común. El resultado final está hermoso, y estoy seguro de que tocará el corazón de muchas personas.",
+      },
+    },
+  {
+      name: "Renan Martins",
+      title: {
+        en: "Drummer • Producer • Recording Engineer",
+        pt: "Baterista • Produtor • Engenheiro de Gravação",
+        es: "Baterista • Productor • Ingeniero de Grabación",
+      },
+      location: "Flórida, USA 🇺🇸",
+      achievements: {
+        en: "Disney • PlayStation • Netflix • Globo TV<br />🏆 1x Latin GRAMMY® Winner<br />🏆 9x Latin GRAMMY® Nominee",
+        pt: "Disney • PlayStation • Netflix • Globo TV<br />🏆 1x vencedor do Latin GRAMMY®<br />🏆 9x indicado ao Latin GRAMMY®",
+        es: "Disney • PlayStation • Netflix • Globo TV<br />🏆 1x ganador del Latin GRAMMY®<br />🏆 9x nominado al Latin GRAMMY®",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: renanMartinsPhoto,
+      initials: "RM",
+      avatarClass: "renan-avatar",
+      quote: {
+        en: "Working with Gabriel Soares is always a very good experience. He is an extremely talented musician, very musical, and has a way of leading the session that truly takes the project to another level. I really like the way he sees music, always with taste, sensitivity and attention to what really matters. He is the kind of professional who adds a lot to any production.",
+        pt: "Trabalhar com o Gabriel Soares é sempre uma experiência muito boa. Ele é um músico extremamente talentoso, muito musical e tem uma forma de conduzir a sessão que realmente leva o projeto para outro nível. Gosto muito da maneira como ele enxerga a música, sempre com bom gosto, sensibilidade e atenção ao que realmente importa. É o tipo de profissional que soma muito em qualquer produção.",
+        es: "Trabajar con Gabriel Soares siempre es una experiencia muy buena. Es un músico extremadamente talentoso, muy musical, y tiene una forma de conducir la sesión que realmente lleva el proyecto a otro nivel. Me gusta mucho la manera en que ve la música, siempre con buen gusto, sensibilidad y atención a lo que realmente importa. Es el tipo de profesional que aporta muchísimo a cualquier producción.",
+      },
+    },
+  {
+      name: "Ricardo Martins",
+      title: {
+        en: "Producer • Composer • Arranger",
+        pt: "Produtor • Compositor • Arranjador",
+        es: "Productor • Compositor • Arreglista",
+      },
+      location: "Saskatoon, Canadá 🇨🇦",
+      achievements: {
+        en: "Arautos do Rei<br />Founder of Adoradores Novo Tempo<br />Co-founder of Ministério de Louvor Está Escrito",
+        pt: "Arautos do Rei<br />Fundador do Adoradores Novo Tempo<br />Cofundador do Ministério de Louvor Está Escrito",
+        es: "Arautos do Rei<br />Fundador de Adoradores Novo Tempo<br />Cofundador de Ministério de Louvor Está Escrito",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: ricardoMartinsPhoto,
+      initials: "RM",
+      avatarClass: "ricardo-avatar",
+      quote: {
+        en: "Recording with Gabriel Soares has been a privilege. Besides being an excellent arranger, his musical taste is exceptional. The sound of his acoustic guitar is distinctive, balanced and expressive, always serving the song. I recommend Gabriel with complete confidence to anyone looking for high-level quality and musicality.",
+        pt: "Gravar com o Gabriel Soares tem sido um privilégio. Além de ser um excelente arranjador, seu gosto musical é excepcional. O som do seu violão é diferenciado, equilibrado e expressivo, sempre a serviço da música. Recomendo o Gabriel com total confiança para quem busca qualidade e musicalidade de alto nível.",
+        es: "Grabar con Gabriel Soares ha sido un privilegio. Además de ser un excelente arreglista, su gusto musical es excepcional. El sonido de su guitarra acústica es diferente, equilibrado y expresivo, siempre al servicio de la canción. Recomiendo a Gabriel con total confianza a quienes buscan calidad y musicalidad de alto nivel.",
+      },
+    },
+  {
+      name: "Myson Charly",
+      title: {
+        en: "Producer • Mixer • Composer",
+        pt: "Produtor • Mixer • Compositor",
+        es: "Productor • Mixer • Compositor",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Director of Arautos do Rei • Ministério Faces • Art Trio",
+        pt: "Diretor do Arautos do Rei • Ministério Faces • Art Trio",
+        es: "Diretor do Arautos do Rei • Ministério Faces • Art Trio",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: mysonCharlyPhoto,
+      initials: "MC",
+      avatarClass: "myson-avatar",
+      quote: {
+        en: "Recording acoustic guitars with Gabriel is always a surprise. He is creative, professional and extremely talented. His work inspires, moves people and leaves unforgettable marks on everyone who comes into contact with his art.",
+        pt: "Gravar violões com o Gabriel é sempre uma surpresa. Ele é criativo, profissional e extremamente talentoso. Seu trabalho inspira, emociona e deixa marcas inesquecíveis em todos que entram em contato com sua arte.",
+        es: "Grabar guitarras acústicas con Gabriel siempre es una sorpresa. Es creativo, profesional y extremadamente talentoso. Su trabajo inspira, emociona y deja marcas inolvidables en todos los que entran en contacto con su arte.",
+      },
+    },
+  {
+      name: "Sullivan Dutra",
+      title: {
+        en: "Producer • Composer • Pianist",
+        pt: "Produtor • Compositor • Pianista",
+        es: "Productor • Compositor • Pianista",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Director of Novo Tom • Adoradores 5",
+        pt: "Diretor do Novo Tom • Adoradores 5",
+        es: "Diretor do Novo Tom • Adoradores 5",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: sullivanDutraPhoto,
+      initials: "SD",
+      avatarClass: "sullivan-avatar",
+      quote: {
+        en: "My friend Gabriel is an incredibly talented, sensitive and dedicated musician. Working with him means knowing that every detail will be handled with professionalism, creativity and care. 10/10, always!",
+        pt: "Meu amigo Gabriel é um músico de enorme talento, sensibilidade e dedicação. Trabalhar com ele é ter a certeza de que cada detalhe será tratado com profissionalismo, criatividade e cuidado. 10/10, sempre!",
+        es: "Mi amigo Gabriel es un músico de enorme talento, sensibilidad y dedicación. Trabajar con él es tener la certeza de que cada detalle será tratado con profesionalismo, creatividad y cuidado. ¡10/10, siempre!",
+      },
+    },
+  {
+      name: "Sérgio Saas",
+      title: {
+        en: "Singer • Composer",
+        pt: "Cantor • Compositor",
+        es: "Cantante • Compositor",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Founder & Director of Raiz Coral",
+        pt: "Fundador e Diretor do Raiz Coral",
+        es: "Fundador y Director de Raiz Coral",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: sergioSaasPhoto,
+      initials: "SS",
+      avatarClass: "sergio-avatar",
+      quote: {
+        en: "The ability to hear a song for the first time and know exactly the best key, tempo, harmonic structure and rhythmic direction. It is easy to work with a producer like that.",
+        pt: "A habilidade de ouvir uma música pela primeira vez e saber exatamente qual a melhor tonalidade, andamento, estrutura harmônica e rítmica. Fica fácil trabalhar com um produtor desses.",
+        es: "La habilidad de escuchar una canción por primera vez y saber exactamente cuál es la mejor tonalidad, tempo, estructura armónica y dirección rítmica. Es fácil trabajar con un productor así.",
+      },
+    },
+  {
+      name: "Flávio Santos",
+      title: {
+        en: "Conductor • Producer • Composer",
+        pt: "Maestro • Produtor • Compositor",
+        es: "Director de Orquesta • Productor • Compositor",
+      },
+      location: "Florianópolis, Brazil 🇧🇷",
+      achievements: {
+        en: "Arautos do Rei • Wintley Phipps • Prisma Brasil",
+        pt: "Arautos do Rei • Wintley Phipps • Prisma Brasil",
+        es: "Arautos do Rei • Wintley Phipps • Prisma Brasil",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: flavioSantosPhoto,
+      initials: "FS",
+      avatarClass: "flavio-avatar",
+      quote: {
+        en: "Gabriel is a young multi-instrumentalist and music producer whom I greatly admire. In our work together, his sensitivity and musical refinement on the acoustic guitar have always stood out to me.",
+        pt: "Gabriel é um jovem multi-instrumentista e produtor musical que admiro muito. Em nossos trabalhos juntos, sempre me chamou atenção a sua sensibilidade e refinamento musical no violão.",
+        es: "Gabriel es un joven multiinstrumentista y productor musical a quien admiro mucho. En nuestros trabajos juntos, siempre me ha llamado la atención su sensibilidad y refinamiento musical en la guitarra acústica.",
+      },
+    },
+  {
+      name: "Gabro",
+      title: {
+        en: "Singer • Composer",
+        pt: "Cantor • Compositor",
+        es: "Cantante • Compositor",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Novo Tom, Prisma Brasil, Grupo Versos",
+        pt: "Novo Tom, Prisma Brasil, Grupo Versos",
+        es: "Novo Tom, Prisma Brasil, Grupo Versos",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: gabroPhoto,
+      initials: "GB",
+      avatarClass: "gabro-avatar",
+      quote: {
+        en: "The best productions happen when talent meets vision. Working with Gabriel has been one of the greatest and most rewarding creative experiences of my career.",
+        pt: "As melhores produções acontecem quando talento encontra visão. Trabalhar com o Gabriel tem sido uma das maiores e melhores experiências criativas da minha carreira.",
+        es: "Las mejores producciones surgen cuando el talento se encuentra con la visión. Trabajar con Gabriel ha sido una de las experiencias creativas más importantes y enriquecedoras de mi carrera.",
+      },
+    },
+  {
+      name: "Samuel Lóia",
+      title: {
+        en: "Producer • Composer • Arranger",
+        pt: "Produtor • Compositor • Arranjador",
+        es: "Productor • Compositor • Arreglista",
+      },
+      location: "São Paulo, Brazil 🇧🇷",
+      achievements: {
+        en: "Director of Ministério Vox",
+        pt: "Diretor do Ministério Vox",
+        es: "Director de Ministério Vox",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: samuelLoiaPhoto,
+      initials: "SL",
+      avatarClass: "samuel-avatar",
+      quote: {
+        en: "Gabriel’s acoustic guitar sound is refined and tasteful, and it is also very faithful to what the project asks for. In my view, that is a major differentiator.",
+        pt: "O som de violão do Gabriel é refinado e de muito bom gosto, além de ser muito fiel à proposta pedida. Na minha visão, esse é um grande diferencial.",
+        es: "El sonido de la guitarra acústica de Gabriel es refinado y de muy buen gusto, además de ser muy fiel a la propuesta solicitada. En mi opinión, ese es un gran diferencial.",
+      },
+    },
+  {
+      name: "Pablo Canalis",
+      title: {
+        en: "Medical Psychiatrist • Composer",
+        pt: "Médico Psiquiatra • Compositor",
+        es: "Médico Psiquiatra • Compositor",
+      },
+      location: "Entre Rios, Argentina 🇦🇷",
+      achievements: {
+        en: "Founder of Gliamind 🇧🇷",
+        pt: "Fundador da Gliamind 🇧🇷",
+        es: "Fundador de Gliamind 🇧🇷",
+      },
+      workedWith: {
+        en: "",
+        pt: "",
+        es: "",
+      },
+      image: pabloCanalisPhoto,
+      initials: "PC",
+      avatarClass: "pablo-avatar",
+      quote: {
+        en: "I always dreamed of hearing my songs with a professional sound, and Gabriel brought out the best in me with great care and quality. His responsibility, attention to detail and especially his spirituality make me always want to work with him. For someone who is small and dreams of growing, he is the right person.",
+        pt: "Sempre sonhei em ouvir minhas músicas com som profissional, e o Gabriel extraiu o melhor de mim com muito carinho e qualidade. Sua responsabilidade, capricho e especialmente a sua espiritualidade, me fazem sempre querer trabalhar com ele. Para quem é pequeno e sonha crescer, ele é a pessoa certa.",
+        es: "Siempre soñé con escuchar mis canciones con un sonido profesional, y Gabriel sacó lo mejor de mí con mucho cariño y calidad. Su responsabilidad, cuidado en los detalles y especialmente su espiritualidad hacen que siempre quiera trabajar con él. Para quien está comenzando y sueña con crecer, él es la persona indicada.",
+      },
+    },
+];
+
+const t = sectionText[currentLanguage];
+---
+
+<section class="trusted" id="trusted">
+
+  <div class="container">
+
+    <div class="heading">
+      <p class="eyebrow">{t.eyebrow}</p>
+
+      <h2>{t.title}</h2>
+    </div>
+
+    <div class="carousel" aria-label={t.ariaLabel}>
+
+      {testimonials.map((item) => (
+
+        <article class="testimonial">
+
+          <div class="photo-side">
+            {item.image ? (
+              <img
+                src={item.image.src}
+                alt={item.name}
+                data-photo-name={item.name}
+                data-avatar-class={item.avatarClass}
+                class={`avatar ${item.avatarClass}`}
+              />
+            ) : (
+              <div class="initials-avatar">
+                {item.initials}
+              </div>
+            )}
+          </div>
+
+          <div class="testimonial-content">
+
+            <div class="person">
+              <h3>{item.name}</h3>
+
+              <p class="title">{item.title[currentLanguage]}</p>
+              {item.location && (
+                <p class="location">{item.location}</p>
+)}
+
+              {item.achievements[currentLanguage] && (
+                <p class="achievements" set:html={item.achievements[currentLanguage]} />
+              )}
+
+              {item.workedWith[currentLanguage] && (
+                <p class="worked">{item.workedWith[currentLanguage]}</p>
+              )}
+            </div>
+
+            <blockquote>
+              “{item.quote[currentLanguage]}”
+            </blockquote>
+
+          </div>
+
+        </article>
+
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.trusted{
+  background:#050505;
+  color:white;
+  padding:120px 0;
+  overflow:hidden;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 6%;
+}
+
+.heading{
+  margin-bottom:56px;
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.8rem;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:3rem;
+  max-width:760px;
+  line-height:1.05;
+}
+
+.carousel{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(460px, 560px);
+  gap:28px;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:6%;
+  padding:8px 6% 34px;
+  margin:0 -6%;
+  align-items:start;
+}
+
+.carousel::-webkit-scrollbar{
+  height:8px;
+}
+
+.carousel::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.035);
+  border-radius:999px;
+}
+
+.carousel::-webkit-scrollbar-thumb{
+  background:rgba(210,176,120,.28);
+  border-radius:999px;
+}
+
+.testimonial{
+  scroll-snap-align:start;
+  position:relative;
+  display:grid;
+  grid-template-columns:118px 1fr;
+  gap:28px;
+  padding:28px;
+  border-radius:30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.018)
+    );
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.35s;
+}
+
+.testimonial:hover{
+  transform:translateY(-5px);
+}
+
+.photo-side{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+  overflow:hidden;
+  border-radius:50%;
+  width:118px;
+  height:118px;
+  border:3px solid rgba(210,176,120,.42);
+  background:#151515;
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.42),
+    0 0 0 8px rgba(255,255,255,.025);
+}
+
+.avatar{
+  width:118px;
+  height:118px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center;
+  flex-shrink:0;
+}
+
+.photo-side .luciano-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .renan-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .gui-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .kleber-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .carlos-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .ricardo-avatar{
+  width:150px;
+  height:150px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(-2px) translateY(14px) scale(0.96);
+}
+
+.photo-side .myson-avatar{
+  width:154px;
+  height:154px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(10px) translateY(34px) scale(1.3);
+}
+
+.photo-side .sergio-avatar{
+  width:118px;
+  height:118px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1.18);
+}
+
+.photo-side .flavio-avatar{
+  width:175px;
+  height:175px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(0px) translateY(0px) scale(1);
+}
+
+.photo-side .samuel-avatar{
+  width:190px;
+  height:190px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(8px) translateY(44px) scale(1.22);
+}
+
+.photo-side .pablo-avatar{
+  width:154px;
+  height:154px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(14px) translateY(44px) scale(1.34);
+}
+
+.initials-avatar{
+  width:118px;
+  height:118px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(210,176,120,.34),
+      rgba(255,255,255,.055) 38%,
+      rgba(0,0,0,.22) 100%
+    );
+  color:#f0d7a3;
+  font-family:"Cormorant Garamond",serif;
+  font-size:2.2rem;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.testimonial-content{
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:none;
+}
+
+.person{
+  margin-bottom:18px;
+}
+
+.person h3{
+  font-size:1.32rem;
+  margin-bottom:7px;
+}
+
+.title{
+  color:#b8b8b8;
+  font-size:.88rem;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.location{
+  color:rgba(255,255,255,.48);
+  font-size:.76rem;
+  line-height:1.45;
+  margin:-4px 0 10px;
+  letter-spacing:.2px;
+}
+
+.achievements{
+  color:rgba(255,255,255,.54);
+  font-size:.76rem;
+  line-height:1.55;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:.1px;
+  margin-bottom:6px;
+}
+
+.worked{
+  color:rgba(255,255,255,.46);
+  font-size:.76rem;
+  line-height:1.55;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:.1px;
+}
+
+blockquote{
+  color:#e6e6e6;
+  font-size:.95rem;
+  line-height:1.72;
+  margin:0;
+}
+
+@media(max-width:1100px){
+  .carousel{
+    grid-auto-columns:82%;
+  }
+}
+
+@media(max-width:700px){
+  .trusted{
+    padding:90px 0;
+  }
+
+  h2{
+    font-size:2.35rem;
+  }
+
+  .carousel{
+    grid-auto-columns:86%;
+    gap:22px;
+  }
+
+  .testimonial{
+    grid-template-columns:1fr;
+    gap:18px;
+    padding:28px;
+  }
+
+  .photo-side{
+    justify-content:center;
+    width:104px;
+    height:104px;
+  }
+
+  .avatar{
+    width:104px;
+    height:104px;
+  }
+
+  .initials-avatar{
+    width:104px;
+    height:104px;
+    font-size:2rem;
+  }
+
+  .photo-side .luciano-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .renan-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .gui-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .kleber-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .carlos-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .ricardo-avatar{
+    width:136px;
+    height:136px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(-2px) translateY(14px) scale(0.96);
+  }
+
+  .photo-side .myson-avatar{
+    width:144px;
+    height:144px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(10px) translateY(34px) scale(1.3);
+  }
+
+  .photo-side .sergio-avatar{
+    width:104px;
+    height:104px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1.18);
+  }
+
+  .photo-side .flavio-avatar{
+    width:155px;
+    height:155px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(0px) translateY(0px) scale(1);
+  }
+
+  .photo-side .samuel-avatar{
+    width:170px;
+    height:170px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(8px) translateY(44px) scale(1.22);
+  }
+
+  .photo-side .pablo-avatar{
+    width:144px;
+    height:144px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(14px) translateY(44px) scale(1.34);
+  }
+
+  .person h3{
+    font-size:1.2rem;
+  }
+
+  blockquote{
+    font-size:.96rem;
+    line-height:1.7;
+  }
+}
+</style>
+
+<script is:inline>
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+) {
+  const editablePhotos = document.querySelectorAll(".photo-side .avatar");
+
+  const tool = document.createElement("div");
+
+  tool.innerHTML = `
+    <button id="photoToolToggle" style="
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:46px;
+      height:46px;
+      z-index:100000;
+      border:none;
+      border-radius:999px;
+      background:rgba(8,8,8,.92);
+      color:white;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 16px 50px rgba(0,0,0,.45);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      cursor:pointer;
+      font-size:1.15rem;
+      line-height:1;
+    ">▲</button>
+
+    <div id="photoToolPanel" style="
+      position:fixed;
+      right:18px;
+      bottom:74px;
+      width:min(430px, calc(100vw - 36px));
+      max-height:52vh;
+      z-index:99999;
+      background:rgba(8,8,8,.94);
+      color:white;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      box-shadow:0 24px 90px rgba(0,0,0,.55);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      font-family:Inter, sans-serif;
+      overflow:hidden;
+      display:none;
+    ">
+      <div style="
+        padding:14px 16px;
+        border-bottom:1px solid rgba(255,255,255,.1);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      ">
+        <strong style="font-size:.86rem;">Photo Position Tool</strong>
+        <button id="photoToolCopy" style="
+          border:none;
+          border-radius:999px;
+          padding:8px 12px;
+          background:white;
+          color:black;
+          font-size:.75rem;
+          font-weight:700;
+          cursor:pointer;
+        ">Copiar CSS</button>
+      </div>
+
+      <p style="
+        padding:12px 16px 0;
+        color:#bdbdbd;
+        font-size:.74rem;
+        line-height:1.55;
+      ">
+        Com a ferramenta aberta, arraste a foto. Use o scroll em cima dela para zoom. Depois copie o CSS abaixo e cole no arquivo.
+      </p>
+
+      <textarea id="photoToolOutput" readonly style="
+        width:100%;
+        height:260px;
+        margin-top:10px;
+        padding:14px 16px;
+        background:rgba(255,255,255,.045);
+        color:#f0d7a3;
+        border:none;
+        outline:none;
+        resize:none;
+        font-family:monospace;
+        font-size:.72rem;
+        line-height:1.55;
+      "></textarea>
+
+      <div style="
+        padding:10px 16px 14px;
+        display:flex;
+        gap:8px;
+        justify-content:space-between;
+      ">
+        <button id="photoToolReset" style="
+          border:1px solid rgba(255,255,255,.16);
+          border-radius:999px;
+          padding:8px 12px;
+          background:transparent;
+          color:white;
+          font-size:.75rem;
+          cursor:pointer;
+        ">Resetar ajustes</button>
+
+        <span id="photoToolStatus" style="
+          color:#9f9f9f;
+          font-size:.72rem;
+          align-self:center;
+        ">Tool closed</span>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(tool);
+
+  const toggleButton = document.querySelector("#photoToolToggle");
+  const panel = document.querySelector("#photoToolPanel");
+  const output = document.querySelector("#photoToolOutput");
+  const copyButton = document.querySelector("#photoToolCopy");
+  const resetButton = document.querySelector("#photoToolReset");
+  const status = document.querySelector("#photoToolStatus");
+
+  const photoState = new Map();
+
+  let photoToolEnabled = false;
+
+  const setPhotosCursor = () => {
+    editablePhotos.forEach((photo) => {
+      photo.style.cursor = photoToolEnabled ? "grab" : "";
+      photo.style.userSelect = photoToolEnabled ? "none" : "";
+      photo.style.touchAction = photoToolEnabled ? "none" : "";
+    });
+  };
+
+  toggleButton?.addEventListener("click", () => {
+    if (!panel) return;
+
+    photoToolEnabled = !photoToolEnabled;
+
+    panel.style.display = photoToolEnabled ? "block" : "none";
+    toggleButton.textContent = photoToolEnabled ? "▼" : "▲";
+
+    setPhotosCursor();
+
+    if (status) {
+      status.textContent = photoToolEnabled ? "Tool open" : "Tool closed";
+    }
+  });
+
+  const getStorageKey = (photo) => {
+    return `testimonial-photo-${photo.dataset.avatarClass}`;
+  };
+
+  const parseInitialTransform = (photo) => {
+    const computedStyle = window.getComputedStyle(photo);
+    const matrix = new DOMMatrixReadOnly(computedStyle.transform);
+
+    return {
+      x: Math.round(matrix.m41 || 0),
+      y: Math.round(matrix.m42 || 0),
+      scale: Number((matrix.a || 1).toFixed(2)),
+    };
+  };
+
+  const applyTransform = (photo, state) => {
+    photo.style.transform =
+      `translateX(${state.x}px) translateY(${state.y}px) scale(${state.scale})`;
+  };
+
+  const saveTransform = (photo, state) => {
+    localStorage.setItem(getStorageKey(photo), JSON.stringify(state));
+  };
+
+  const updateOutput = () => {
+    const desktopBlocks = [];
+    const mobileBlocks = [];
+
+    editablePhotos.forEach((photo) => {
+      const state = photoState.get(photo);
+      const className = photo.dataset.avatarClass;
+
+      if (!state || !className) return;
+
+      desktopBlocks.push(`.photo-side .${className}{
+  width:${state.desktopWidth}px;
+  height:${state.desktopHeight}px;
+  max-width:none;
+  object-position:center;
+  transform:translateX(${state.x}px) translateY(${state.y}px) scale(${state.scale});
+}`);
+
+      mobileBlocks.push(`  .photo-side .${className}{
+    width:${state.mobileWidth}px;
+    height:${state.mobileHeight}px;
+    max-width:none;
+    object-position:center;
+    transform:translateX(${state.x}px) translateY(${state.y}px) scale(${state.scale});
+  }`);
+    });
+
+    if (!output) return;
+
+    output.value = `${desktopBlocks.join("\n\n")}
+
+@media(max-width:700px){
+${mobileBlocks.join("\n\n")}
+}`;
+  };
+
+  editablePhotos.forEach((photo) => {
+    const initial = parseInitialTransform(photo);
+    const saved = localStorage.getItem(getStorageKey(photo));
+    const parsedSaved = saved ? JSON.parse(saved) : null;
+
+    const state = {
+      x: parsedSaved?.x ?? initial.x,
+      y: parsedSaved?.y ?? initial.y,
+      scale: parsedSaved?.scale ?? initial.scale,
+      desktopWidth: Number.parseInt(window.getComputedStyle(photo).width) || 118,
+      desktopHeight: Number.parseInt(window.getComputedStyle(photo).height) || 118,
+      mobileWidth: photo.classList.contains("flavio-avatar") ? 155 :
+        photo.classList.contains("samuel-avatar") ? 170 :
+        photo.classList.contains("myson-avatar") ? 144 :
+        photo.classList.contains("ricardo-avatar") ? 136 :
+        photo.classList.contains("pablo-avatar") ? 144 :
+        photo.classList.contains("sergio-avatar") ? 104 :
+        photo.classList.contains("kleber-avatar") ? 104 :
+        photo.classList.contains("gui-avatar") ? 104 :
+        photo.classList.contains("carlos-avatar") ? 104 :
+        photo.classList.contains("renan-avatar") ? 104 :
+        photo.classList.contains("luciano-avatar") ? 104 :
+        104,
+      mobileHeight: photo.classList.contains("flavio-avatar") ? 155 :
+        photo.classList.contains("samuel-avatar") ? 170 :
+        photo.classList.contains("myson-avatar") ? 144 :
+        photo.classList.contains("ricardo-avatar") ? 136 :
+        photo.classList.contains("pablo-avatar") ? 144 :
+        photo.classList.contains("sergio-avatar") ? 104 :
+        photo.classList.contains("kleber-avatar") ? 104 :
+        photo.classList.contains("gui-avatar") ? 104 :
+        photo.classList.contains("carlos-avatar") ? 104 :
+        photo.classList.contains("renan-avatar") ? 104 :
+        photo.classList.contains("luciano-avatar") ? 104 :
+        104,
+    };
+
+    photoState.set(photo, state);
+    applyTransform(photo, state);
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    photo.addEventListener("mousedown", (event) => {
+      if (!photoToolEnabled) return;
+
+      isDragging = true;
+      startX = event.clientX - state.x;
+      startY = event.clientY - state.y;
+
+      photo.style.cursor = "grabbing";
+      event.preventDefault();
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      if (!photoToolEnabled || !isDragging) return;
+
+      state.x = Math.round(event.clientX - startX);
+      state.y = Math.round(event.clientY - startY);
+
+      applyTransform(photo, state);
+      saveTransform(photo, state);
+      updateOutput();
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (!isDragging) return;
+
+      isDragging = false;
+
+      if (photoToolEnabled) {
+        photo.style.cursor = "grab";
+      }
+
+      saveTransform(photo, state);
+      updateOutput();
+
+      if (status) {
+        status.textContent = `${photo.dataset.photoName} salvo localmente`;
+      }
+    });
+
+    photo.addEventListener("wheel", (event) => {
+      if (!photoToolEnabled) return;
+
+      event.preventDefault();
+
+      if (event.deltaY < 0) {
+        state.scale += 0.04;
+      } else {
+        state.scale -= 0.04;
+      }
+
+      state.scale = Number(Math.max(.7, Math.min(state.scale, 3)).toFixed(2));
+
+      applyTransform(photo, state);
+      saveTransform(photo, state);
+      updateOutput();
+
+      if (status) {
+        status.textContent = `${photo.dataset.photoName} zoom ${state.scale}`;
+      }
+    });
+  });
+
+  copyButton?.addEventListener("click", async () => {
+    if (!output) return;
+
+    await navigator.clipboard.writeText(output.value);
+
+    if (status) {
+      status.textContent = "CSS copiado";
+    }
+  });
+
+  resetButton?.addEventListener("click", () => {
+    editablePhotos.forEach((photo) => {
+      localStorage.removeItem(getStorageKey(photo));
+      photo.style.transform = "";
+    });
+
+    if (status) {
+      status.textContent = "Ajustes apagados. Recarregue a página.";
+    }
+  });
+
+  setPhotosCursor();
+  updateOutput();
+}
+</script>

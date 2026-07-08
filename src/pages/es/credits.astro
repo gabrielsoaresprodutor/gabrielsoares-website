@@ -1,0 +1,465 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Contact from "../../components/Contact.astro";
+import { projects } from "../../data/projects";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+const pageTitle = "Cr\u00e9ditos de Gabriel Soares | Producci\u00f3n Musical & Guitarra Ac\u00fastica";
+
+const pageDescription =
+  "P\u00e1gina oficial de cr\u00e9ditos de Gabriel Soares, productor musical brasile\u00f1o, guitarrista ac\u00fastico, arreglista y multiinstrumentista con cr\u00e9ditos en proyectos de m\u00fasica cristiana, gospel y worship.";
+
+
+const projectTextReplacements: Record<string, string> = {
+  "Music Production": "Producci\u00f3n Musical",
+  "music production": "producci\u00f3n musical",
+  "Producer": "Productor",
+  "producer": "productor",
+  "Production": "Producci\u00f3n",
+  "production": "producci\u00f3n",
+  "Acoustic Guitar": "Guitarra Ac\u00fastica",
+  "acoustic guitar": "guitarra ac\u00fastica",
+  "Guitar": "Guitarra",
+  "guitar": "guitarra",
+  "Arrangements": "Arreglos",
+  "arrangements": "arreglos",
+  "Arrangement": "Arreglo",
+  "arrangement": "arreglo",
+  "Instrumental Production": "Producci\u00f3n Instrumental",
+  "instrumental production": "producci\u00f3n instrumental",
+  "Piano": "Piano",
+  "Bass": "Bajo",
+  "bass": "bajo",
+  "Electric Guitar": "Guitarra El\u00e9ctrica",
+  "electric guitar": "guitarra el\u00e9ctrica",
+  "Pads": "Pads",
+  "Instrumentation": "Instrumentaci\u00f3n",
+  "instrumentation": "instrumentaci\u00f3n",
+  "Editing": "Edici\u00f3n",
+  "editing": "edici\u00f3n",
+  "Recording": "Grabaci\u00f3n",
+  "recording": "grabaci\u00f3n",
+  "Recordings": "Grabaciones",
+  "recordings": "grabaciones",
+  "Live Recording": "Grabaci\u00f3n en Vivo",
+  "live recording": "grabaci\u00f3n en vivo",
+  "Live": "En Vivo",
+  "live": "en vivo",
+  "Credits": "Cr\u00e9ditos",
+  "credits": "cr\u00e9ditos",
+  "Featured": "Destacado",
+  "featured": "destacado",
+  "Released": "Lanzado",
+  "released": "lanzado",
+  "Christian": "Cristiana",
+  "christian": "cristiana",
+  "Gospel": "Gospel",
+  "worship": "worship",
+  "Views": "Visualizaciones",
+  "views": "visualizaciones",
+  "Streams": "Streams",
+  "streams": "streams",
+  "Single": "Single",
+  "single": "single",
+  "Album": "\u00c1lbum",
+  "album": "\u00e1lbum"
+};
+
+const localizeProjectText = (value?: string | null) => {
+  if (!value) return "";
+
+  let localizedValue = value;
+
+  Object.entries(projectTextReplacements).forEach(([source, replacement]) => {
+    localizedValue = localizedValue.replaceAll(source, replacement);
+  });
+
+  return localizedValue;
+};
+
+const localizedProjects = projects.map((project) => ({
+  ...project,
+  role: localizeProjectText(project.role),
+  highlight: localizeProjectText(project.highlight),
+  description: localizeProjectText(project.description),
+  credits: project.credits.map((credit) => localizeProjectText(credit)),
+}));
+
+const creditsSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${siteUrl}/es/credits#credits`,
+  url: `${siteUrl}/es/credits`,
+  name: "Cr\u00e9ditos de Gabriel Soares",
+  description: pageDescription,
+  inLanguage: "es",
+  about: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    name: "Cr\u00e9ditos musicales seleccionados de Gabriel Soares",
+    itemListElement: localizedProjects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "MusicRecording",
+        name: `${project.artist} - ${project.title}`,
+        byArtist: {
+          "@type": "MusicGroup",
+          name: project.artist
+        },
+        description: project.description,
+        contributor: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Gabriel Soares"
+        },
+        image: `${siteUrl}${project.image.src}`
+      }
+    }))
+  },
+  hasPart: localizedProjects.map((project) => ({
+    "@type": "CreativeWork",
+    name: `${project.artist} - ${project.title}`,
+    description: project.description,
+    contributor: {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Gabriel Soares"
+    }
+  }))
+};
+---
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(creditsSchema)} />
+
+  <Navbar />
+
+  <main class="credits-page">
+
+    <section class="credits-hero">
+
+      <div class="container">
+
+        <p class="eyebrow">CRÉDITOS OFICIALES</p>
+
+        <h1>Créditos Seleccionados</h1>
+
+        <p class="lead">
+          Producción musical, guitarra acústica, arreglos y grabaciones instrumentales de Gabriel Soares en proyectos lanzados de música cristiana, gospel y worship.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="credits-intro">
+
+      <div class="container narrow">
+
+        <h2>Créditos musicales de Gabriel Soares</h2>
+
+        <p>
+          Los créditos de Gabriel Soares incluyen producción musical, grabaciones de guitarra acústica, arreglos, piano, bajo, guitarra eléctrica, pads, instrumentación y edición para artistas y proyectos como <strong>Vocal Livre</strong>, <strong>Arautos do Rei</strong>, <strong>Pedro Valença</strong>, <strong>Devoted Vocal</strong>, <strong>Novo Tom</strong>, <strong>Adoradores 5</strong>, <strong>Gabro</strong> y otros proyectos de música cristiana.
+        </p>
+
+        <p>
+          Su trabajo incluye contribuciones en <strong>Temporal</strong>, álbum de Vocal Livre nominado al Latin GRAMMY®, además de proyectos en vivo, lanzamientos acústicos, singles y grabaciones conectadas a millones de streams y visualizaciones.
+        </p>
+
+        <p>
+          Esta página reúne trabajos lanzados seleccionados conectados a Gabriel Soares como productor musical, guitarrista acústico, arreglista, multiinstrumentista y colaborador de grabación.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="credits-list">
+
+      <div class="container">
+
+        <div class="grid">
+
+          {localizedProjects.map((project) => (
+
+            <article class="credit-card">
+
+              <div class="image-wrap">
+                <img
+                  src={project.image.src}
+                  alt={`${project.artist} - ${project.title}`}
+                  loading="lazy"
+                />
+              </div>
+
+              <div class="content">
+
+                <p class="artist">{project.artist}</p>
+
+                <h3>
+                  {project.slug === "alfredo" ? (
+                    <>O Senhor é o Meu<br />Pastor</>
+                  ) : project.slug === "fixa-teus-olhos" ? (
+                    <>Fixa Teus Olhos<br />em Mim</>
+                  ) : (
+                    project.title
+                  )}
+                </h3>
+
+                <p class="role">{project.role}</p>
+
+                {project.highlight && (
+                  <span class="highlight">{project.highlight}</span>
+                )}
+
+                <p class="description">{project.description}</p>
+
+                <div class="credits">
+
+                  {project.credits.map((credit) => (
+                    <span>{credit}</span>
+                  ))}
+
+                </div>
+
+              </div>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <Contact />
+
+  <Footer />
+
+</Layout>
+
+<style>
+.credits-page{
+  background:#070707;
+  color:white;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 6%;
+}
+
+.narrow{
+  max-width:900px;
+}
+
+.credits-hero{
+  min-height:68vh;
+  display:flex;
+  align-items:center;
+  padding:160px 0 100px;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(210,176,120,.18), transparent 34%),
+    linear-gradient(180deg, #050505, #090909);
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.78rem;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(4rem, 9vw, 8rem);
+  line-height:.9;
+  letter-spacing:-4px;
+  margin-bottom:28px;
+}
+
+.lead{
+  max-width:760px;
+  color:rgba(255,255,255,.72);
+  font-size:1.25rem;
+  line-height:1.75;
+}
+
+.credits-intro{
+  padding:100px 0;
+  background:#090909;
+}
+
+h2{
+  font-size:clamp(2.4rem, 5vw, 4rem);
+  line-height:1.05;
+  margin-bottom:30px;
+  letter-spacing:-1.5px;
+}
+
+p{
+  color:rgba(255,255,255,.68);
+  font-size:1rem;
+  line-height:1.85;
+  margin-bottom:22px;
+}
+
+strong{
+  color:white;
+}
+
+.credits-list{
+  padding:40px 0 120px;
+  background:#090909;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:28px;
+}
+
+.credit-card{
+  background:#141414;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 24px 70px rgba(0,0,0,.22);
+  transition:.35s ease;
+}
+
+.credit-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(210,176,120,.3);
+}
+
+.image-wrap{
+  overflow:hidden;
+  background:#080808;
+}
+
+.image-wrap img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+  transition:.5s ease;
+}
+
+.credit-card:hover .image-wrap img{
+  transform:scale(1.04);
+}
+
+.content{
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.artist{
+  color:#aaa;
+  letter-spacing:3px;
+  font-size:.72rem;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+h3{
+  font-size:1.85rem;
+  line-height:1.15;
+  margin-bottom:12px;
+}
+
+.role{
+  color:#c9c9c9;
+  margin-bottom:16px;
+}
+
+.highlight{
+  display:inline-block;
+  width:fit-content;
+  margin-bottom:18px;
+  padding:8px 13px;
+  border-radius:999px;
+  border:1px solid rgba(210,176,120,.28);
+  color:#f0d7a3;
+  font-size:.75rem;
+}
+
+.description{
+  color:rgba(255,255,255,.58);
+  font-size:.9rem;
+  line-height:1.65;
+  margin-bottom:20px;
+}
+
+.credits{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:auto;
+}
+
+.credits span{
+  display:inline-flex;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.075);
+  color:rgba(255,255,255,.62);
+  font-size:.72rem;
+}
+
+@media(max-width:1000px){
+  .grid{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+@media(max-width:700px){
+  .credits-hero{
+    min-height:auto;
+    padding:140px 0 80px;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .lead{
+    font-size:1.05rem;
+  }
+
+  .credits-intro{
+    padding:80px 0;
+  }
+
+  .credits-list{
+    padding:20px 0 90px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  h3{
+    font-size:1.75rem;
+  }
+}
+</style>

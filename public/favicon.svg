@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#050505"/>
+
+  <g transform="translate(0 -230) scale(1.08 2.15)">
+    <text
+      x="228"
+      y="256"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+      font-size="250"
+      font-weight="600"
+      letter-spacing="-18"
+      textLength="370"
+      lengthAdjust="spacingAndGlyphs"
+      fill="#ffffff"
+    >GS</text>
+  </g>
+</svg>

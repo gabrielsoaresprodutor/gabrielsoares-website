@@ -1,0 +1,1253 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import Contact from "../../components/Contact.astro";
+
+const siteUrl = "https://gabrielsoares.art.br";
+
+const pageTitle = "Sobre Gabriel Soares | Produtor Musical, Violonista de Estúdio & Multi-instrumentista";
+
+const pageDescription =
+  "Perfil oficial de Gabriel Soares, produtor musical brasileiro, violonista de estúdio, arranjador e multi-instrumentista conhecido por produção instrumental, gravações refinadas de violão, projetos ao vivo, crédito indicado ao Latin GRAMMY® e reconhecimento na MUSO AI.";
+
+const aboutImages = {
+  who: "/images/about/who-gabriel.jpg",
+  production: "/images/about/music-production.jpg",
+  live: "/images/about/live-projects.jpg",
+  guitar: "/images/about/acoustic-guitar.png",
+  faq: "/images/about/faq-stage.png",
+  artists: [
+    "/images/about/artist-1.jpg"
+  ],
+  recognition: [
+    "/images/about/muso-ai.jpg",
+    "/images/about/latin-grammy.jpg"
+  ]
+};
+
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${siteUrl}/pt/about#profile`,
+  url: `${siteUrl}/pt/about`,
+  name: "Sobre Gabriel Soares",
+  description: pageDescription,
+  inLanguage: "pt-BR",
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${siteUrl}/#person`,
+    name: "Gabriel Soares",
+    url: siteUrl,
+    jobTitle: [
+      "Produtor Musical",
+      "Violonista de Estúdio",
+      "Arranjador",
+      "Multi-Instrumentista"
+    ],
+    description:
+      "Gabriel Soares, popularmente conhecido como Jhonny, é produtor musical brasileiro, violonista de estúdio, arranjador e multi-instrumentista conhecido por produção instrumental, gravações refinadas de violão, projetos ao vivo, créditos verificados, crédito como producer em álbum indicado ao Latin GRAMMY® e reconhecimento como guitarrista na MUSO AI.",
+    knowsAbout: [
+      "Violão de Estúdio",
+      "Produção Musical",
+      "Produção Musical ao Vivo",
+      "Gravação ao Vivo",
+      "Arranjo",
+      "Produção Instrumental",
+      "Gravação de Violão",
+      "Gravação",
+      "Instrumentação",
+      "Música Cristã",
+      "Gospel",
+      "Worship",
+      "Créditos Musicais"
+    ],
+    sameAs: [
+      "https://www.instagram.com/gabrielsoaresprodutor/",
+      "https://www.youtube.com/@gabrielsoaresprodutor",
+      "https://open.spotify.com/intl-pt/artist/4llhbsPozmyRXlJWNmAVHb"
+    ]
+  }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${siteUrl}/pt/about#faq`,
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Gabriel Soares atende só produções do Brasil?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Não. Gabriel Soares atende gravações remotas de violão, produção musical e projetos ao vivo para artistas, produtores, gravadoras e diretores musicais no mundo todo. Os meios oficiais de contato são email e WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Como faço para contratar Gabriel Soares para gravar ou produzir?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "O meio oficial para contratar Gabriel Soares para gravações de violão, arranjos instrumentais, produção musical e projetos ao vivo é preferencialmente por email ou WhatsApp."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Gabriel Soares grava qualquer estilo ou somente gospel?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Gabriel Soares tem muitos projetos conhecidos no gospel, música cristã e worship, mas também trabalha naturalmente em estilos como folk, acústico, singer-songwriter, pop, pop rock, country, worship e estilos relacionados. Entre em contato e explique o que você precisa."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "Quais instrumentos Gabriel Soares grava?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text:
+          "Gabriel Soares grava violão, guitarra, piano, baixo, pads, texturas e camadas de produção instrumental. Seu principal instrumento de assinatura é o violão."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(profileSchema)} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <Navbar />
+
+  <main class="about-page">
+
+    <section class="hero-about">
+
+      <div class="container">
+
+        <p class="eyebrow">PERFIL OFICIAL</p>
+
+        <h1>Gabriel Soares</h1>
+
+        <p class="lead">
+          Produtor musical brasileiro, violonista de estúdio, arranjador e multi-instrumentista, criando gravações refinadas de violão, arranjos instrumentais e camadas de produção para artistas e produtores.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="content-section">
+
+      <div class="container split-section">
+
+        <div class="text-block">
+
+          <h2>Quem é Gabriel Soares?</h2>
+
+          <p>
+            Gabriel Soares é um produtor musical brasileiro, violonista de estúdio, arranjador e multi-instrumentista conhecido por produção instrumental refinada e gravações de violão.
+          </p>
+
+          <p>
+            Seu trabalho une sensibilidade, precisão e bom gosto musical, criando arranjos, dedilhados, texturas acústicas e camadas de produção que ajudam cada música a soar emocional, intencional e profissionalmente finalizada.
+          </p>
+
+          <p>
+            Seus créditos incluem trabalhos conectados a <strong>Vocal Livre</strong>, <strong>Pedro Valença</strong>, <strong>Arautos do Rei</strong>, <strong>Devoted Vocal</strong>, <strong>Novo Tom</strong>, <strong>Adoradores 5</strong>, <strong>Gabro</strong> e outros artistas.
+          </p>
+
+        </div>
+
+        <figure class="image-card large">
+          <img src={aboutImages.who} alt="Gabriel Soares em estúdio e trabalho com violão" />
+        </figure>
+
+      </div>
+
+    </section>
+
+    <section class="content-section dark">
+
+      <div class="container">
+
+        <div class="info-grid">
+
+          <article>
+            <figure class="card-image">
+              <img src={aboutImages.live} alt="Produção musical ao vivo e projeto de gravação ao vivo" />
+            </figure>
+
+            <h3>Projetos Ao Vivo</h3>
+
+            <p>
+              Gabriel já produziu e gravou diversos projetos ao vivo, tanto como produtor musical quanto como músico instrumentista, atuando em produções audiovisuais, live sessions e registros ao vivo que exigem direção musical, sensibilidade e consistência de estúdio.
+            </p>
+          </article>
+
+          <article>
+            <figure class="card-image">
+              <img src={aboutImages.production} alt="Produção instrumental e sessão de estúdio" />
+            </figure>
+
+            <h3>Produção Musical</h3>
+
+            <p>
+              Gabriel é especialmente conhecido por seu trabalho de produção instrumental, criando arranjos que fazem os instrumentos conversarem entre si, criando cenários, texturas e camadas musicais que trazem profundidade, emoção e sonoridade profissional para cada projeto.
+            </p>
+          </article>
+
+          <article>
+            <figure class="card-image">
+              <img src={aboutImages.guitar} alt="Gravação de violão por Gabriel Soares" />
+            </figure>
+
+            <h3>Violão</h3>
+
+            <p>
+              Seu trabalho com violão se tornou uma de suas principais assinaturas, com dedilhados refinados e uma tocada cuidadosamente construída, bem posicionada e criativa, vai desde músicas sensíveis até muito punch sem perder a riqueza. Seu som de violão se tornou uma identidade musical marcante em cada gravação e projeto do qual participa; muitos reconhecem ser o violão do Gabriel Soares (Jhonny) ao ouvir poucos segundos.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="content-section">
+
+      <div class="container split-section reverse">
+
+        <div class="text-block">
+
+          <h2>Trabalho de estúdio e abordagem musical</h2>
+
+          <p>
+            Gabriel gosta de trabalhar com artistas, produtores, gravadoras e diretores musicais que sabem o que querem e buscam gravações refinadas de violão, arranjos instrumentais e produções com sonoridade profissional de estúdio, valorizando cada detalhe da música.
+          </p>
+
+          <p>
+            Suas contribuições vão de sessões de violão a produção instrumental, arranjos, piano, baixo, guitarra, texturas, edição e direção musical. Em alguns projetos, também atua como engenheiro de mixagem e masterização.
+          </p>
+
+          <p>
+            O objetivo não é apenas fazer música, Gabriel pensa cuidadosamente em cada profissional envolvido, no bem estar de cada um e nas relações do trabalho. Escolhe a dedo músicos que, além de talentosos, também serão impactados pelo projeto.
+          </p>
+
+          <blockquote class="artist-quote">
+            <p>
+              “Minha maior paixão na música, é produzir um instrumental capaz de promover uma conversa tão rica entre instrumento e voz, que seja impossível não se emocionar com a mensagem, dando à produção musical uma identidade forte e marcante no coração de quem ouve — onde todos, desde os simples ouvintes até os maiores instrumentistas, cantores, arranjadores e engenheiros de áudio, sintam a música na mesma profundidade que eu sinto.”
+            </p>
+            <footer>— Gabriel Soares, em suas próprias palavras</footer>
+          </blockquote>
+
+        </div>
+
+        <div class="artist-collage single-artist-photo" aria-label="Gabriel Soares com artista e colaborador">
+
+          <figure class="collage-photo photo-1">
+            <img src={aboutImages.artists[0]} alt="Gabriel Soares com artista ou colaborador" />
+          </figure>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="content-section dark">
+
+      <div class="container split-section">
+
+        <div class="text-block">
+
+          <h2>Principais reconhecimentos</h2>
+
+          <p>
+            Gabriel é um Produtor Musical indicado ao Latin GRAMMY®, e aparece na posição #840 no ranking mundial de guitarristas, segundo dados públicos da MUSO AI.
+          </p>
+
+          <p>
+            Esses reconhecimentos se conectam aos seus créditos verificados, gravações lançadas, dados de streaming e ao seu trabalho como produtor musical, violonista de estúdio e multi-instrumentista.
+          </p>
+
+        </div>
+
+        <div class="recognition-gallery" aria-label="Reconhecimento na MUSO AI e Latin GRAMMY">
+
+          {aboutImages.recognition.map((image, index) => (
+            <figure class="recognition-image">
+              <img src={image} alt={index === 0 ? "Reconhecimento da MUSO AI para Gabriel Soares" : "Reconhecimento Latin GRAMMY conectado aos créditos de Gabriel Soares"} />
+            </figure>
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section
+      class="faq-section faq-photo-section"
+      style={`--faq-bg:url(${aboutImages.faq});`}
+    >
+
+      <div class="container faq-photo-content">
+
+        <p class="eyebrow">INFORMAÇÕES DE BUSCA</p>
+
+        <h2>Perguntas pesquisadas com frequência</h2>
+
+        <div class="faq">
+
+          <article>
+            <h3>Gabriel atende só produções do Brasil?</h3>
+
+            <p>
+              Não. Gabriel atende gravações remotas de violão, produção musical e projetos ao vivo no mundo todo. Entre em contato e diga como Gabriel pode lhe ajudar.
+            </p>
+          </article>
+
+          <article>
+            <h3>Como faço para contratar Gabriel para gravar ou produzir?</h3>
+
+            <p>
+              O meio oficial de contato com Gabriel é, de preferência, por Email ou WhatsApp. Você pode entrar em contato para gravações de violão, arranjos instrumentais, produção musical, projetos ao vivo ou trabalhos de estúdio.
+            </p>
+          </article>
+
+          <article>
+            <h3>Gabriel grava qualquer estilo ou somente gospel?</h3>
+
+            <p>
+              Gabriel tem muitos projetos conhecidos no gospel, música cristã e worship, mas seu estilo também conversa com folk, acústico, singer-songwriter, pop, pop rock, country, worship e sonoridades próximas.
+            </p>
+          </article>
+
+          <article>
+            <h3>Quais instrumentos Gabriel Soares grava?</h3>
+
+            <p>
+              Gabriel grava violão, guitarra, piano, baixo, pads, coberturas, texturas e camadas de produção instrumental. Seu principal instrumento de assinatura é o violão, onde seu som foi elogiado até mesmo por grandes nomes da indústria da música.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <Contact />
+
+  <Footer />
+
+</Layout>
+
+<script is:inline>
+if (
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1" ||
+  new URLSearchParams(window.location.search).has("editphotos")
+) {
+  const editablePhotos = document.querySelectorAll(
+    ".image-card img, .card-image img, .collage-photo img, .recognition-image img"
+  );
+
+  const tool = document.createElement("div");
+
+  tool.innerHTML = `
+    <button id="aboutPhotoToolToggle" style="
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:46px;
+      height:46px;
+      z-index:100000;
+      border:none;
+      border-radius:999px;
+      background:rgba(8,8,8,.92);
+      color:white;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 16px 50px rgba(0,0,0,.45);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      cursor:pointer;
+      font-size:1.15rem;
+      line-height:1;
+    ">▲</button>
+
+    <div id="aboutPhotoToolPanel" style="
+      position:fixed;
+      right:18px;
+      bottom:74px;
+      width:min(430px, calc(100vw - 36px));
+      max-height:52vh;
+      z-index:99999;
+      background:rgba(8,8,8,.94);
+      color:white;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:18px;
+      box-shadow:0 24px 90px rgba(0,0,0,.55);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      font-family:Inter, sans-serif;
+      overflow:hidden;
+      display:none;
+    ">
+      <div style="
+        padding:14px 16px;
+        border-bottom:1px solid rgba(255,255,255,.1);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      ">
+        <strong style="font-size:.86rem;">About Photo Position Tool</strong>
+        <button id="aboutPhotoToolCopy" style="
+          border:none;
+          border-radius:999px;
+          padding:8px 12px;
+          background:white;
+          color:black;
+          font-size:.75rem;
+          font-weight:700;
+          cursor:pointer;
+        ">Copiar CSS</button>
+      </div>
+
+      <p style="
+        padding:12px 16px 0;
+        color:#bdbdbd;
+        font-size:.74rem;
+        line-height:1.55;
+      ">
+        Com a ferramenta aberta, arraste a foto. Use o scroll em cima dela para zoom. Depois copie o CSS abaixo e cole no arquivo.
+      </p>
+
+      <textarea id="aboutPhotoToolOutput" readonly style="
+        width:100%;
+        height:260px;
+        margin-top:10px;
+        padding:14px 16px;
+        background:rgba(255,255,255,.045);
+        color:#f0d7a3;
+        border:none;
+        outline:none;
+        resize:none;
+        font-family:monospace;
+        font-size:.72rem;
+        line-height:1.55;
+      "></textarea>
+
+      <div style="
+        padding:10px 16px 14px;
+        display:flex;
+        gap:8px;
+        justify-content:space-between;
+      ">
+        <button id="aboutPhotoToolReset" style="
+          border:1px solid rgba(255,255,255,.16);
+          border-radius:999px;
+          padding:8px 12px;
+          background:transparent;
+          color:white;
+          font-size:.75rem;
+          cursor:pointer;
+        ">Resetar ajustes</button>
+
+        <span id="aboutPhotoToolStatus" style="
+          color:#9f9f9f;
+          font-size:.72rem;
+          align-self:center;
+        ">Tool closed</span>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(tool);
+
+  const toggleButton = document.querySelector("#aboutPhotoToolToggle");
+  const panel = document.querySelector("#aboutPhotoToolPanel");
+  const output = document.querySelector("#aboutPhotoToolOutput");
+  const copyButton = document.querySelector("#aboutPhotoToolCopy");
+  const resetButton = document.querySelector("#aboutPhotoToolReset");
+  const status = document.querySelector("#aboutPhotoToolStatus");
+
+  const photoState = new Map();
+
+  let photoToolEnabled = false;
+
+  const setPhotosCursor = () => {
+    editablePhotos.forEach((photo) => {
+      photo.style.cursor = photoToolEnabled ? "grab" : "";
+      photo.style.userSelect = photoToolEnabled ? "none" : "";
+      photo.style.touchAction = photoToolEnabled ? "none" : "";
+    });
+  };
+
+  toggleButton?.addEventListener("click", () => {
+    if (!panel) return;
+
+    photoToolEnabled = !photoToolEnabled;
+
+    panel.style.display = photoToolEnabled ? "block" : "none";
+    toggleButton.textContent = photoToolEnabled ? "▼" : "▲";
+
+    setPhotosCursor();
+
+    if (status) {
+      status.textContent = photoToolEnabled ? "Tool open" : "Tool closed";
+    }
+  });
+
+  const getPhotoInfo = (photo) => {
+    if (photo.closest(".image-card.large")) {
+      return {
+        name: "who",
+        selector: ".image-card.large img"
+      };
+    }
+
+    const cardImage = photo.closest(".card-image");
+
+    if (cardImage) {
+      const article = cardImage.closest(".info-grid article");
+      const articles = Array.from(document.querySelectorAll(".info-grid article"));
+      const index = articles.indexOf(article) + 1;
+
+      return {
+        name: `info-${index}`,
+        selector: `.info-grid article:nth-child(${index}) .card-image img`
+      };
+    }
+
+    const collagePhoto = photo.closest(".collage-photo");
+
+    if (collagePhoto) {
+      if (collagePhoto.classList.contains("photo-1")) {
+        return {
+          name: "artist-1",
+          selector: ".collage-photo.photo-1 img"
+        };
+      }
+
+      if (collagePhoto.classList.contains("photo-2")) {
+        return {
+          name: "artist-2",
+          selector: ".collage-photo.photo-2 img"
+        };
+      }
+
+      if (collagePhoto.classList.contains("photo-3")) {
+        return {
+          name: "artist-3",
+          selector: ".collage-photo.photo-3 img"
+        };
+      }
+    }
+
+    const recognitionImage = photo.closest(".recognition-image");
+
+    if (recognitionImage) {
+      const recognitionItems = Array.from(document.querySelectorAll(".recognition-image"));
+      const index = recognitionItems.indexOf(recognitionImage) + 1;
+
+      return {
+        name: index === 1 ? "muso-ai" : "latin-grammy",
+        selector: `.recognition-gallery .recognition-image:nth-child(${index}) img`
+      };
+    }
+
+    return {
+      name: "about-photo",
+      selector: ".about-page img"
+    };
+  };
+
+  const getStorageKey = (photo) => {
+    return `about-photo-${getPhotoInfo(photo).name}`;
+  };
+
+  const parseInitialTransform = (photo) => {
+    const computedStyle = window.getComputedStyle(photo);
+    const transform = computedStyle.transform;
+
+    if (!transform || transform === "none") {
+      return {
+        x: 0,
+        y: 0,
+        scale: 1,
+      };
+    }
+
+    const matrix = new DOMMatrixReadOnly(transform);
+
+    return {
+      x: Math.round(matrix.m41 || 0),
+      y: Math.round(matrix.m42 || 0),
+      scale: Number((matrix.a || 1).toFixed(2)),
+    };
+  };
+
+  const applyTransform = (photo, state) => {
+    photo.style.transform =
+      `translateX(${state.x}px) translateY(${state.y}px) scale(${state.scale})`;
+  };
+
+  const saveTransform = (photo, state) => {
+    localStorage.setItem(getStorageKey(photo), JSON.stringify(state));
+  };
+
+  const updateOutput = () => {
+    const blocks = [];
+
+    editablePhotos.forEach((photo) => {
+      const state = photoState.get(photo);
+      const info = getPhotoInfo(photo);
+
+      if (!state || !info.selector) return;
+
+      blocks.push(`${info.selector}{
+  transform:translateX(${state.x}px) translateY(${state.y}px) scale(${state.scale});
+}`);
+    });
+
+    if (!output) return;
+
+    output.value = blocks.join("\n\n");
+  };
+
+  editablePhotos.forEach((photo) => {
+    const initial = parseInitialTransform(photo);
+    const saved = localStorage.getItem(getStorageKey(photo));
+    const parsedSaved = saved ? JSON.parse(saved) : null;
+
+    const state = {
+      x: parsedSaved?.x ?? initial.x,
+      y: parsedSaved?.y ?? initial.y,
+      scale: parsedSaved?.scale ?? initial.scale,
+    };
+
+    photoState.set(photo, state);
+    applyTransform(photo, state);
+
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    photo.addEventListener("mousedown", (event) => {
+      if (!photoToolEnabled) return;
+
+      isDragging = true;
+      startX = event.clientX - state.x;
+      startY = event.clientY - state.y;
+
+      photo.style.cursor = "grabbing";
+      event.preventDefault();
+    });
+
+    window.addEventListener("mousemove", (event) => {
+      if (!photoToolEnabled || !isDragging) return;
+
+      state.x = Math.round(event.clientX - startX);
+      state.y = Math.round(event.clientY - startY);
+
+      applyTransform(photo, state);
+      saveTransform(photo, state);
+      updateOutput();
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (!isDragging) return;
+
+      isDragging = false;
+
+      if (photoToolEnabled) {
+        photo.style.cursor = "grab";
+      }
+
+      saveTransform(photo, state);
+      updateOutput();
+
+      if (status) {
+        status.textContent = `${getPhotoInfo(photo).name} salvo localmente`;
+      }
+    });
+
+    photo.addEventListener("wheel", (event) => {
+      if (!photoToolEnabled) return;
+
+      event.preventDefault();
+
+      if (event.deltaY < 0) {
+        state.scale += 0.04;
+      } else {
+        state.scale -= 0.04;
+      }
+
+      state.scale = Number(Math.max(.7, Math.min(state.scale, 3)).toFixed(2));
+
+      applyTransform(photo, state);
+      saveTransform(photo, state);
+      updateOutput();
+
+      if (status) {
+        status.textContent = `${getPhotoInfo(photo).name} zoom ${state.scale}`;
+      }
+    });
+  });
+
+  copyButton?.addEventListener("click", async () => {
+    if (!output) return;
+
+    await navigator.clipboard.writeText(output.value);
+
+    if (status) {
+      status.textContent = "CSS copiado";
+    }
+  });
+
+  resetButton?.addEventListener("click", () => {
+    editablePhotos.forEach((photo) => {
+      localStorage.removeItem(getStorageKey(photo));
+      photo.style.transform = "";
+    });
+
+    if (status) {
+      status.textContent = "Ajustes apagados. Recarregue a página.";
+    }
+  });
+
+  setPhotosCursor();
+  updateOutput();
+}
+</script>
+
+<style>
+.about-page{
+  background:#070707;
+  color:white;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 6%;
+}
+
+.narrow{
+  max-width:900px;
+}
+
+.hero-about{
+  min-height:70vh;
+  display:flex;
+  align-items:center;
+  padding:160px 0 100px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(210,176,120,.18), transparent 34%),
+    linear-gradient(180deg, #050505, #090909);
+}
+
+.eyebrow{
+  color:var(--gold);
+  letter-spacing:6px;
+  font-size:.78rem;
+  margin-bottom:20px;
+}
+
+h1{
+  font-size:clamp(4rem, 9vw, 8rem);
+  line-height:.9;
+  letter-spacing:-4px;
+  margin-bottom:28px;
+}
+
+.lead{
+  max-width:800px;
+  color:rgba(255,255,255,.72);
+  font-size:1.25rem;
+  line-height:1.75;
+}
+
+.content-section{
+  padding:100px 0;
+  background:#090909;
+}
+
+.content-section.dark{
+  background:#050505;
+}
+
+.split-section{
+  display:grid;
+  grid-template-columns:minmax(0, 1.1fr) minmax(340px, .9fr);
+  gap:64px;
+  align-items:center;
+}
+
+.split-section.reverse{
+  grid-template-columns:minmax(340px, .9fr) minmax(0, 1.1fr);
+}
+
+.split-section.reverse .text-block{
+  order:2;
+}
+
+.split-section.reverse .artist-collage{
+  order:1;
+}
+
+.text-block{
+  max-width:720px;
+}
+
+h2{
+  font-size:clamp(2.4rem, 5vw, 4rem);
+  line-height:1.05;
+  margin-bottom:30px;
+  letter-spacing:-1.5px;
+}
+
+p{
+  color:rgba(255,255,255,.68);
+  font-size:1rem;
+  line-height:1.85;
+  margin-bottom:22px;
+}
+
+strong{
+  color:white;
+}
+
+.image-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:34px;
+  background:#151515;
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+.image-card::after,
+.card-image::after,
+.collage-photo::after,
+.recognition-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.02),
+      rgba(0,0,0,.24)
+    );
+  pointer-events:none;
+}
+
+.image-card.large{
+  aspect-ratio:4 / 5;
+}
+
+.image-card img,
+.card-image img,
+.collage-photo img,
+.recognition-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
+.card-image img{
+  object-fit:contain;
+  background:#090909;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:26px;
+}
+
+.info-grid article{
+  min-height:440px;
+  padding:22px;
+  border-radius:30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.07),
+      rgba(255,255,255,.018)
+    );
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+
+.card-image{
+  position:relative;
+  overflow:hidden;
+  height:190px;
+  margin-bottom:26px;
+  border-radius:22px;
+  background:#090909;
+  border:1px solid rgba(255,255,255,.075);
+}
+
+.info-grid h3{
+  font-size:1.7rem;
+  margin-bottom:18px;
+}
+
+.info-grid p{
+  margin-bottom:0;
+}
+
+.artist-collage{
+  position:relative;
+  min-height:500px;
+}
+
+.collage-photo{
+  position:absolute;
+  overflow:hidden;
+  background:#151515;
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 28px 80px rgba(0,0,0,.32);
+}
+
+.collage-photo.photo-1{
+  top:0;
+  left:0;
+  width:68%;
+  aspect-ratio:4 / 5;
+  border-radius:34px;
+}
+
+.collage-photo.photo-2{
+  right:0;
+  top:120px;
+  width:48%;
+  aspect-ratio:1 / 1.12;
+  border-radius:28px;
+}
+
+.collage-photo.photo-3{
+  left:18%;
+  bottom:0;
+  width:56%;
+  aspect-ratio:16 / 10;
+  border-radius:28px;
+}
+
+.artist-collage.single-artist-photo{
+  min-height:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.artist-collage.single-artist-photo .collage-photo.photo-1{
+  position:relative;
+  inset:auto;
+  width:100%;
+  max-width:520px;
+  aspect-ratio:4 / 5;
+  border-radius:34px;
+}
+
+
+.artist-quote{
+  margin:34px 0 0;
+  padding:24px 26px;
+  border-radius:24px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(210,176,120,.12),
+      rgba(255,255,255,.035)
+    );
+  border:1px solid rgba(210,176,120,.24);
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+.artist-quote p{
+  margin-bottom:14px;
+  color:rgba(255,255,255,.82);
+  font-size:1.02rem;
+  line-height:1.85;
+}
+
+.artist-quote footer{
+  color:#f0d7a3;
+  font-size:.78rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.recognition-gallery{
+  display:grid;
+  gap:18px;
+}
+
+.recognition-image{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:16 / 10;
+  border-radius:28px;
+  background:#151515;
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 28px 80px rgba(0,0,0,.28);
+}
+
+.faq-section{
+  position:relative;
+  overflow:hidden;
+  min-height:900px;
+  padding:110px 0;
+  background:#050505;
+  display:flex;
+  align-items:center;
+}
+
+.faq-photo-section{
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(0,0,0,.90) 0%,
+      rgba(0,0,0,.78) 28%,
+      rgba(0,0,0,.42) 52%,
+      rgba(0,0,0,.12) 78%,
+      rgba(0,0,0,.28) 100%
+    ),
+    var(--faq-bg);
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+}
+
+.faq-photo-content{
+  position:relative;
+  z-index:2;
+  width:min(760px, 54vw);
+  max-width:760px;
+  margin-left:clamp(48px, 4.5vw, 82px);
+  margin-right:auto;
+}
+
+.faq-photo-content .eyebrow{
+  text-shadow:0 4px 28px rgba(0,0,0,.85);
+}
+
+.faq-photo-content h2{
+  max-width:760px;
+  margin-bottom:26px;
+  text-shadow:0 8px 38px rgba(0,0,0,.85);
+}
+
+.faq{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(300px, 1fr));
+  gap:16px;
+  margin-top:30px;
+  max-width:760px;
+}
+
+.faq article{
+  min-height:178px;
+  padding:18px 20px;
+  border-radius:20px;
+  background:rgba(7,7,7,.58);
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.045);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.faq h3{
+  font-size:1.02rem;
+  margin-bottom:8px;
+}
+
+.faq p{
+  margin-bottom:0;
+  font-size:.84rem;
+  line-height:1.58;
+  color:rgba(255,255,255,.72);
+}
+
+@media(max-width:1000px){
+  .split-section,
+  .split-section.reverse{
+    grid-template-columns:1fr;
+    gap:42px;
+  }
+
+  .split-section.reverse .text-block,
+  .split-section.reverse .artist-collage{
+    order:initial;
+  }
+
+  .text-block{
+    max-width:none;
+  }
+
+  .image-card.large{
+    aspect-ratio:16 / 10;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid article{
+    min-height:auto;
+  }
+
+  .card-image{
+    height:240px;
+  }
+
+  .artist-collage{
+    min-height:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+
+  .collage-photo,
+  .collage-photo.photo-1,
+  .collage-photo.photo-2,
+  .collage-photo.photo-3{
+    position:relative;
+    inset:auto;
+    width:100%;
+    aspect-ratio:4 / 3;
+    border-radius:26px;
+  }
+
+  .collage-photo.photo-1{
+    grid-column:1 / -1;
+    aspect-ratio:16 / 9;
+  }
+
+  .artist-collage.single-artist-photo{
+    display:flex;
+    min-height:auto;
+  }
+
+  .artist-collage.single-artist-photo .collage-photo.photo-1{
+    grid-column:auto;
+    width:100%;
+    max-width:none;
+    aspect-ratio:16 / 10;
+  }
+
+  .faq-photo-content{
+    width:min(720px, 76vw);
+    max-width:720px;
+    margin-left:clamp(30px, 4vw, 52px);
+  }
+
+  .faq{
+    grid-template-columns:repeat(2, minmax(280px, 1fr));
+    max-width:720px;
+  }
+
+  .faq article{
+    min-height:178px;
+  }
+}
+
+@media(max-width:700px){
+  .hero-about{
+    min-height:auto;
+    padding:140px 0 80px;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .lead{
+    font-size:1.05rem;
+  }
+
+  .content-section,
+  .faq-section{
+    padding:80px 0;
+  }
+
+  .card-image{
+    height:210px;
+  }
+
+  .artist-collage{
+    grid-template-columns:1fr;
+  }
+
+  .collage-photo.photo-1{
+    grid-column:auto;
+    aspect-ratio:4 / 3;
+  }
+
+  .artist-collage.single-artist-photo .collage-photo.photo-1{
+    aspect-ratio:4 / 3;
+  }
+
+  .recognition-image{
+    aspect-ratio:4 / 3;
+  }
+
+  .faq-section{
+    min-height:auto;
+    padding:90px 0;
+  }
+
+  .faq-photo-section{
+    background-position:62% center;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(0,0,0,.92) 0%,
+        rgba(0,0,0,.82) 48%,
+        rgba(0,0,0,.54) 100%
+      ),
+      var(--faq-bg);
+  }
+
+  .faq-photo-content{
+    width:auto;
+    max-width:none;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .faq{
+    grid-template-columns:1fr;
+    max-width:none;
+  }
+
+  .faq article{
+    max-width:none;
+    min-height:auto;
+    padding:17px 18px;
+  }
+}
+</style>
