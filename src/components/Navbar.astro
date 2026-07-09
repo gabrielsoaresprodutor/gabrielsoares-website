@@ -620,145 +620,162 @@ nav a:hover,
 
 @media(max-width:900px){
   .navbar{
-    gap:10px;
-  }
-
-  .mobile-menu-button{
-    width:42px;
-    height:42px;
-    border:none;
-    border-radius:999px;
+    position:absolute;
+    top:14px;
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    width:min(100% - 18px, 520px);
+    padding:8px 0;
+    border-radius:0;
     display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-    background:rgba(255,255,255,.08);
-    color:white;
-    cursor:pointer;
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-  }
-
-  .mobile-menu-button span{
-    width:17px;
-    height:2px;
-    border-radius:999px;
-    background:white;
-    opacity:.9;
-  }
-
-  .mobile-menu-panel{
-    position:fixed;
-    inset:0;
-    z-index:998;
-    display:none;
-    align-items:flex-start;
-    justify-content:center;
-    padding:92px 18px 18px;
-    background:rgba(0,0,0,.52);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-  }
-
-  .mobile-menu-panel.active{
-    display:flex;
-  }
-
-  .mobile-menu-card{
-    width:min(420px,100%);
-    border-radius:28px;
-    padding:20px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(20,20,20,.96),
-        rgba(6,6,6,.96)
-      );
-    border:1px solid rgba(255,255,255,.11);
-    box-shadow:
-      0 30px 100px rgba(0,0,0,.58),
-      inset 0 1px 0 rgba(255,255,255,.08);
-  }
-
-  .mobile-menu-top{
-    display:flex;
+    flex-wrap:nowrap;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:18px;
-    padding-bottom:16px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-  }
-
-  .mobile-menu-top span{
-    color:white;
-    font-size:1rem;
-    font-weight:700;
-    letter-spacing:.3px;
-  }
-
-  .mobile-menu-close{
-    width:36px;
-    height:36px;
+    gap:12px;
+    background:transparent;
     border:none;
-    border-radius:999px;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    box-shadow:none;
+  }
+
+  .brand{
+    display:none;
+  }
+
+  nav{
+    order:1;
+    flex:1;
+    width:auto;
+    margin:0;
+    padding-right:8px;
+    display:flex !important;
+    justify-content:space-between;
+    align-items:center;
+    gap:0;
+    overflow:visible;
+  }
+
+  nav a,
+  nav .nav-link{
+    flex:0 0 auto;
+    min-height:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:7px 0;
+    border-radius:0;
+    font-family:Inter, sans-serif;
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.105em;
+    text-transform:uppercase;
+    line-height:1;
+    color:rgba(240,215,163,.9);
+    opacity:1;
+    background:transparent;
+    border:none;
+    white-space:nowrap;
+    text-shadow:0 3px 18px rgba(0,0,0,.75);
+  }
+
+  nav a::after,
+  nav .nav-link::after{
+    display:none;
+  }
+
+  nav a:hover,
+  nav .nav-link:hover{
+    color:white;
+  }
+
+  .language{
+    order:2;
+    width:auto;
+    flex:0 0 auto;
+    margin-left:0;
+    display:flex;
+    justify-content:flex-end;
+    position:relative;
+  }
+
+  .language-button{
+    padding:7px 11px;
+    font-size:.74rem;
     background:rgba(255,255,255,.08);
-    color:white;
-    font-size:1.35rem;
-    cursor:pointer;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 8px 22px rgba(0,0,0,.18);
   }
 
-  .mobile-menu-links{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+  .language-menu{
+    top:38px;
+    right:0;
+    z-index:1001;
   }
 
-  .mobile-menu-links a,
-  .mobile-menu-links .nav-link{
-    width:100%;
-    min-height:48px;
-    display:flex;
-    align-items:center;
-    padding:0 16px;
-    border-radius:16px;
-    color:white;
-    text-decoration:none;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.06);
-    font-size:.96rem;
-    opacity:.92;
+  .mobile-menu-button,
+  .mobile-menu-panel{
+    display:none !important;
+  }
+@media(max-width:700px){
+  .soon-modal{
+    align-items:flex-start !important;
+    justify-content:center !important;
+    padding:18px 14px !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch;
   }
 
-  .mobile-menu-links .nav-link{
-    font:inherit;
-    cursor:pointer;
+  .soon-card{
+    width:100% !important;
+    max-width:420px !important;
+    max-height:calc(100dvh - 36px) !important;
+    overflow-y:auto !important;
+    padding:22px 22px 24px !important;
+    border-radius:24px !important;
   }
 
-  .mobile-language-links{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:8px;
-    margin-top:18px;
-    padding-top:18px;
-    border-top:1px solid rgba(255,255,255,.08);
+  .soon-close{
+    position:sticky !important;
+    top:0 !important;
+    right:auto !important;
+    margin-left:auto !important;
+    margin-bottom:10px !important;
+    width:38px !important;
+    height:38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    z-index:5 !important;
+    background:rgba(255,255,255,.12) !important;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
   }
 
-  .mobile-language-links a{
-    min-height:44px;
-    display:flex;
-    align-items:center;
-    padding:0 14px;
-    border-radius:14px;
-    color:rgba(255,255,255,.82);
-    text-decoration:none;
-    background:rgba(255,255,255,.035);
-    font-size:.88rem;
+  .soon-eyebrow{
+    font-size:.62rem !important;
+    letter-spacing:3px !important;
+    margin-bottom:14px !important;
   }
 
-  .mobile-language-links a.active{
-    color:#f0d7a3;
-    background:rgba(210,176,120,.1);
+  .soon-card h2{
+    font-size:1.95rem !important;
+    line-height:1.08 !important;
+    letter-spacing:-.8px !important;
+    margin-bottom:18px !important;
+  }
+
+  .soon-card p{
+    font-size:.94rem !important;
+    line-height:1.6 !important;
+    margin-bottom:13px !important;
+  }
+
+  .soon-note{
+    margin-top:12px !important;
+    padding:11px 14px !important;
+    font-size:.82rem !important;
   }
 }
 </style>
