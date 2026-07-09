@@ -181,6 +181,17 @@ const vocalLivreYoutube = localizedProjects.filter((project) => project.collecti
 const featured = localizedProjects.filter((project) => project.collection === "featured");
 const other = localizedProjects.filter((project) => project.collection === "other");
 
+const allProjects = [
+  ...mainProjects,
+  ...vocalLivreEPs,
+  ...vocalLivreSingles,
+  ...vocalLivreYoutube,
+  ...featured,
+  ...other,
+].filter((project, index, array) => {
+  return array.findIndex((item) => item.slug === project.slug) === index;
+});
+
 const workSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -246,84 +257,23 @@ const workSchema = {
       </p>
 
       <div class="intro-actions">
-        <a href="/es/credits">Créditos Oficiales</a>
         <a href="/es#contact">Iniciar un Proyecto</a>
       </div>
 
     </section>
 
-    <section class="artist">
-      <p class="eyebrow">PROYECTOS SELECCIONADOS</p>
+    <section class="artist all-works">
 
-      <div class="category">
-        <h2>Álbumes & Proyectos Destacados</h2>
+      <p class="eyebrow">TODOS LOS PROYECTOS</p>
 
-        <div class="grid">
-          {mainProjects.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </div>
-      </div>
-
-      {vocalLivreEPs.length > 0 && (
-        <div class="category">
-          <h2>EPs</h2>
-
-          <div class="grid">
-            {vocalLivreEPs.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {vocalLivreSingles.length > 0 && (
-        <div class="category">
-          <h2>Singles</h2>
-
-          <div class="grid">
-            {vocalLivreSingles.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {vocalLivreYoutube.length > 0 && (
-        <div class="category">
-          <h2>YouTube</h2>
-
-          <div class="grid">
-            {vocalLivreYoutube.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-    </section>
-
-    <section class="artist">
-      <p class="eyebrow">COLABORACIONES DESTACADAS</p>
-
-      <h2>Colaboraciones & Sesiones</h2>
+      <h2>Proyectos, álbumes, singles y colaboraciones.</h2>
 
       <div class="grid">
-        {featured.map((project) => (
-          <ProjectCard project={project} />
+        {allProjects.map((project, index) => (
+          <ProjectCard project={project} priority={index < 8} />
         ))}
       </div>
-    </section>
 
-    <section class="artist">
-      <p class="eyebrow">OTROS PROYECTOS</p>
-
-      <h2>Créditos Adicionales</h2>
-
-      <div class="grid">
-        {other.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
     </section>
 
   </main>
@@ -535,7 +485,29 @@ h2{
   }
 
   .grid{
-    grid-template-columns:1fr;
+    display:flex !important;
+    grid-template-columns:none !important;
+    gap:18px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    -webkit-overflow-scrolling:touch;
+    padding:0 6% 18px !important;
+    margin-left:-6% !important;
+    margin-right:-6% !important;
+    scrollbar-width:none;
+  }
+
+  .grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .grid > :global(.card){
+    flex:0 0 82% !important;
+    width:82% !important;
+    max-width:82% !important;
+    min-width:82% !important;
+    scroll-snap-align:start;
   }
 
   .artist{

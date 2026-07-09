@@ -11,11 +11,12 @@ interface Project {
 
 interface Props {
   project: Project;
+  priority?: boolean;
 }
 
 type SiteLanguage = "en" | "pt" | "es";
 
-const { project } = Astro.props;
+const { project, priority = false } = Astro.props;
 
 const currentPath = Astro.url.pathname;
 
@@ -35,7 +36,15 @@ const projectHref =
 
 <a class="card" href={projectHref}>
 
-  <img src={project.image.src} alt={`${project.artist} - ${project.title}`} />
+  <img
+    src={project.image.src}
+    alt={`${project.artist} - ${project.title}`}
+    width="640"
+    height="640"
+    loading={priority ? "eager" : "lazy"}
+    fetchpriority={priority ? "high" : "auto"}
+    decoding="async"
+  />
 
   <div class="info">
     <p>{project.artist}</p>
@@ -66,8 +75,11 @@ const projectHref =
 
 .card img{
   width:100%;
+  height:auto;
   aspect-ratio:1/1;
   object-fit:cover;
+  display:block;
+  background:#0b0b0b;
 }
 
 .info{

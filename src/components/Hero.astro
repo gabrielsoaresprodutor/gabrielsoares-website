@@ -76,6 +76,16 @@ const t = heroText[currentLanguage];
       {t.title}
     </h1>
 
+    <img
+      class="mobile-artist-avatar"
+      src={heroImage.src}
+      alt="Gabriel Soares"
+      width="132"
+      height="132"
+      loading="eager"
+      decoding="async"
+    />
+
     <p class="description">
       {t.description}
     </p>
@@ -146,6 +156,10 @@ h1{
   max-width:700px;
 }
 
+.mobile-artist-avatar{
+  display:none;
+}
+
 .description{
   margin-top:34px;
   max-width:680px;
@@ -210,6 +224,78 @@ h1{
 
   .buttons{
     flex-direction:column;
+  }
+}
+
+@media(max-width:700px){
+  .hero{
+    min-height:100svh;
+    height:auto;
+    align-items:flex-start;
+    padding:118px 0 58px;
+    background-image:none !important;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(210,176,120,.12), transparent 34%),
+      linear-gradient(180deg, #070707 0%, #050505 100%);
+  }
+
+  .overlay{
+    display:none;
+  }
+
+  .content{
+    width:min(440px,88%);
+    margin:0 auto;
+    transform:none;
+    text-align:center;
+  }
+
+  .eyebrow{
+    max-width:none;
+    margin:0 auto 18px;
+    font-size:.58rem;
+    letter-spacing:3.4px;
+    line-height:1.7;
+  }
+
+  h1{
+    font-size:3.25rem;
+    line-height:.95;
+    max-width:none;
+  }
+
+  .mobile-artist-avatar{
+    display:block;
+    width:132px;
+    height:132px;
+    margin:24px auto 26px;
+    border-radius:50%;
+    object-fit:cover;
+    object-position:center 35%;
+    border:2px solid rgba(210,176,120,.62);
+    box-shadow:
+      0 22px 55px rgba(0,0,0,.48),
+      0 0 0 8px rgba(255,255,255,.045),
+      inset 0 1px 0 rgba(255,255,255,.2);
+  }
+
+  .description{
+    margin:0 auto;
+    max-width:360px;
+    font-size:.96rem;
+    line-height:1.75;
+    color:#d6d6d6;
+  }
+
+  .buttons{
+    margin-top:34px;
+    gap:14px;
+  }
+
+  .buttons a{
+    width:100%;
+    padding:16px 26px;
+    border-radius:14px;
   }
 }
 

@@ -39,6 +39,17 @@ const vocalLivreYoutube = localizedProjects.filter((project) => project.collecti
 const featured = localizedProjects.filter((project) => project.collection === "featured");
 const other = localizedProjects.filter((project) => project.collection === "other");
 
+const allProjects = [
+  ...mainProjects,
+  ...vocalLivreEPs,
+  ...vocalLivreSingles,
+  ...vocalLivreYoutube,
+  ...featured,
+  ...other,
+].filter((project, index, array) => {
+  return array.findIndex((item) => item.slug === project.slug) === index;
+});
+
 const workSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -104,84 +115,23 @@ const workSchema = {
       </p>
 
       <div class="intro-actions">
-        <a href="/credits">Official Credits</a>
         <a href="/#contact">Start a Project</a>
       </div>
 
     </section>
 
-    <section class="artist">
-      <p class="eyebrow">SELECTED WORK</p>
+    <section class="artist all-works">
 
-      <div class="category">
-        <h2>Albums & Featured Projects</h2>
+      <p class="eyebrow">ALL WORKS</p>
 
-        <div class="grid">
-          {mainProjects.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </div>
-      </div>
-
-      {vocalLivreEPs.length > 0 && (
-        <div class="category">
-          <h2>EPs</h2>
-
-          <div class="grid">
-            {vocalLivreEPs.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {vocalLivreSingles.length > 0 && (
-        <div class="category">
-          <h2>Singles</h2>
-
-          <div class="grid">
-            {vocalLivreSingles.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {vocalLivreYoutube.length > 0 && (
-        <div class="category">
-          <h2>YouTube</h2>
-
-          <div class="grid">
-            {vocalLivreYoutube.map((project) => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
-        </div>
-      )}
-    </section>
-
-    <section class="artist">
-      <p class="eyebrow">FEATURED COLLABORATIONS</p>
-
-      <h2>Collaborations & Sessions</h2>
+      <h2>Projects, albums, singles and collaborations.</h2>
 
       <div class="grid">
-        {featured.map((project) => (
-          <ProjectCard project={project} />
+        {allProjects.map((project, index) => (
+          <ProjectCard project={project} priority={index < 8} />
         ))}
       </div>
-    </section>
 
-    <section class="artist">
-      <p class="eyebrow">OTHER PROJECTS</p>
-
-      <h2>Additional Credits</h2>
-
-      <div class="grid">
-        {other.map((project) => (
-          <ProjectCard project={project} />
-        ))}
-      </div>
     </section>
 
   </main>
@@ -393,7 +343,27 @@ h2{
   }
 
   .grid{
-    grid-template-columns:1fr;
+    display:flex;
+    grid-template-columns:none;
+    gap:18px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:0 6% 16px;
+    margin-left:-6%;
+    margin-right:-6%;
+    scrollbar-width:none;
+  }
+
+  .grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .grid :global(.card){
+    flex:0 0 78%;
+    max-width:78%;
+    scroll-snap-align:start;
   }
 
   .artist{
