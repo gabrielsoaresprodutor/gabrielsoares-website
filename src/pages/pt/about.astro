@@ -21,7 +21,6 @@ const aboutImages = {
     "/images/about/artist-1.jpg"
   ],
   recognition: [
-    "/images/about/muso-ai.jpg",
     "/images/about/latin-grammy.jpg"
   ]
 };
@@ -124,22 +123,6 @@ const faqSchema = {
   <Navbar />
 
   <main class="about-page">
-
-    <section class="hero-about">
-
-      <div class="container">
-
-        <p class="eyebrow">PERFIL OFICIAL</p>
-
-        <h1>Gabriel Soares</h1>
-
-        <p class="lead">
-          Produtor musical brasileiro, violonista de estúdio, arranjador e multi-instrumentista, criando gravações refinadas de violão, arranjos instrumentais e camadas de produção para artistas e produtores.
-        </p>
-
-      </div>
-
-    </section>
 
     <section class="content-section">
 
@@ -278,11 +261,14 @@ const faqSchema = {
 
         </div>
 
-        <div class="recognition-gallery" aria-label="Reconhecimento na MUSO AI e Latin GRAMMY">
+        <div class="recognition-gallery single-recognition" aria-label="Reconhecimento Latin GRAMMY">
 
-          {aboutImages.recognition.map((image, index) => (
+          {aboutImages.recognition.map((image) => (
             <figure class="recognition-image">
-              <img src={image} alt={index === 0 ? "Reconhecimento da MUSO AI para Gabriel Soares" : "Reconhecimento Latin GRAMMY conectado aos créditos de Gabriel Soares"} />
+              <img
+                src={image}
+                alt="Reconhecimento Latin GRAMMY conectado aos créditos de Gabriel Soares"
+              />
             </figure>
           ))}
 
@@ -561,7 +547,7 @@ if (
       const index = recognitionItems.indexOf(recognitionImage) + 1;
 
       return {
-        name: index === 1 ? "muso-ai" : "latin-grammy",
+        name: index === 1 ? "latin-grammy" : "recognition",
         selector: `.recognition-gallery .recognition-image:nth-child(${index}) img`
       };
     }
@@ -968,7 +954,6 @@ strong{
   border-radius:34px;
 }
 
-
 .artist-quote{
   margin:34px 0 0;
   padding:24px 26px;
@@ -1004,14 +989,31 @@ strong{
   gap:18px;
 }
 
+.recognition-gallery.single-recognition{
+  max-width:520px;
+  width:100%;
+}
+
 .recognition-image{
   position:relative;
   overflow:hidden;
-  aspect-ratio:16 / 10;
+  aspect-ratio:3 / 4;
   border-radius:28px;
   background:#151515;
   border:1px solid rgba(255,255,255,.09);
   box-shadow:0 28px 80px rgba(0,0,0,.28);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+}
+
+.recognition-image img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center;
 }
 
 .faq-section{
@@ -1212,7 +1214,7 @@ strong{
   }
 
   .recognition-image{
-    aspect-ratio:4 / 3;
+    aspect-ratio:3 / 4;
   }
 
   .faq-section{
@@ -1275,7 +1277,10 @@ strong{
   transform:translateX(0px) translateY(0px) scale(1) !important;
 }
 
-.recognition-gallery .recognition-image:nth-child(2) img{
-  transform:translateX(0px) translateY(0px) scale(1) !important;
+@media(max-width:700px){
+  .image-card.large img{
+    transform:translateX(0px) translateY(0px) scale(1) !important;
+    object-position:center top !important;
+  }
 }
 </style>
