@@ -1,5 +1,5 @@
-import temporal from "../assets/projects/temporal.png";
-import temporalAovivo from "../assets/projects/temporal-aovivo.png";
+import temporal from "../assets/projects/temporal.jpg";
+import temporalAovivo from "../assets/projects/temporal-aovivo.jpg";
 import recife15 from "../assets/projects/recife15.png";
 
 import liveSession from "../assets/projects/live-session.png";
