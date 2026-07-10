@@ -1293,47 +1293,12 @@ strong{
   transform:translateX(0px) translateY(0px) scale(1) !important;
 }
 
-@media(max-width:700px){
-  .about-page .content-section:first-of-type .image-card.large{
-    aspect-ratio:4 / 3 !important;
-    overflow:hidden !important;
-  }
-
-  .about-page .content-section:first-of-type .image-card.large img{
-    width:100% !important;
-    height:calc(100% + 90px) !important;
-    max-width:none !important;
-    object-fit:cover !important;
-    object-position:center top !important;
-    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
-  }
 .mobile-who-photo{
-  display:none;
-  }
-
-  .desktop-who-photo{
-  display:block;
+  display:none !important;
 }
 
-@media(max-width:700px){
-  .desktop-who-photo{
-    display:none !important;
-  }
-
-  .mobile-who-photo{
-    display:block !important;
-    margin:0 0 34px;
-    aspect-ratio:4 / 3 !important;
-  }
-
-  .mobile-who-photo img{
-    width:100% !important;
-    height:calc(100% + 90px) !important;
-    max-width:none !important;
-    object-fit:cover !important;
-    object-position:center top !important;
-    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
-  }
+.desktop-who-photo{
+  display:block !important;
 }
 
 .single-quote-section{
@@ -1377,6 +1342,26 @@ strong{
 }
 
 @media(max-width:700px){
+  .desktop-who-photo{
+    display:none !important;
+  }
+
+  .mobile-who-photo{
+    display:block !important;
+    margin:0 0 34px;
+    aspect-ratio:4 / 3 !important;
+    overflow:hidden !important;
+  }
+
+  .mobile-who-photo img{
+    width:100% !important;
+    height:calc(100% + 90px) !important;
+    max-width:none !important;
+    object-fit:cover !important;
+    object-position:center top !important;
+    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
+  }
+
   .single-quote-section{
     max-width:100%;
   }
@@ -1396,22 +1381,5 @@ strong{
     object-position:center -10% !important;
     transform:scale(1.50) !important;
   }
-
-  .mobile-who-photo{
-    display:none !important;
-}
-
-  .desktop-who-photo{
-    display:block !important;
-}
-
-@media(max-width:700px){
-  .mobile-who-photo{
-    display:block !important;
-  }
-
-  .desktop-who-photo{
-    display:none !important;
-  }  
 }
 </style>
