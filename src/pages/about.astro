@@ -130,6 +130,16 @@ const faqSchema = {
 
         <div class="text-block">
 
+          <figure class="image-card large mobile-who-photo">
+            <img
+              src={aboutImages.who}
+              alt="Gabriel Soares in studio and acoustic guitar work"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+
           <h2>Who is Gabriel Soares?</h2>
 
           <p>
@@ -146,7 +156,7 @@ const faqSchema = {
 
         </div>
 
-        <figure class="image-card large">
+        <figure class="image-card large desktop-who-photo">
           <img src={aboutImages.who} alt="Gabriel Soares in studio and acoustic guitar work" />
         </figure>
 
@@ -204,7 +214,7 @@ const faqSchema = {
 
     <section class="content-section">
 
-      <div class="container split-section reverse">
+      <div class="container single-quote-section">
 
         <div class="text-block">
 
@@ -222,20 +232,24 @@ const faqSchema = {
             The goal is not only to make music. Gabriel thinks carefully about each professional involved, each person’s well-being and the relationships behind the work. He carefully chooses musicians who, besides being talented, will also be impacted by the project.
           </p>
 
-          <blockquote class="artist-quote">
+          <blockquote class="artist-quote artist-quote-with-avatar">
             <p>
               “My greatest passion in music is producing an instrumental capable of creating such a rich conversation between instrument and voice that it becomes impossible not to be moved by the message, giving the music production a strong and memorable identity in the heart of the listener — where everyone, from everyday listeners to the greatest instrumentalists, singers, arrangers and audio engineers, can feel the music with the same depth that I feel it.”
             </p>
-            <footer>— Gabriel Soares, in his own words</footer>
+
+            <footer class="quote-author">
+              <span>— Gabriel Soares</span>
+
+              <span class="quote-author-avatar">
+                <img
+                  src="/images/about/gabriel-quote-avatar.jpg"
+                  alt="Gabriel Soares"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+            </footer>
           </blockquote>
-
-        </div>
-
-        <div class="artist-collage single-artist-photo" aria-label="Gabriel Soares with artist and collaborator">
-
-          <figure class="collage-photo photo-1">
-            <img src={aboutImages.artists[0]} alt="Gabriel Soares with artist or collaborator" />
-          </figure>
 
         </div>
 
@@ -406,7 +420,7 @@ if (
           font-size:.75rem;
           font-weight:700;
           cursor:pointer;
-        ">Copiar CSS</button>
+        ">Copy CSS</button>
       </div>
 
       <p style="
@@ -415,7 +429,7 @@ if (
         font-size:.74rem;
         line-height:1.55;
       ">
-        Com a ferramenta aberta, arraste a foto. Use o scroll em cima dela para zoom. Depois copie o CSS abaixo e cole no arquivo.
+        With the tool open, drag the photo. Use the mouse wheel over it to zoom. Then copy the CSS below and paste it into the file.
       </p>
 
       <textarea id="aboutPhotoToolOutput" readonly style="
@@ -447,7 +461,7 @@ if (
           color:white;
           font-size:.75rem;
           cursor:pointer;
-        ">Resetar ajustes</button>
+        ">Reset adjustments</button>
 
         <span id="aboutPhotoToolStatus" style="
           color:#9f9f9f;
@@ -513,31 +527,6 @@ if (
         name: `info-${index}`,
         selector: `.info-grid article:nth-child(${index}) .card-image img`
       };
-    }
-
-    const collagePhoto = photo.closest(".collage-photo");
-
-    if (collagePhoto) {
-      if (collagePhoto.classList.contains("photo-1")) {
-        return {
-          name: "artist-1",
-          selector: ".collage-photo.photo-1 img"
-        };
-      }
-
-      if (collagePhoto.classList.contains("photo-2")) {
-        return {
-          name: "artist-2",
-          selector: ".collage-photo.photo-2 img"
-        };
-      }
-
-      if (collagePhoto.classList.contains("photo-3")) {
-        return {
-          name: "artist-3",
-          selector: ".collage-photo.photo-3 img"
-        };
-      }
     }
 
     const recognitionImage = photo.closest(".recognition-image");
@@ -624,92 +613,6 @@ if (
 
     photoState.set(photo, state);
     applyTransform(photo, state);
-
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-
-    photo.addEventListener("mousedown", (event) => {
-      if (!photoToolEnabled) return;
-
-      isDragging = true;
-      startX = event.clientX - state.x;
-      startY = event.clientY - state.y;
-
-      photo.style.cursor = "grabbing";
-      event.preventDefault();
-    });
-
-    window.addEventListener("mousemove", (event) => {
-      if (!photoToolEnabled || !isDragging) return;
-
-      state.x = Math.round(event.clientX - startX);
-      state.y = Math.round(event.clientY - startY);
-
-      applyTransform(photo, state);
-      saveTransform(photo, state);
-      updateOutput();
-    });
-
-    window.addEventListener("mouseup", () => {
-      if (!isDragging) return;
-
-      isDragging = false;
-
-      if (photoToolEnabled) {
-        photo.style.cursor = "grab";
-      }
-
-      saveTransform(photo, state);
-      updateOutput();
-
-      if (status) {
-        status.textContent = `${getPhotoInfo(photo).name} salvo localmente`;
-      }
-    });
-
-    photo.addEventListener("wheel", (event) => {
-      if (!photoToolEnabled) return;
-
-      event.preventDefault();
-
-      if (event.deltaY < 0) {
-        state.scale += 0.04;
-      } else {
-        state.scale -= 0.04;
-      }
-
-      state.scale = Number(Math.max(.7, Math.min(state.scale, 3)).toFixed(2));
-
-      applyTransform(photo, state);
-      saveTransform(photo, state);
-      updateOutput();
-
-      if (status) {
-        status.textContent = `${getPhotoInfo(photo).name} zoom ${state.scale}`;
-      }
-    });
-  });
-
-  copyButton?.addEventListener("click", async () => {
-    if (!output) return;
-
-    await navigator.clipboard.writeText(output.value);
-
-    if (status) {
-      status.textContent = "CSS copiado";
-    }
-  });
-
-  resetButton?.addEventListener("click", () => {
-    editablePhotos.forEach((photo) => {
-      localStorage.removeItem(getStorageKey(photo));
-      photo.style.transform = "";
-    });
-
-    if (status) {
-      status.textContent = "Ajustes apagados. Recarregue a página.";
-    }
   });
 
   setPhotosCursor();
@@ -780,18 +683,6 @@ h1{
   align-items:center;
 }
 
-.split-section.reverse{
-  grid-template-columns:minmax(340px, .9fr) minmax(0, 1.1fr);
-}
-
-.split-section.reverse .text-block{
-  order:2;
-}
-
-.split-section.reverse .artist-collage{
-  order:1;
-}
-
 .text-block{
   max-width:720px;
 }
@@ -827,7 +718,6 @@ strong{
 
 .image-card::after,
 .card-image::after,
-.collage-photo::after,
 .recognition-image::after{
   content:"";
   position:absolute;
@@ -847,7 +737,6 @@ strong{
 
 .image-card img,
 .card-image img,
-.collage-photo img,
 .recognition-image img{
   width:100%;
   height:100%;
@@ -899,59 +788,6 @@ strong{
 
 .info-grid p{
   margin-bottom:0;
-}
-
-.artist-collage{
-  position:relative;
-  min-height:500px;
-}
-
-.collage-photo{
-  position:absolute;
-  overflow:hidden;
-  background:#151515;
-  border:1px solid rgba(255,255,255,.09);
-  box-shadow:0 28px 80px rgba(0,0,0,.32);
-}
-
-.collage-photo.photo-1{
-  top:0;
-  left:0;
-  width:68%;
-  aspect-ratio:4 / 5;
-  border-radius:34px;
-}
-
-.collage-photo.photo-2{
-  right:0;
-  top:120px;
-  width:48%;
-  aspect-ratio:1 / 1.12;
-  border-radius:28px;
-}
-
-.collage-photo.photo-3{
-  left:18%;
-  bottom:0;
-  width:56%;
-  aspect-ratio:16 / 10;
-  border-radius:28px;
-}
-
-.artist-collage.single-artist-photo{
-  min-height:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.artist-collage.single-artist-photo .collage-photo.photo-1{
-  position:relative;
-  inset:auto;
-  width:100%;
-  max-width:520px;
-  aspect-ratio:4 / 5;
-  border-radius:34px;
 }
 
 .artist-quote{
@@ -1094,16 +930,58 @@ strong{
   color:rgba(255,255,255,.72);
 }
 
+.mobile-who-photo{
+  display:none;
+}
+
+.desktop-who-photo{
+  display:block;
+}
+
+.single-quote-section{
+  max-width:980px;
+}
+
+.single-quote-section .text-block{
+  max-width:880px;
+}
+
+.artist-quote-with-avatar .quote-author{
+  display:flex !important;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:24px;
+}
+
+.quote-author-avatar{
+  width:72px;
+  height:72px;
+  flex:0 0 72px;
+  border-radius:50%;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid rgba(210,176,120,.55);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.32),
+    0 0 0 5px rgba(255,255,255,.035);
+}
+
+.quote-author-avatar img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center -10%;
+  transform:scale(1.50);
+}
+
 @media(max-width:1000px){
-  .split-section,
-  .split-section.reverse{
+  .split-section{
     grid-template-columns:1fr;
     gap:42px;
-  }
-
-  .split-section.reverse .text-block,
-  .split-section.reverse .artist-collage{
-    order:initial;
   }
 
   .text-block{
@@ -1124,41 +1002,6 @@ strong{
 
   .card-image{
     height:240px;
-  }
-
-  .artist-collage{
-    min-height:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-  }
-
-  .collage-photo,
-  .collage-photo.photo-1,
-  .collage-photo.photo-2,
-  .collage-photo.photo-3{
-    position:relative;
-    inset:auto;
-    width:100%;
-    aspect-ratio:4 / 3;
-    border-radius:26px;
-  }
-
-  .collage-photo.photo-1{
-    grid-column:1 / -1;
-    aspect-ratio:16 / 9;
-  }
-
-  .artist-collage.single-artist-photo{
-    display:flex;
-    min-height:auto;
-  }
-
-  .artist-collage.single-artist-photo .collage-photo.photo-1{
-    grid-column:auto;
-    width:100%;
-    max-width:none;
-    aspect-ratio:16 / 10;
   }
 
   .faq-photo-content{
@@ -1191,35 +1034,25 @@ strong{
     font-size:1.05rem;
   }
 
-  .content-section,
+  .content-section{
+    padding:42px 0 !important;
+  }
+
   .faq-section{
-    padding:80px 0;
+    min-height:auto;
+    padding:56px 0 !important;
+  }
+
+  .content-section + .content-section{
+    padding-top:32px !important;
   }
 
   .card-image{
     height:210px;
   }
 
-  .artist-collage{
-    grid-template-columns:1fr;
-  }
-
-  .collage-photo.photo-1{
-    grid-column:auto;
-    aspect-ratio:4 / 3;
-  }
-
-  .artist-collage.single-artist-photo .collage-photo.photo-1{
-    aspect-ratio:4 / 3;
-  }
-
   .recognition-image{
     aspect-ratio:3 / 4;
-  }
-
-  .faq-section{
-    min-height:auto;
-    padding:90px 0;
   }
 
   .faq-photo-section{
@@ -1251,6 +1084,46 @@ strong{
     min-height:auto;
     padding:17px 18px;
   }
+
+  .desktop-who-photo{
+    display:none !important;
+  }
+
+  .mobile-who-photo{
+    display:block !important;
+    margin:0 0 34px;
+    aspect-ratio:4 / 3 !important;
+    overflow:hidden !important;
+  }
+
+  .mobile-who-photo img{
+    width:100% !important;
+    height:calc(100% + 90px) !important;
+    max-width:none !important;
+    object-fit:cover !important;
+    object-position:center top !important;
+    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
+  }
+
+  .single-quote-section{
+    max-width:100%;
+  }
+
+  .artist-quote-with-avatar .quote-author{
+    gap:14px;
+    margin-top:22px;
+  }
+
+  .quote-author-avatar{
+    width:76px !important;
+    height:76px !important;
+    flex:0 0 76px !important;
+  }
+
+  .quote-author-avatar img{
+    object-position:center -10% !important;
+    transform:scale(1.50) !important;
+  }
 }
 
 .image-card.large img{
@@ -1269,27 +1142,7 @@ strong{
   transform:translateX(29px) translateY(3px) scale(1.48) !important;
 }
 
-.collage-photo.photo-1 img{
-  transform:translateX(0px) translateY(0px) scale(1.02) !important;
-}
-
 .recognition-gallery .recognition-image:nth-child(1) img{
   transform:translateX(0px) translateY(0px) scale(1) !important;
-}
-
-@media(max-width:700px){
-  .about-page .content-section:first-of-type .image-card.large{
-    aspect-ratio:4 / 3 !important;
-    overflow:hidden !important;
-  }
-
-  .about-page .content-section:first-of-type .image-card.large img{
-    width:100% !important;
-    height:calc(100% + 90px) !important;
-    max-width:none !important;
-    object-fit:cover !important;
-    object-position:center top !important;
-    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
-  }
 }
 </style>
