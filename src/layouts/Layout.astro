@@ -165,6 +165,7 @@ const websiteSchema = {
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=31" />
   <link rel="apple-touch-icon" href="/favicon.svg?v=31" />
+
   <meta name="theme-color" content="#050505" />
 
   <meta property="og:type" content={type} />
@@ -174,18 +175,38 @@ const websiteSchema = {
   <meta property="og:site_name" content="Gabriel Soares" />
   <meta property="og:locale" content={languageMeta[currentLanguage].ogLocale} />
 
-  <meta property="og:image" content="https://gabrielsoares.art.br/images/og/gabriel-soares-og.jpg" />
-  <meta property="og:image:secure_url" content="https://gabrielsoares.art.br/images/og/gabriel-soares-og.jpg" />
+  <meta
+    property="og:image"
+    content="https://www.gabrielsoares.art.br/images/og/gabriel-soares-og.jpg"
+  />
+
+  <meta
+    property="og:image:secure_url"
+    content="https://www.gabrielsoares.art.br/images/og/gabriel-soares-og.jpg"
+  />
+
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Gabriel Soares - Music Producer and Studio Acoustic Guitarist" />
+
+  <meta
+    property="og:image:alt"
+    content="Gabriel Soares - Music Producer and Studio Acoustic Guitarist"
+  />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://gabrielsoares.art.br/images/og/gabriel-soares-og.jpg" />
-  <meta name="twitter:image:alt" content="Gabriel Soares - Music Producer and Studio Acoustic Guitarist" />
+
+  <meta
+    name="twitter:image"
+    content="https://www.gabrielsoares.art.br/images/og/gabriel-soares-og.jpg"
+  />
+
+  <meta
+    name="twitter:image:alt"
+    content="Gabriel Soares - Music Producer and Studio Acoustic Guitarist"
+  />
 
   <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
