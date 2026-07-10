@@ -130,6 +130,16 @@ const faqSchema = {
 
         <div class="text-block">
 
+          <figure class="image-card large mobile-who-photo">
+            <img
+              src={aboutImages.who}
+              alt="Gabriel Soares em estúdio e trabalho com violão"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+  
           <h2>Quem é Gabriel Soares?</h2>
 
           <p>
@@ -146,7 +156,7 @@ const faqSchema = {
 
         </div>
 
-        <figure class="image-card large">
+        <figure class="image-card large desktop-who-photo">
           <img src={aboutImages.who} alt="Gabriel Soares em estúdio e trabalho com violão" />
         </figure>
 
@@ -202,44 +212,50 @@ const faqSchema = {
 
     </section>
 
-    <section class="content-section">
+<section class="content-section">
 
-      <div class="container split-section reverse">
+  <div class="container single-quote-section">
 
-        <div class="text-block">
+    <div class="text-block">
 
-          <h2>Trabalho de estúdio e abordagem musical</h2>
+      <h2>Trabalho de estúdio e abordagem musical</h2>
 
-          <p>
-            Gabriel gosta de trabalhar com artistas, produtores, gravadoras e diretores musicais que sabem o que querem e buscam gravações refinadas de violão, arranjos instrumentais e produções com sonoridade profissional de estúdio, valorizando cada detalhe da música.
-          </p>
+      <p>
+        Gabriel gosta de trabalhar com artistas, produtores, gravadoras e diretores musicais que sabem o que querem e buscam gravações refinadas de violão, arranjos instrumentais e produções com sonoridade profissional de estúdio, valorizando cada detalhe da música.
+      </p>
 
-          <p>
-            Suas contribuições vão de sessões de violão a produção instrumental, arranjos, piano, baixo, guitarra, texturas, edição e direção musical. Em alguns projetos, também atua como engenheiro de mixagem e masterização.
-          </p>
+      <p>
+        Suas contribuições vão de sessões de violão a produção instrumental, arranjos, piano, baixo, guitarra, texturas, edição e direção musical. Em alguns projetos, também atua como engenheiro de mixagem e masterização.
+      </p>
 
-          <p>
-            O objetivo não é apenas fazer música, Gabriel pensa cuidadosamente em cada profissional envolvido, no bem estar de cada um e nas relações do trabalho. Escolhe a dedo músicos que, além de talentosos, também serão impactados pelo projeto.
-          </p>
+      <p>
+        O objetivo não é apenas fazer música, Gabriel pensa cuidadosamente em cada profissional envolvido, no bem estar de cada um e nas relações do trabalho. Escolhe a dedo músicos que, além de talentosos, também serão impactados pelo projeto.
+      </p>
 
-          <blockquote class="artist-quote">
-            <p>
-              “Minha maior paixão na música, é produzir um instrumental capaz de promover uma conversa tão rica entre instrumento e voz, que seja impossível não se emocionar com a mensagem, dando à produção musical uma identidade forte e marcante no coração de quem ouve — onde todos, desde os simples ouvintes até os maiores instrumentistas, cantores, arranjadores e engenheiros de áudio, sintam a música na mesma profundidade que eu sinto.”
-            </p>
-            <footer>— Gabriel Soares, em suas próprias palavras</footer>
-          </blockquote>
+      <blockquote class="artist-quote artist-quote-with-avatar">
+        <p>
+          “Minha maior paixão na música, é produzir um instrumental capaz de promover uma conversa tão rica entre instrumento e voz, que seja impossível não se emocionar com a mensagem, dando à produção musical uma identidade forte e marcante no coração de quem ouve — onde todos, desde os simples ouvintes até os maiores instrumentistas, cantores, arranjadores e engenheiros de áudio, sintam a música na mesma profundidade que eu sinto.”
+        </p>
 
-        </div>
+        <footer class="quote-author">
+          <span>— Gabriel Soares</span>
 
-        <div class="artist-collage single-artist-photo" aria-label="Gabriel Soares com artista e colaborador">
+          <span class="quote-author-avatar">
+            <img
+              src="/images/about/gabriel-quote-avatar.jpg"
+              alt="Gabriel Soares"
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
 
-          <figure class="collage-photo photo-1">
-            <img src={aboutImages.artists[0]} alt="Gabriel Soares com artista ou colaborador" />
-          </figure>
+          
+        </footer>
+      </blockquote>
 
-        </div>
+    </div>
 
-      </div>
+  </div>
 
     </section>
 
@@ -1290,6 +1306,95 @@ strong{
     object-fit:cover !important;
     object-position:center top !important;
     transform:translateX(0px) translateY(-90px) scale(1.00) !important;
+  }
+.mobile-who-photo{
+  display:none;
+  }
+
+  .desktop-who-photo{
+  display:block;
+}
+
+@media(max-width:700px){
+  .desktop-who-photo{
+    display:none !important;
+  }
+
+  .mobile-who-photo{
+    display:block !important;
+    margin:0 0 34px;
+    aspect-ratio:4 / 3 !important;
+  }
+
+  .mobile-who-photo img{
+    width:100% !important;
+    height:calc(100% + 90px) !important;
+    max-width:none !important;
+    object-fit:cover !important;
+    object-position:center top !important;
+    transform:translateX(0px) translateY(-90px) scale(1.00) !important;
+  }
+}
+
+.single-quote-section{
+  max-width:980px;
+}
+
+.single-quote-section .text-block{
+  max-width:880px;
+}
+
+.artist-quote-with-avatar .quote-author{
+  display:flex !important;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:24px;
+}
+
+.quote-author-avatar{
+  width:72px;
+  height:72px;
+  flex:0 0 72px;
+  border-radius:50%;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid rgba(210,176,120,.55);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.32),
+    0 0 0 5px rgba(255,255,255,.035);
+}
+
+.quote-author-avatar img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center -10%;
+  transform:scale(1.50);
+}
+
+@media(max-width:700px){
+  .single-quote-section{
+    max-width:100%;
+  }
+
+  .artist-quote-with-avatar .quote-author{
+    gap:14px;
+    margin-top:22px;
+  }
+
+  .quote-author-avatar{
+    width:76px !important;
+    height:76px !important;
+    flex:0 0 76px !important;
+  }
+
+  .quote-author-avatar img{
+    object-position:center -10% !important;
+    transform:scale(1.50) !important;
   }
 }
 </style>
